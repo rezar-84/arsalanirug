@@ -5,9 +5,9 @@
 > The site is a catalog-and-inquiry gallery: every rug lists its reference (SKU),
 > dimensions in centimetres, collection, material, origin, and a color palette
 > extracted from its photographs. Prices are on request — there is no online checkout.
-> Inquiries go by WhatsApp, phone, email (info@arsalanirug.com), or the contact form.
-> Locations: Tehran Grand Bazaar (Bazar Booali Sara), Qom (Bazar Amjadi Sara),
-> Izmir (Türkiye), and Los Angeles (USA).
+> Inquiries go by WhatsApp, phone (+1 647-879-5149), email (info@arsalanirug.com),
+> or the contact form. Locations: Izmir (Türkiye), Los Angeles (USA), and Toronto
+> (75 Oneida Cres, Richmond Hill, ON, Canada).
 
 The site ships in nine languages: English (default, at /), Persian (/fa/, RTL),
 Turkish (/tr/), Spanish (/es/), Japanese (/ja/), German (/de/), Russian (/ru/),

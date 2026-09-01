@@ -33,7 +33,6 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status | Waiting on whom | For what decision | Since |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ARSA-002 | Replace placeholder WhatsApp number in `src/i18n/ui.ts` (currently the old Qom landline +98 253 7723684) | 1 | product-manager | — | Parked | Rezar86 | the actual WhatsApp business number | 2026-09-01 |
 | ARSA-003 | Register Web3Forms for info@arsalanirug.com and replace the placeholder key in `src/components/ContactForm.astro` | 1 | devops-sre | — | Parked | Rezar86 | account registration (free) | 2026-09-01 |
 | ARSA-006 | Connect hosting and deploy `dist/` through Cloudflare Workers Static Assets | 1 | devops-sre | ARSA-002, ARSA-003 | In review | Rezar86 | security audit finding, production deploy approval, and inquiry-channel dependencies | 2026-09-01 |
 
@@ -49,6 +48,8 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status | Completed |
 | --- | --- | --- | --- | --- | --- | --- |
+| ARSA-023 | Contact overhaul: remove Tehran/Qom, add Toronto (Richmond Hill) + tel +1 647-879-5149, all locales + schema + llms | 1 | product-manager | — | Done | 2026-09-01 |
+| ARSA-002 | WhatsApp/phone placeholder — resolved by ARSA-023 with the owner-provided Toronto line (confirm it is the WhatsApp line, see A6) | 1 | product-manager | — | Done | 2026-09-01 |
 | ARSA-021 | SEO pass: favicons/OG image, SKU-deduped titles, Product+Breadcrumb LD, noindex+sitemap filter, llms.txt | 2 | seo | — | Done | 2026-09-01 |
 | ARSA-008 | Favicon set + OG default image — done within ARSA-021 | 3 | brand-designer | — | Done | 2026-09-01 |
 | ARSA-018 | Replace the main hero image with `IMG_5840_0.jpg` and fit it to the arch frame | 2 | brand-designer | owner-provided image | Done | 2026-09-01 |

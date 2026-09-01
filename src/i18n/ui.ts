@@ -14,13 +14,13 @@ export const localeMeta: Record<Locale, { dir: "ltr" | "rtl"; htmlLang: string; 
   zh: { dir: "ltr", htmlLang: "zh-CN", label: "中文" },
 };
 
-// Contact details carried over from the old site. The WhatsApp number is a
-// placeholder (the old Qom landline) until the real business line is provided
-// — see README "Open items".
+// Contact details per the owner (2026-09-01): Toronto-area line; Tehran/Qom
+// contacts removed. WhatsApp uses the same number — confirm it is the
+// WhatsApp business line.
 export const contact = {
-  phone: "+982537723684",
-  phoneDisplay: "+98 253 772 3684",
-  whatsapp: "982537723684",
+  phone: "+16478795149",
+  phoneDisplay: "+1 647-879-5149",
+  whatsapp: "16478795149",
   email: "info@arsalanirug.com",
   instagram: "https://www.instagram.com/arsalanirug/",
 };
@@ -123,7 +123,7 @@ export const ui = {
     contactPage: {
       title: "Contact Us",
       intro:
-        "Visit us in the historic bazaars of Tehran and Qom, our showrooms in Izmir and Los Angeles — or write to us below.",
+        "Visit our showrooms in Izmir, Los Angeles, and Toronto — or write to us below.",
       locationsTitle: "Our Locations",
       formTitle: "Send a message",
       name: "Name",
@@ -135,10 +135,9 @@ export const ui = {
       thankYouText: "Your message has been sent. We will be in touch shortly.",
     },
     locations: [
-      { city: "Tehran, Iran", address: "Bazar Booali Sara, Tehran Grand Bazaar" },
-      { city: "Qom, Iran", address: "Bazar Amjadi Sara, Qom" },
       { city: "Izmir, Türkiye", address: "Ataşehir Mah., Izmir" },
       { city: "Los Angeles, USA", address: "Los Angeles, California" },
+      { city: "Toronto, Canada", address: "75 Oneida Cres, Richmond Hill, ON" },
     ],
     footer: {
       tagline: "Hand-knotted Persian rugs, woven to outlive us all.",
@@ -238,7 +237,7 @@ export const ui = {
     contactPage: {
       title: "تماس با ما",
       intro:
-        "در بازارهای تاریخی تهران و قم، و نمایشگاه‌های ما در ازمیر و لس‌آنجلس منتظر شماییم — یا از فرم زیر برایمان بنویسید.",
+        "در نمایشگاه‌های ما در ازمیر، لس‌آنجلس و تورنتو منتظر شماییم — یا از فرم زیر برایمان بنویسید.",
       locationsTitle: "نشانی‌های ما",
       formTitle: "ارسال پیام",
       name: "نام",
@@ -250,10 +249,9 @@ export const ui = {
       thankYouText: "پیام شما ارسال شد. به‌زودی با شما تماس می‌گیریم.",
     },
     locations: [
-      { city: "تهران، ایران", address: "بازار بزرگ تهران، سرای بوعلی" },
-      { city: "قم، ایران", address: "بازار قم، سرای امجدی" },
       { city: "ازمیر، ترکیه", address: "محله آتاشهیر، ازمیر" },
       { city: "لس‌آنجلس، آمریکا", address: "لس‌آنجلس، کالیفرنیا" },
+      { city: "تورنتو، کانادا", address: "75 Oneida Cres, Richmond Hill, ON" },
     ],
     footer: {
       tagline: "فرش دستباف ایرانی، بافته‌ای که از ما ماندگارتر است.",
@@ -311,16 +309,15 @@ tr: {
     heritage: { title: "Mirasımız", intro: "Kaşan'dan dünyaya, bir asrı aşkın İran halı zanaatı." },
     contactPage: {
       title: "İletişim",
-      intro: "Bizi Tahran ve Kum'un tarihi çarşılarında, İzmir ve Los Angeles'taki adreslerimizde ziyaret edin — ya da aşağıdan yazın.",
+      intro: "İzmir, Los Angeles ve Toronto'daki adreslerimizi ziyaret edin — ya da aşağıdan bize yazın.",
       locationsTitle: "Adreslerimiz", formTitle: "Mesaj gönderin",
       name: "Ad", email: "E-posta", phone: "Telefon (isteğe bağlı)", message: "Mesaj", submit: "Mesajı gönder",
       thankYouTitle: "Teşekkürler", thankYouText: "Mesajınız gönderildi. En kısa sürede dönüş yapacağız.",
     },
     locations: [
-      { city: "Tahran, İran", address: "Bazar Booali Sara, Tahran Kapalıçarşısı" },
-      { city: "Kum, İran", address: "Bazar Amjadi Sara, Kum" },
       { city: "İzmir, Türkiye", address: "Ataşehir Mah., İzmir" },
       { city: "Los Angeles, ABD", address: "Los Angeles, Kaliforniya" },
+      { city: "Toronto, Kanada", address: "75 Oneida Cres, Richmond Hill, ON" },
     ],
     footer: { tagline: "Hepimizden uzun yaşasın diye dokunan el halıları.", rights: "Tüm hakları saklıdır.", navTitle: "Keşfedin", contactTitle: "Bize ulaşın" },
     notFound: { title: "Sayfa bulunamadı", text: "İzlediğiniz iplik çözülmüş. İzin verin sizi geri götürelim.", backHome: "Ana sayfaya dön" },
@@ -369,16 +366,15 @@ tr: {
     heritage: { title: "Nuestro Legado", intro: "Más de un siglo de arte de la alfombra persa, de Kashan al mundo." },
     contactPage: {
       title: "Contacto",
-      intro: "Visítenos en los bazares históricos de Teherán y Qom, en Esmirna o Los Ángeles — o escríbanos aquí.",
+      intro: "Visítenos en Esmirna, Los Ángeles o Toronto — o escríbanos aquí.",
       locationsTitle: "Nuestras direcciones", formTitle: "Envíe un mensaje",
       name: "Nombre", email: "Correo", phone: "Teléfono (opcional)", message: "Mensaje", submit: "Enviar mensaje",
       thankYouTitle: "Gracias", thankYouText: "Su mensaje ha sido enviado. Le responderemos muy pronto.",
     },
     locations: [
-      { city: "Teherán, Irán", address: "Bazar Booali Sara, Gran Bazar de Teherán" },
-      { city: "Qom, Irán", address: "Bazar Amjadi Sara, Qom" },
       { city: "Esmirna, Turquía", address: "Ataşehir Mah., Esmirna" },
       { city: "Los Ángeles, EE. UU.", address: "Los Ángeles, California" },
+      { city: "Toronto, Canadá", address: "75 Oneida Cres, Richmond Hill, ON" },
     ],
     footer: { tagline: "Alfombras persas tejidas a mano para sobrevivirnos a todos.", rights: "Todos los derechos reservados.", navTitle: "Explorar", contactTitle: "Contacto" },
     notFound: { title: "Página no encontrada", text: "El hilo que seguía se ha soltado. Permítanos guiarle de vuelta.", backHome: "Volver al inicio" },
@@ -427,16 +423,15 @@ tr: {
     heritage: { title: "私たちの歩み", intro: "カーシャーンから世界へ — 一世紀を超えるペルシャ絨毯の技。" },
     contactPage: {
       title: "お問い合わせ",
-      intro: "テヘランとクムの歴史あるバザール、イズミルやロサンゼルスの拠点でお待ちしています — 下記フォームからもどうぞ。",
+      intro: "イズミル、ロサンゼルス、トロントの拠点でお待ちしています — 下記フォームからもどうぞ。",
       locationsTitle: "所在地", formTitle: "メッセージを送る",
       name: "お名前", email: "メールアドレス", phone: "電話番号（任意）", message: "メッセージ", submit: "送信",
       thankYouTitle: "ありがとうございます", thankYouText: "メッセージを受け付けました。追ってご連絡いたします。",
     },
     locations: [
-      { city: "テヘラン（イラン）", address: "テヘラン・グランドバザール、ブーアリー・サラー" },
-      { city: "クム（イラン）", address: "クム・バザール、アムジャディー・サラー" },
       { city: "イズミル（トルコ）", address: "アタシェヒル地区、イズミル" },
       { city: "ロサンゼルス（アメリカ）", address: "カリフォルニア州ロサンゼルス" },
+      { city: "トロント（カナダ）", address: "75 Oneida Cres, Richmond Hill, ON" },
     ],
     footer: { tagline: "私たちより長く生きるために織られた、手織りのペルシャ絨毯。", rights: "無断転載を禁じます。", navTitle: "メニュー", contactTitle: "ご連絡先" },
     notFound: { title: "ページが見つかりません", text: "たどった糸がほどけてしまいました。もとの場所へご案内します。", backHome: "ホームへ戻る" },
@@ -485,16 +480,15 @@ tr: {
     heritage: { title: "Unser Erbe", intro: "Über ein Jahrhundert persischer Teppichkunst, von Kaschan in die Welt." },
     contactPage: {
       title: "Kontakt",
-      intro: "Besuchen Sie uns in den historischen Basaren von Teheran und Ghom, in Izmir oder Los Angeles — oder schreiben Sie uns.",
+      intro: "Besuchen Sie uns in Izmir, Los Angeles oder Toronto — oder schreiben Sie uns.",
       locationsTitle: "Unsere Standorte", formTitle: "Nachricht senden",
       name: "Name", email: "E-Mail", phone: "Telefon (optional)", message: "Nachricht", submit: "Nachricht senden",
       thankYouTitle: "Vielen Dank", thankYouText: "Ihre Nachricht wurde gesendet. Wir melden uns in Kürze.",
     },
     locations: [
-      { city: "Teheran, Iran", address: "Bazar Booali Sara, Großer Basar von Teheran" },
-      { city: "Ghom, Iran", address: "Bazar Amjadi Sara, Ghom" },
       { city: "Izmir, Türkei", address: "Ataşehir Mah., Izmir" },
       { city: "Los Angeles, USA", address: "Los Angeles, Kalifornien" },
+      { city: "Toronto, Kanada", address: "75 Oneida Cres, Richmond Hill, ON" },
     ],
     footer: { tagline: "Handgeknüpfte persische Teppiche, gewebt, um uns alle zu überdauern.", rights: "Alle Rechte vorbehalten.", navTitle: "Entdecken", contactTitle: "Kontakt" },
     notFound: { title: "Seite nicht gefunden", text: "Der Faden, dem Sie folgten, hat sich gelöst. Lassen Sie sich zurückführen.", backHome: "Zur Startseite" },
@@ -521,8 +515,12 @@ tr: {
     },
     catalog: { title: "Коллекция", intro: "Ковры ручной работы, каждый — уникальное произведение; размеры и происхождение указаны, цена по запросу.", empty: "Ковров, соответствующих выбору, нет.", filterMaterial: "Материал", piecesCount: (n: number) => n + " изделий" },
     heritage: { title: "Наше наследие", intro: "Более века персидского коврового ремесла — от Кашана до всего мира." },
-    contactPage: { title: "Свяжитесь с нами", intro: "Посетите нас в исторических базарах Тегерана и Кума, а также в наших представительствах в Измире и Лос-Анджелесе — или напишите нам ниже.", locationsTitle: "Наши адреса", formTitle: "Отправить сообщение", name: "Имя", email: "Электронная почта", phone: "Телефон (необязательно)", message: "Сообщение", submit: "Отправить", thankYouTitle: "Спасибо", thankYouText: "Ваше сообщение отправлено. Мы скоро свяжемся с вами." },
-    locations: [{ city: "Тегеран, Иран", address: "Базар Буали-Сара, Большой базар Тегерана" }, { city: "Кум, Иран", address: "Базар Амджади-Сара, Кум" }, { city: "Измир, Турция", address: "мкр. Аташехир, Измир" }, { city: "Лос-Анджелес, США", address: "Лос-Анджелес, Калифорния" }],
+    contactPage: { title: "Свяжитесь с нами", intro: "Посетите наши представительства в Измире, Лос-Анджелесе и Торонто — или напишите нам ниже.", locationsTitle: "Наши адреса", formTitle: "Отправить сообщение", name: "Имя", email: "Электронная почта", phone: "Телефон (необязательно)", message: "Сообщение", submit: "Отправить", thankYouTitle: "Спасибо", thankYouText: "Ваше сообщение отправлено. Мы скоро свяжемся с вами." },
+    locations: [
+      { city: "Измир, Турция", address: "мкр. Аташехир, Измир" },
+      { city: "Лос-Анджелес, США", address: "Лос-Анджелес, Калифорния" },
+      { city: "Торонто, Канада", address: "75 Oneida Cres, Richmond Hill, ON" },
+    ],
     footer: { tagline: "Персидские ковры ручной работы, созданные пережить нас всех.", rights: "Все права защищены.", navTitle: "Изучить", contactTitle: "Связаться" },
     notFound: { title: "Страница не найдена", text: "Нить, по которой вы пришли, оборвалась. Позвольте проводить вас обратно.", backHome: "На главную" },
     whatsappMessage: (title: string, sku: string, url: string) => "Здравствуйте, меня интересует «" + title + "» (арт. " + sku + ") — " + url,
@@ -547,8 +545,12 @@ tr: {
     },
     catalog: { title: "المجموعة", intro: "سجاد منسوج يدوياً، كل قطعة عمل فني فريدة — الأبعاد والمنشأ موضحان، والسعر عند الطلب.", empty: "لا توجد سجاد مطابق لهذا الاختيار.", filterMaterial: "الخامة", piecesCount: (n: number) => n + " قطع" },
     heritage: { title: "تراثنا", intro: "أكثر من قرن من حرفة السجاد الفارسي، من كاشان إلى العالم." },
-    contactPage: { title: "اتصل بنا", intro: "تفضل بزيارتنا في أسواق طهران وقم التاريخية، أو في صالاتنا في إزمير ولوس أنجلوس — أو اكتب لنا أدناه.", locationsTitle: "مواقعنا", formTitle: "أرسل رسالة", name: "الاسم", email: "البريد الإلكتروني", phone: "الهاتف (اختياري)", message: "الرسالة", submit: "إرسال الرسالة", thankYouTitle: "شكراً لك", thankYouText: "تم إرسال رسالتك. سنتواصل معك قريباً." },
-    locations: [{ city: "طهران، إيران", address: "بازار بوعلي سرا، بازار طهران الكبير" }, { city: "قم، إيران", address: "بازار أمجدي سرا، قم" }, { city: "إزمير، تركيا", address: "حي أتا شهير، إزمير" }, { city: "لوس أنجلوس، الولايات المتحدة", address: "لوس أنجلوس، كاليفورنيا" }],
+    contactPage: { title: "اتصل بنا", intro: "تفضل بزيارتنا في إزمير أو لوس أنجلوس أو تورونتو — أو اكتب لنا أدناه.", locationsTitle: "مواقعنا", formTitle: "أرسل رسالة", name: "الاسم", email: "البريد الإلكتروني", phone: "الهاتف (اختياري)", message: "الرسالة", submit: "إرسال الرسالة", thankYouTitle: "شكراً لك", thankYouText: "تم إرسال رسالتك. سنتواصل معك قريباً." },
+    locations: [
+      { city: "إزمير، تركيا", address: "حي أتا شهير، إزمير" },
+      { city: "لوس أنجلوس، الولايات المتحدة", address: "لوس أنجلوس، كاليفورنيا" },
+      { city: "تورونتو، كندا", address: "75 Oneida Cres, Richmond Hill, ON" },
+    ],
     footer: { tagline: "سجاد فارسي منسوج يدوياً ليبقى أطول من أعمارنا جميعاً.", rights: "جميع الحقوق محفوظة.", navTitle: "استكشف", contactTitle: "تواصل معنا" },
     notFound: { title: "الصفحة غير موجودة", text: "انقطع الخيط الذي اتبعته. دعنا نرشدك إلى طريق العودة.", backHome: "العودة إلى الرئيسية" },
     whatsappMessage: (title: string, sku: string, url: string) => "مرحباً، أنا مهتم بـ «" + title + "» (المرجع " + sku + ") — " + url,
@@ -573,8 +575,12 @@ tr: {
     },
     catalog: { title: "地毯收藏", intro: "手工编织的地毯，每一件都是独一无二的作品——尺寸与产地已列明，价格请咨询。", empty: "没有符合此选择的地毯。", filterMaterial: "材质", piecesCount: (n: number) => n + " 件" },
     heritage: { title: "家族传承", intro: "一个多世纪的波斯地毯技艺，从卡尚走向世界。" },
-    contactPage: { title: "联系我们", intro: "欢迎到访德黑兰和库姆的历史集市，以及我们在伊兹密尔和洛杉矶的展厅——也可以在下方留言。", locationsTitle: "我们的地址", formTitle: "发送消息", name: "姓名", email: "电子邮箱", phone: "电话（可选）", message: "留言", submit: "发送消息", thankYouTitle: "谢谢", thankYouText: "您的消息已发送，我们会尽快与您联系。" },
-    locations: [{ city: "伊朗·德黑兰", address: "布阿里商廊，德黑兰大巴扎" }, { city: "伊朗·库姆", address: "阿姆贾迪商廊，库姆" }, { city: "土耳其·伊兹密尔", address: "阿塔谢希尔区，伊兹密尔" }, { city: "美国·洛杉矶", address: "加利福尼亚州洛杉矶" }],
+    contactPage: { title: "联系我们", intro: "欢迎到访我们在伊兹密尔、洛杉矶和多伦多的展厅——也可以在下方留言。", locationsTitle: "我们的地址", formTitle: "发送消息", name: "姓名", email: "电子邮箱", phone: "电话（可选）", message: "留言", submit: "发送消息", thankYouTitle: "谢谢", thankYouText: "您的消息已发送，我们会尽快与您联系。" },
+    locations: [
+      { city: "土耳其·伊兹密尔", address: "阿塔谢希尔区，伊兹密尔" },
+      { city: "美国·洛杉矶", address: "加利福尼亚州洛杉矶" },
+      { city: "加拿大·多伦多", address: "75 Oneida Cres, Richmond Hill, ON" },
+    ],
     footer: { tagline: "手工编织的波斯地毯，愿它比我们每个人都长久。", rights: "版权所有。", navTitle: "探索", contactTitle: "联系方式" },
     notFound: { title: "页面未找到", text: "您循着的线索已经松开，让我们带您回去。", backHome: "返回首页" },
     whatsappMessage: (title: string, sku: string, url: string) => "您好，我对“" + title + "”（编号 " + sku + "）感兴趣——" + url,

@@ -35,8 +35,8 @@ overwritten — check `git status` after re-running.
 
 ## Open items (placeholders in the code)
 
-- **WhatsApp number** (`src/i18n/ui.ts` → `contact.whatsapp`): currently the old Qom
-  landline; replace with the real WhatsApp business number (ARSA-002).
+- **WhatsApp number** (`src/i18n/ui.ts` → `contact.whatsapp`): set to the owner's
+  Toronto line +1 647-879-5149 — confirm this is the WhatsApp business number.
 - **Web3Forms key** (`src/components/ContactForm.astro`): register info@arsalanirug.com
   at web3forms.com (free) and replace the placeholder — the form does not deliver until
   then (ARSA-003).

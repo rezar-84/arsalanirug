@@ -55,7 +55,7 @@ ${rugs.map(line).join("\n")}
 - History of the Persian rug: https://arsalanirug.com/history
 - Guide to designs, regions, quality, and terms: https://arsalanirug.com/guide
 - The Arsalani family story: https://arsalanirug.com/about
-- Contact and locations (Tehran, Qom, Izmir, Los Angeles): https://arsalanirug.com/contact
+- Contact and locations (Izmir, Los Angeles, Toronto): https://arsalanirug.com/contact
 `;
 
 writeFileSync(join(ROOT, "public/llms-full.txt"), out);

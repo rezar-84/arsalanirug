@@ -172,6 +172,31 @@ records: `docs/project/reviews/ARSA-006-design.md` and
 
 ---
 
+## ARSA-023 — Contact overhaul: Toronto in, Tehran/Qom out — 2026-09-01
+
+**Tier:** 1 surface (contact details / inquiry channels), executed on the owner's
+direct instruction, which is the required approval.
+
+**Request.** Owner: remove Tehran and Qom address and contact; keep Izmir and Los
+Angeles; add Toronto — 75 Oneida Cres, Richmond Hill, ON, Canada, tel +1 647-879-5149.
+
+**What was done.** `contact` in `src/i18n/ui.ts`: phone/phoneDisplay → +1 647-879-5149,
+WhatsApp → same number (the old Qom landline is gone everywhere; assumption A6 flags
+confirming it as the WhatsApp line). All nine locales' `locations` arrays rewritten to
+Izmir / Los Angeles / Toronto with localized city labels (street address kept in Latin
+script); all nine contact-page intros rewritten to drop the Tehran/Qom bazaar mention.
+Organization JSON-LD addresses now Izmir (TR), Los Angeles (US), Richmond Hill (CA,
+with street). llms.txt and the llms-full generator updated. The heritage narrative's
+historical mention of Tehran/Qom bazaars was deliberately kept (story, not contact).
+
+**Verification.** astro check 0 errors; build exit 0; dist/contact has zero
+tehran/booali/amjadi matches, carries the Richmond Hill address + new tel; fa/ja/ar
+contact pages show the localized Toronto entry; old landline absent from dist.
+
+**Not done.** WhatsApp-line confirmation (A6); README note updated accordingly.
+
+---
+
 ## ARSA-022 (third addendum, Tier 3) — 2026-09-01 — Owner supplied a flat-design Persian carpet reference (`~/Downloads/flat-design-persian-carpet-pattern/`) and asked to learn from it. Timeline scroll rebuilt in that flat idiom, replacing line-art with filled silhouettes: thin winding stem (stroke), filled almond leaves seated at computed stem/branch points with tangent-matched rotations, two filled crescent fronds, crimson filled buds at branch tips, and the era node as a flat layered rosette — five crimson petals over five saffron inner petals with an espresso center (colors via the theme's CSS variables). Verified: astro check 0 errors, build exit 0, full-page and zoomed screenshots read like the reference's vinework.
 
 ---
