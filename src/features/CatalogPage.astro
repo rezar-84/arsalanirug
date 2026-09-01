@@ -25,7 +25,9 @@ const title = category ? ui.categories[category] : ui.catalog.title;
   title={`${title} — ${ui.siteName}`}
   description={ui.catalog.intro}
 >
-  <section class="mx-auto max-w-[1400px] px-6 pt-16 md:pt-20">
+  <section class="relative mx-auto max-w-[1400px] px-6 pt-16 md:pt-20">
+    <Motif variant="arch" class="pointer-events-none absolute start-4 top-10 hidden h-40 w-32 text-espresso/[0.08] lg:block" />
+    <Motif variant="arch" class="pointer-events-none absolute end-4 top-10 hidden h-40 w-32 text-espresso/[0.08] lg:block" />
     <h1 class="font-display-lang text-center text-5xl" data-reveal>{title}</h1>
     <Motif variant="divider" class="mt-5 text-espresso/25" data-reveal />
     <p class="mx-auto mt-5 max-w-xl text-center text-sm leading-relaxed text-espresso/80" data-reveal>

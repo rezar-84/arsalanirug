@@ -36,7 +36,7 @@ const counts = Object.fromEntries(
       class="relative mx-auto max-w-[1400px] overflow-hidden rounded-t-[3rem] rounded-b-[2.5rem] bg-bitter px-6 py-16 text-canvas md:py-24"
     >
       <Motif variant="medallion" class="pointer-events-none absolute -start-40 -top-40 h-[34rem] w-[34rem] text-canvas/[0.06]" />
-      <Motif variant="medallion" class="pointer-events-none absolute -bottom-48 -end-24 h-[28rem] w-[28rem] text-canvas/[0.05]" />
+      <Motif variant="shamse" class="pointer-events-none absolute -bottom-48 -end-24 h-[28rem] w-[28rem] text-canvas/[0.05]" />
       <div class="relative mx-auto grid max-w-[1100px] items-center gap-12 md:grid-cols-2">
         <div class="text-center md:text-start">
           <img
@@ -60,17 +60,27 @@ const counts = Object.fromEntries(
             </Button>
           </div>
         </div>
-        <a href={heroRugPath} class="arch mx-auto block w-full max-w-sm border border-canvas/20">
-          <Picture
-            src={heroImage}
-            widths={[500, 900]}
-            sizes="(min-width: 768px) 384px, 90vw"
-            formats={["avif", "webp"]}
-            alt={ui.home.heroTitle}
-            loading="eager"
-            class="aspect-[3/4] w-full object-cover object-top"
-          />
-        </a>
+        <div class="relative mx-auto w-full max-w-sm">
+          <a href={heroRugPath} class="arch block border border-canvas/20">
+            <Picture
+              src={heroImage}
+              widths={[500, 900]}
+              sizes="(min-width: 768px) 384px, 90vw"
+              formats={["avif", "webp"]}
+              alt={ui.home.heroTitle}
+              loading="eager"
+              class="aspect-[3/4] w-full object-cover object-top"
+            />
+          </a>
+          <!-- motifs riding the frame: rosette at the arch apex, lachak
+               spandrels at the foot, a guard band beneath -->
+          <span class="pointer-events-none absolute -top-5 start-1/2 -translate-x-1/2 rounded-full bg-bitter p-1.5 rtl:translate-x-1/2">
+            <Motif variant="rosette" class="h-8 w-8 text-saffron/80" />
+          </span>
+          <Motif variant="lachak" class="pointer-events-none absolute -bottom-2 -start-2 h-16 w-16 -scale-y-100 text-canvas/25" />
+          <Motif variant="lachak" class="pointer-events-none absolute -bottom-2 -end-2 h-16 w-16 -scale-x-100 -scale-y-100 text-canvas/25" />
+          <Motif variant="band" class="mx-auto mt-5 w-3/5 text-canvas/25" />
+        </div>
       </div>
     </div>
   </section>
@@ -115,10 +125,12 @@ const counts = Object.fromEntries(
   <!-- Heritage band — the single soft color wash -->
   <section class="px-4 py-20 md:py-24">
     <div
-      class="mx-auto max-w-[1400px] rounded-[2.5rem] px-6 py-16 text-center md:py-20"
+      class="relative mx-auto max-w-[1400px] overflow-hidden rounded-[2.5rem] px-6 py-16 text-center md:py-20"
       style="background: linear-gradient(115deg, rgba(201,154,60,0.14), rgba(138,31,45,0.10));"
       data-reveal
     >
+      <Motif variant="star" class="pointer-events-none absolute -start-6 top-6 h-24 w-24 text-espresso/10" />
+      <Motif variant="star" class="pointer-events-none absolute -end-6 bottom-6 h-24 w-24 text-espresso/10" />
       <h2 class="font-display-lang mx-auto max-w-2xl text-4xl leading-tight md:text-5xl">
         {ui.home.heritageTitle}
       </h2>

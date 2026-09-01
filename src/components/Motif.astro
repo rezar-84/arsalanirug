@@ -6,7 +6,17 @@
  * on the dark panel).
  */
 interface Props {
-  variant: "medallion" | "divider" | "boteh" | "rosette" | "cypress" | "lachak" | "band";
+  variant:
+    | "medallion"
+    | "divider"
+    | "boteh"
+    | "rosette"
+    | "cypress"
+    | "lachak"
+    | "band"
+    | "shamse"
+    | "star"
+    | "arch";
   class?: string;
 }
 const { variant, class: cls = "" } = Astro.props;
@@ -31,6 +41,36 @@ const { variant, class: cls = "" } = Astro.props;
   <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" class={cls} aria-hidden="true">
     <path d="M50 88 C 27 77 19 49 33 29 C 41 17 57 12 66 20 C 73 27 71 37 63 39 C 57 40 52 36 53 30" />
     <path d="M50 76 C 35 68 30 50 39 36 C 45 27 55 24 61 29" />
+  </svg>
+)}
+
+{variant === "shamse" && (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" class={cls} aria-hidden="true">
+    <circle cx="100" cy="100" r="26" />
+    <circle cx="100" cy="100" r="44" />
+    {[0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5].map((a) => (
+      <path transform={`rotate(${a} 100 100)`} d="M100 56 L106 24 L100 4 L94 24 Z" />
+    ))}
+    {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
+      <path transform={`rotate(${a} 100 100)`} d="M100 74 C 106 84 106 92 100 100 C 94 92 94 84 100 74 Z" />
+    ))}
+  </svg>
+)}
+
+{variant === "star" && (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" class={cls} aria-hidden="true">
+    <rect x="22" y="22" width="56" height="56" />
+    <rect x="22" y="22" width="56" height="56" transform="rotate(45 50 50)" />
+    <circle cx="50" cy="50" r="12" />
+    <circle cx="50" cy="50" r="3" />
+  </svg>
+)}
+
+{variant === "arch" && (
+  <svg viewBox="0 0 120 160" fill="none" stroke="currentColor" stroke-width="1.5" class={cls} aria-hidden="true">
+    <path d="M10 150 V70 C 10 30 32 12 60 6 C 88 12 110 30 110 70 V150" />
+    <path d="M22 150 V72 C 22 40 38 24 60 18 C 82 24 98 40 98 72 V150" />
+    <path d="M2 150 H118" />
   </svg>
 )}
 
