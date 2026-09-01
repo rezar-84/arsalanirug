@@ -21,6 +21,34 @@ last-reviewed: 2026-09-01
 
 ---
 
+## ARSA-015 — Add Turkish, Spanish, Japanese, German locales — 2026-09-01
+
+**Tier:** 2. **Request.** Owner: "add turkish, spanish, japanese and german".
+
+**What was done.** `src/i18n/ui.ts` gained full UI-string translations for tr/es/ja/de
+(nav, hero/home, catalog, specs, gallery/zoom, contact incl. localized locations,
+footer, 404, WhatsApp message templates) plus localeMeta entries; `stripLocale`/
+`alternatePath` generalized. BaseLayout now emits hreflang for all six locales + an
+og:locale map; the header's two-way toggle became a dropdown language menu (details/
+summary, click-outside close). `getRugsWithFallback` generalized so any non-EN locale
+falls back to EN entries; long-form pages (Heritage/History/Guide) typed
+Partial<Record<Locale,…>> with `?? content.en` fallback. Routes for the four locales
+generated from the fa/ templates (9 pages each); astro.config locales updated; JA gets
+a system-font stack (Hiragino/Yu Gothic body, Mincho for display) with no new webfont.
+`formatDimensions` now formats numbers per locale.
+
+**Verification.** `npx astro check` 0 errors; `npm run build` exit 0 — **283 pages**;
+spot-checks: `<html lang="ja">`, localized titles (アルサラーニ・ラグ / Arsalani Halı /
+Contacto / Gewebte Erbstücke), 7 hreflang alternates on the home page, 34 product pages
+per locale; JA homepage screenshot confirms layout, fonts, and the language menu.
+
+**Not done.** tr/es/ja/de long-form content (History/Guide/Heritage bodies, rug
+descriptions) intentionally falls back to English — extends ARSA-004's translation
+review; locations/addresses kept as transliterations; no per-locale font tuning beyond
+the JA system stack.
+
+---
+
 ## ARSA-014 (addendum, Tier 3) — 2026-09-01 — More motifs per owner ("you can add some more visual motifs"): extended `Motif.astro` with `rosette` (8-petal gol), `cypress` (sarv), `lachak` (corner spandrel), and `band` (repeating diamond frieze via SVG pattern). Applied sparingly, still mono/low-opacity: cypress pair flanking the home inquiry title, rosette + cypresses on /about, lachak corners on the contact form card + medallion behind locations, large faint boteh on 404/thank-you, divider under related-rugs, band above the footer copyright. Verified: astro check clean, build exit 0 (95 pages), each motif confirmed present in the built HTML of its page.
 
 ---

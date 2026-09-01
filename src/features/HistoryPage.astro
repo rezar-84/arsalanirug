@@ -13,7 +13,7 @@ const ui = t(locale);
 // A cultural history of the Persian rug — deliberately separate from the
 // Arsalani family story on /about. Dates cross-checked against standard
 // references (Hermitage/Pazyryk, V&A/Ardabil, UNESCO ICH 2010).
-const content: Record<
+const content: Partial<Record<
   Locale,
   {
     kicker: string;
@@ -24,7 +24,7 @@ const content: Record<
     closing: string;
     toGuide: string;
   }
-> = {
+>> = {
   en: {
     kicker: "The Persian Rug",
     title: "A Woven History",
@@ -121,7 +121,7 @@ const content: Record<
   },
 };
 
-const c = content[locale];
+const c = content[locale] ?? content.en!;
 ---
 
 <BaseLayout

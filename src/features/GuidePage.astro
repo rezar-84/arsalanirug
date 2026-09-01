@@ -12,7 +12,7 @@ const ui = t(locale);
 
 type Entry = { term: string; fa: string; text: string };
 
-const content: Record<
+const content: Partial<Record<
   Locale,
   {
     kicker: string;
@@ -32,7 +32,7 @@ const content: Record<
     lexiconIntro: string;
     lexicon: Entry[];
   }
-> = {
+>> = {
   en: {
     kicker: "A Collector's Companion",
     title: "How to Read a Persian Rug",
@@ -233,7 +233,7 @@ const content: Record<
   },
 };
 
-const c = content[locale];
+const c = content[locale] ?? content.en!;
 ---
 
 <BaseLayout

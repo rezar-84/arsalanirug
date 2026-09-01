@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { localeMeta, localizedPath, contact, type Locale } from "../i18n/ui";
+import { locales, localeMeta, localizedPath, contact, type Locale } from "../i18n/ui";
 
 interface Props {
   locale: Locale;
@@ -26,9 +26,9 @@ const {
 
 const meta = localeMeta[locale];
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://arsalanirug.com";
-const enUrl = `${site}${localizedPath("en", path)}`;
-const faUrl = `${site}${localizedPath("fa", path)}`;
-const canonicalUrl = locale === "en" ? enUrl : faUrl;
+const urlFor = (l: Locale) => `${site}${localizedPath(l, path)}`;
+const canonicalUrl = urlFor(locale);
+const ogLocales: Record<Locale, string> = { en: "en_US", fa: "fa_IR", tr: "tr_TR", es: "es_ES", ja: "ja_JP", de: "de_DE" };
 
 const organizationLd = {
   "@context": "https://schema.org",
@@ -51,9 +51,10 @@ const organizationLd = {
     <link rel="canonical" href={canonicalUrl} />
     {hasAltLocale && (
       <>
-        <link rel="alternate" hreflang="en" href={enUrl} />
-        <link rel="alternate" hreflang="fa" href={faUrl} />
-        <link rel="alternate" hreflang="x-default" href={enUrl} />
+        {locales.map((l) => (
+          <link rel="alternate" hreflang={l} href={urlFor(l)} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={urlFor("en")} />
       </>
     )}
     <link rel="icon" type="image/png" href="/logo.png" />
@@ -64,7 +65,7 @@ const organizationLd = {
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, site).toString()} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:locale" content={locale === "en" ? "en_US" : "fa_IR"} />
+    <meta property="og:locale" content={ogLocales[locale]} />
     <meta name="twitter:card" content="summary_large_image" />
 
     <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} is:inline />

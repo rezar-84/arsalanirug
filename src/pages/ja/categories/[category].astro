@@ -1,0 +1,12 @@
+---
+import CatalogPage from "../../../features/CatalogPage.astro";
+import { categorySlugs } from "../../../i18n/ui";
+
+export function getStaticPaths() {
+  return categorySlugs.map((category) => ({ params: { category } }));
+}
+
+const { category } = Astro.params;
+---
+
+<CatalogPage locale="ja" category={category} />

@@ -1,0 +1,23 @@
+---
+import RugDetailPage from "../../../features/RugDetailPage.astro";
+import { getRugsWithFallback, rugSlug } from "../../../lib/rugs";
+
+export async function getStaticPaths() {
+  // Fallback set: FA entry when translated, EN entry otherwise — so every rug
+  // has a /fa/ URL and hreflang pairs stay valid.
+  const rugs = await getRugsWithFallback("ja");
+  return rugs.map((rug) => ({
+    params: { slug: rugSlug(rug) },
+    props: {
+      rug,
+      related: rugs
+        .filter((r) => rugSlug(r) !== rugSlug(rug) && r.data.category === rug.data.category)
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { rug, related } = Astro.props;
+---
+
+<RugDetailPage locale="ja" rug={rug} related={related} />

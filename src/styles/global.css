@@ -45,6 +45,14 @@
     font-family: var(--font-fa);
   }
 
+  /* Japanese: extend the stacks with the platform's JP faces (no webfont). */
+  html[lang="ja"] {
+    font-family: "Inter Variable", "Hiragino Sans", "Yu Gothic", "Meiryo", ui-sans-serif, sans-serif;
+  }
+  html[lang="ja"] .font-display-lang {
+    font-family: "Cormorant Variable", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  }
+
   ::selection {
     background-color: var(--color-crimson);
     color: var(--color-canvas);

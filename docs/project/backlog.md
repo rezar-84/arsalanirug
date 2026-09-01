@@ -21,7 +21,7 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status |
 | --- | --- | --- | --- | --- | --- |
-| ARSA-004 | FA translation pass: Persian titles + descriptions for the 29 rug entries, drop `draft: true` after owner review | 1 | copywriter | — | Ready |
+| ARSA-004 | Translation review: FA rug titles/descriptions + FA/tr/es/ja/de long-form pages (History/Guide/Heritage) currently falling back to English | 1 | copywriter | — | Ready |
 | ARSA-005 | Write real EN descriptions for the 29 rugs (bodies are TODO placeholders) | 2 | copywriter | — | Ready |
 | ARSA-008 | Proper favicon set + OG default image from logo.png | 3 | brand-designer | — | Ready |
 
@@ -50,6 +50,7 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status | Completed |
 | --- | --- | --- | --- | --- | --- | --- |
+| ARSA-015 | Locales tr/es/ja/de: full UI translations, language menu, per-locale routes/hreflang, EN fallback for long-form | 2 | localisation | — | Done | 2026-09-01 |
 | ARSA-014 | Zoom lightbox, palette extraction, Persian motifs, design polish, /history + /guide pages (EN+FA) | 2 | ux-designer | — | Done | 2026-09-01 |
 | ARSA-013 | Verify no fake products; owner kept full live catalog (34); junk-titled rugs imported, FilterBar hides empty categories | 3 | product-manager | — | Done | 2026-09-01 |
 | ARSA-012 | Match live site: verbatim titles, old URL structure (`/content/`, `/categories/`, `/products`, `/about`), brand logo | 2 | architect | — | Done | 2026-09-01 |

@@ -17,19 +17,19 @@ export async function getRugs(locale: Locale): Promise<Rug[]> {
   );
 }
 
-// FA falls back to the EN entry (specs are language-neutral) so the Persian
-// catalog is complete even while translations are in draft.
+// Non-EN locales fall back to the EN entry (specs are language-neutral) so
+// every locale's catalog is complete even while translations are in draft.
 export async function getRugsWithFallback(locale: Locale): Promise<Rug[]> {
   if (locale === "en") return getRugs("en");
-  const fa = await getRugs("fa");
-  const faSlugs = new Set(fa.map(rugSlug));
+  const localized = await getRugs(locale);
+  const have = new Set(localized.map(rugSlug));
   const en = await getRugs("en");
-  return [...fa, ...en.filter((r) => !faSlugs.has(rugSlug(r)))].sort(
+  return [...localized, ...en.filter((r) => !have.has(rugSlug(r)))].sort(
     (a, b) => a.data.order - b.data.order || rugSlug(a).localeCompare(rugSlug(b))
   );
 }
 
 export const formatDimensions = (rug: Rug, locale: Locale) => {
-  const fmt = (n: number) => n.toLocaleString(locale === "fa" ? "fa-IR" : "en-US");
+  const fmt = (n: number) => n.toLocaleString(locale === "fa" ? "fa-IR" : locale);
   return `${fmt(rug.data.lengthCm)} × ${fmt(rug.data.widthCm)}`;
 };

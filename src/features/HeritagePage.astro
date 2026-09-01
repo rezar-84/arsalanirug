@@ -13,7 +13,7 @@ const { locale } = Astro.props;
 const ui = t(locale);
 
 // Long-form story, rewritten from the old site's About page (docs/source-copy.md).
-const story: Record<Locale, { mission: string; timeline: { era: string; title: string; text: string }[]; closing: string }> = {
+const story: Partial<Record<Locale, { mission: string; timeline: { era: string; title: string; text: string }[]; closing: string }>> = {
   en: {
     mission:
       "Our mission is simple: to bring the finest Persian hand-woven carpets to connoisseurs anywhere in the world — from our own signature pieces to rugs sourced, on commission, from the most reputable weaving houses of Iran. Behind that promise stand more than a hundred years of family craft.",
@@ -82,7 +82,7 @@ const story: Record<Locale, { mission: string; timeline: { era: string; title: s
   },
 };
 
-const s = story[locale];
+const s = story[locale] ?? story.en!;
 const rugs = await getRugsWithFallback(locale);
 const galleryRugs = rugs.filter((r) => r.data.images.length > 1).slice(0, 3);
 ---

@@ -1,5 +1,5 @@
 ---
-import { t, localizedPath, alternatePath, localeMeta, type Locale } from "../i18n/ui";
+import { t, localizedPath, stripLocale, locales, localeMeta, type Locale } from "../i18n/ui";
 
 interface Props {
   locale: Locale;
@@ -8,7 +8,8 @@ interface Props {
 }
 const { locale, path, hasAltLocale = true } = Astro.props;
 const ui = t(locale);
-const other: Locale = locale === "en" ? "fa" : "en";
+const basePath = stripLocale(localizedPath(locale, path));
+const otherLocales = locales.filter((l) => l !== locale);
 
 const links = [
   { href: localizedPath(locale, "/products"), label: ui.nav.rugs },
@@ -43,14 +44,28 @@ const links = [
 
     <div class="flex items-center gap-2">
       {hasAltLocale && (
-        <a
-          href={alternatePath(other, localizedPath(locale, path))}
-          lang={localeMeta[other].htmlLang}
-          dir={localeMeta[other].dir}
-          class="rounded-[100px] border border-espresso/30 px-3 py-1 text-xs text-ink transition-colors hover:border-crimson hover:text-crimson"
-        >
-          {localeMeta[other].label}
-        </a>
+        <details class="relative" data-lang-menu>
+          <summary
+            class="flex cursor-pointer list-none items-center gap-1 rounded-[100px] border border-espresso/30 px-3 py-1 text-xs text-ink transition-colors hover:border-crimson hover:text-crimson [&::-webkit-details-marker]:hidden"
+          >
+            {localeMeta[locale].label}
+            <span aria-hidden="true" class="text-[9px]">▾</span>
+          </summary>
+          <div
+            class="absolute end-0 top-full z-50 mt-2 flex min-w-32 flex-col overflow-hidden rounded-2xl border border-espresso/30 bg-canvas py-1"
+          >
+            {otherLocales.map((l) => (
+              <a
+                href={localizedPath(l, basePath)}
+                lang={localeMeta[l].htmlLang}
+                dir={localeMeta[l].dir}
+                class="px-4 py-2 text-xs text-ink transition-colors hover:bg-linen hover:text-crimson"
+              >
+                {localeMeta[l].label}
+              </a>
+            ))}
+          </div>
+        </details>
       )}
       <button
         type="button"
@@ -83,5 +98,10 @@ const links = [
     if (!menu) return;
     menu.hidden = !menu.hidden;
     e.currentTarget.setAttribute("aria-expanded", String(!menu.hidden));
+  });
+  // Close the language menu when clicking elsewhere.
+  document.addEventListener("click", (e) => {
+    const menu = document.querySelector("[data-lang-menu]");
+    if (menu && menu.open && !menu.contains(e.target)) menu.open = false;
   });
 </script>
