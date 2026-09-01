@@ -6,7 +6,7 @@ import Button from "../components/Button.astro";
 import Motif from "../components/Motif.astro";
 import RugCard from "../components/RugCard.astro";
 import { t, localizedPath, categorySlugs, type Locale } from "../i18n/ui";
-import { getRugsWithFallback } from "../lib/rugs";
+import { getRugsWithFallback, rugSlug } from "../lib/rugs";
 
 interface Props {
   locale: Locale;
@@ -15,9 +15,22 @@ const { locale } = Astro.props;
 const ui = t(locale);
 
 const rugs = await getRugsWithFallback(locale);
-const featured = rugs.filter((r) => r.data.featured);
-const showcase = (featured.length >= 4 ? featured.slice(1, 7) : rugs.slice(1, 7)).slice(0, 6);
-const heroRugPath = localizedPath(locale, "/content/arsalani-qom-lachak-torang-gerd");
+const heroSlug = "arsalani-qom-lachak-torang-gerd";
+const heroRugPath = localizedPath(locale, `/content/${heroSlug}`);
+
+// "Selected Pieces" leads with the boutique classics (owner preference):
+// five boutique slots — featured ones first — plus one featured piece from
+// the rest of the catalog for variety. The hero rug never repeats here.
+const pool = rugs.filter((r) => rugSlug(r) !== heroSlug);
+const boutique = pool.filter((r) => r.data.category === "boutique-rugs");
+const boutiqueRanked = [
+  ...boutique.filter((r) => r.data.featured),
+  ...boutique.filter((r) => !r.data.featured),
+];
+const otherFeatured = pool.filter(
+  (r) => r.data.category !== "boutique-rugs" && r.data.featured
+);
+const showcase = [...boutiqueRanked.slice(0, 5), ...otherFeatured, ...boutiqueRanked.slice(5)].slice(0, 6);
 
 const counts = Object.fromEntries(
   categorySlugs.map((c) => [c, rugs.filter((r) => r.data.category === c).length])

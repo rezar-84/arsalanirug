@@ -172,6 +172,10 @@ records: `docs/project/reviews/ARSA-006-design.md` and
 
 ---
 
+## ARSA-024 (Tier 3) — 2026-09-01 — Owner: home "Selected Pieces" should mostly show the boutique classics. HomePage showcase logic reworked: five slots go to boutique-rugs (featured first, then by order), one slot to a featured piece from the rest for variety; the hero rug is excluded by slug so it never repeats in the grid. Verified: build exit 0; home now shows 5 boutique cards (Ghaliche Kork, Lachak Torang, Kashan Old Manchester Pashm, Malayer Boteh, Shiraz Gabbeh) + 1 Patchwork.
+
+---
+
 ## ARSA-023 — Contact overhaul: Toronto in, Tehran/Qom out — 2026-09-01
 
 **Tier:** 1 surface (contact details / inquiry channels), executed on the owner's
