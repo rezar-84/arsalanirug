@@ -28,7 +28,7 @@ const meta = localeMeta[locale];
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://arsalanirug.com";
 const urlFor = (l: Locale) => `${site}${localizedPath(l, path)}`;
 const canonicalUrl = urlFor(locale);
-const ogLocales: Record<Locale, string> = { en: "en_US", fa: "fa_IR", tr: "tr_TR", es: "es_ES", ja: "ja_JP", de: "de_DE" };
+const ogLocales: Record<Locale, string> = { en: "en_US", fa: "fa_IR", tr: "tr_TR", es: "es_ES", ja: "ja_JP", de: "de_DE", ru: "ru_RU", ar: "ar_AR", zh: "zh_CN" };
 
 const organizationLd = {
   "@context": "https://schema.org",

@@ -145,9 +145,9 @@ lookup.
 
 | | |
 | --- | --- |
-| **Ships in** | en, fa, tr, es, ja, de (tr/es/ja/de: full UI strings; long-form pages fall back to English pending translation) |
+| **Ships in** | en, fa, tr, es, ja, de, ru, ar, zh (non-EN long-form pages fall back to English pending translation) |
 | **Source language** | en |
-| **Writing directions** | bidirectional — fa is RTL (`dir="rtl"`, logical CSS properties throughout); tr/es/ja/de are LTR |
+| **Writing directions** | bidirectional — fa and ar are RTL (`dir="rtl"`, logical CSS properties throughout); tr/es/ja/de/ru/zh are LTR |
 | **Message catalogue** | `src/i18n/ui.ts` (UI strings, both locales); long-form content per-locale in `src/content/rugs/{en,fa}/` and `src/features/HeritagePage.astro` |
 | **Translation workflow** | AI-drafted FA, reviewed by the owner before an entry drops `draft: true` |
 | **Terminology / glossary** | rug-trade terms (Zarcharak, Lachak Torang, Gabbeh…) stay transliterated in EN and native in FA; owner decides disputes |
