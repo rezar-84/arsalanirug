@@ -1,11 +1,12 @@
 ---
 import { Picture } from "astro:assets";
+import heroImage from "../assets/hero/IMG_5840_0.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Motif from "../components/Motif.astro";
 import RugCard from "../components/RugCard.astro";
 import { t, localizedPath, categorySlugs, type Locale } from "../i18n/ui";
-import { getRugsWithFallback, rugSlug } from "../lib/rugs";
+import { getRugsWithFallback } from "../lib/rugs";
 
 interface Props {
   locale: Locale;
@@ -15,7 +16,6 @@ const ui = t(locale);
 
 const rugs = await getRugsWithFallback(locale);
 const featured = rugs.filter((r) => r.data.featured);
-const heroRug = featured[0] ?? rugs[0];
 const showcase = (featured.length >= 4 ? featured.slice(1, 7) : rugs.slice(1, 7)).slice(0, 6);
 
 const counts = Object.fromEntries(
@@ -59,22 +59,17 @@ const counts = Object.fromEntries(
             </Button>
           </div>
         </div>
-        {heroRug && (
-          <a
-            href={localizedPath(locale, `/content/${rugSlug(heroRug)}`)}
-            class="arch mx-auto block w-full max-w-sm border border-canvas/20"
-          >
-            <Picture
-              src={heroRug.data.images[0]}
-              widths={[500, 900]}
-              sizes="(min-width: 768px) 384px, 90vw"
-              formats={["avif", "webp"]}
-              alt={heroRug.data.title}
-              loading="eager"
-              class="aspect-[3/4] w-full object-cover object-top"
-            />
-          </a>
-        )}
+        <div class="arch mx-auto block w-full max-w-sm border border-canvas/20">
+          <Picture
+            src={heroImage}
+            widths={[500, 900]}
+            sizes="(min-width: 768px) 384px, 90vw"
+            formats={["avif", "webp"]}
+            alt={ui.home.heroTitle}
+            loading="eager"
+            class="aspect-[3/4] w-full object-cover object-top"
+          />
+        </div>
       </div>
     </div>
   </section>

@@ -19,6 +19,23 @@ last-reviewed: 2026-09-01
 - When this file gets long, move older entries to `worklog-archive/YYYY.md` and leave a
   pointer here. Do not truncate.
 
+## ARSA-018 — Replace main hero image — 2026-09-01
+
+**Tier:** 2. **Request.** Replace the current hero photo with the owner-provided
+`/home/rubuntu/Documents/arsalani-rug/files/IMG_5840_0.jpg`.
+
+**What was done.** Copied the 2112×2816 source into `src/assets/hero/IMG_5840_0.jpg`;
+`HomePage.astro` now uses Astro `Picture` processing for the hero and no longer links
+the unrelated image to a mismatched product detail page.
+
+**Verification.** `npx astro check` exited 0 with 0 errors; `npm run build` exited 0 and
+built 283 pages, including generated hero AVIF/WebP/JPEG variants.
+
+**Reviews.** Brand/UX: Pass — portrait source fits the 3:4 arch frame and is visually
+consistent with the hero treatment. QA: Pass — build and generated asset checks pass.
+
+**Not done.** Nothing deferred.
+
 ## ARSA-017 — Set sole owner approval gate — 2026-09-01
 
 **Date:** 2026-09-01 **Tier:** 1 **Status:** Done
