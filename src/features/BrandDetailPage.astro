@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Motif from "../components/Motif.astro";
+import RugCard from "../components/RugCard.astro";
+import Button from "../components/Button.astro";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+import { getRugsWithFallback, rugsByBrand } from "../lib/rugs";
+import { brandStory, type Brand } from "../data/brands";
+
+interface Props {
+  locale: Locale;
+  brand: Brand;
+}
+const { locale, brand } = Astro.props;
+const ui = t(locale);
+const rugs = rugsByBrand(await getRugsWithFallback(locale), brand.slug);
+const story = brandStory(brand, locale);
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://arsalanirug.com";
+
+const collectionLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: brand.name,
+  url: `${site}${localizedPath(locale, `/brands/${brand.slug}`)}`,
+  description: story?.tagline,
+  isPartOf: { "@type": "WebSite", name: "Arsalani Rug", url: site },
+};
+---
+
+<BaseLayout
+  locale={locale}
+  path={`/brands/${brand.slug}`}
+  title={`${brand.name} — ${ui.siteName}`}
+  description={story?.tagline ?? brand.name}
+  jsonLd={[collectionLd]}
+>
+  <section class="mx-auto max-w-[800px] px-6 pt-16 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.explore.housesKicker}</p>
+    <h1 class="font-display mt-4 text-5xl md:text-6xl" lang="en" data-reveal>{brand.name}</h1>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    {story?.body.map((p) => (
+      <p class="mt-6 text-start text-sm leading-loose text-espresso/90" data-reveal>{p}</p>
+    ))}
+  </section>
+
+  <section class="mx-auto max-w-[1400px] px-6 py-16">
+    <h2 class="font-display-lang text-center text-3xl" data-reveal>{ui.explore.fromHouse}</h2>
+    {rugs.length > 0 ? (
+      <div class="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {rugs.map((rug) => (
+          <RugCard rug={rug} locale={locale} />
+        ))}
+      </div>
+    ) : (
+      <p class="mt-8 text-center text-sm text-espresso/60">{ui.catalog.empty}</p>
+    )}
+    <div class="mt-14 text-center" data-reveal>
+      <Button href={localizedPath(locale, "/products")} variant="outline">{ui.cta.viewCollection}</Button>
+    </div>
+  </section>
+</BaseLayout>

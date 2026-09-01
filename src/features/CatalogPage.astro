@@ -41,11 +41,14 @@ const title = category ? ui.categories[category] : ui.catalog.title;
     {rugs.length === 0 ? (
       <p class="py-24 text-center text-espresso/60">{ui.catalog.empty}</p>
     ) : (
-      <div class="mt-14 grid gap-x-6 gap-y-14 pb-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {rugs.map((rug, i) => (
-          <RugCard rug={rug} locale={locale} loading={i < 4 ? "eager" : "lazy"} />
-        ))}
-      </div>
+      <>
+        <div class="mt-14 grid gap-x-6 gap-y-14 pb-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {rugs.map((rug, i) => (
+            <RugCard rug={rug} locale={locale} loading={i < 4 ? "eager" : "lazy"} />
+          ))}
+        </div>
+        <p data-filter-empty hidden class="py-16 text-center text-espresso/60">{ui.catalog.empty}</p>
+      </>
     )}
   </section>
 </BaseLayout>

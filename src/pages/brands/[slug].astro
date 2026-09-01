@@ -1,0 +1,12 @@
+---
+import BrandDetailPage from "../../features/BrandDetailPage.astro";
+import { activeBrands } from "../../data/brands";
+
+export function getStaticPaths() {
+  return activeBrands.map((brand) => ({ params: { slug: brand.slug }, props: { brand } }));
+}
+
+const { brand } = Astro.props;
+---
+
+<BrandDetailPage locale="en" brand={brand} />

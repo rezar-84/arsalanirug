@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Motif from "../components/Motif.astro";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+import { getRugsWithFallback, rugsByBrand } from "../lib/rugs";
+import { activeBrands, brandStory } from "../data/brands";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+const rugs = await getRugsWithFallback(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  path="/brands"
+  title={`${ui.explore.housesTitle} — ${ui.siteName}`}
+  description={ui.explore.brandsIntro}
+>
+  <section class="mx-auto max-w-[900px] px-6 pt-16 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.explore.housesKicker}</p>
+    <h1 class="font-display-lang mt-4 text-5xl md:text-6xl" data-reveal>{ui.explore.housesTitle}</h1>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <p class="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-espresso/80" data-reveal>
+      {ui.explore.brandsIntro}
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-[900px] px-6 py-16">
+    <div class="flex flex-col gap-6">
+      {activeBrands.map((brand) => {
+        const count = rugsByBrand(rugs, brand.slug).length;
+        const story = brandStory(brand, locale);
+        return (
+          <a
+            href={localizedPath(locale, `/brands/${brand.slug}`)}
+            class="group relative overflow-hidden rounded-3xl border border-espresso/25 bg-card p-8 transition-colors hover:border-crimson/50"
+            data-reveal
+          >
+            <Motif variant="medallion" class="pointer-events-none absolute -end-16 -top-16 h-48 w-48 text-espresso/[0.06]" />
+            <div class="flex flex-wrap items-baseline justify-between gap-4">
+              <h2 class="font-display text-4xl transition-colors group-hover:text-crimson" lang="en">
+                {brand.name}
+              </h2>
+              <span class="text-xs uppercase tracking-[0.2em] text-espresso/50">
+                {ui.catalog.piecesCount(count)}
+              </span>
+            </div>
+            {story?.tagline && (
+              <p class="mt-3 max-w-xl text-sm leading-relaxed text-espresso/80">{story.tagline}</p>
+            )}
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

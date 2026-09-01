@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import Motif from "./Motif.astro";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+import { getRugsWithFallback, rugsByRegion } from "../lib/rugs";
+import { regions, regionName } from "../data/regions";
+
+interface Props {
+  locale: Locale;
+  compact?: boolean; // band mode (home/guide): single scrolling row
+}
+const { locale, compact = false } = Astro.props;
+const ui = t(locale);
+const rugs = await getRugsWithFallback(locale);
+
+const tiles = regions.map((region) => {
+  const own = rugsByRegion(rugs, region.slug);
+  return {
+    region,
+    name: regionName(region, locale),
+    count: own.length,
+    image: own[0]?.data.images[0],
+  };
+});
+---
+
+<div
+  class={compact
+    ? "flex gap-5 overflow-x-auto pb-4 [scrollbar-width:thin]"
+    : "grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4"}
+>
+  {tiles.map((tile) => (
+    <a
+      href={localizedPath(locale, `/regions/${tile.region.slug}`)}
+      class={`group text-center ${compact ? "w-32 shrink-0" : ""}`}
+      data-reveal
+    >
+      <div class="arch border border-espresso/25 bg-linen/50 transition-colors group-hover:border-crimson/50">
+        {tile.image ? (
+          <Image
+            src={tile.image}
+            width={300}
+            alt={tile.name}
+            loading="lazy"
+            class="aspect-[3/4] w-full object-cover object-top"
+          />
+        ) : (
+          <div class="flex aspect-[3/4] w-full items-center justify-center">
+            <Motif variant="medallion" class="h-16 w-16 text-espresso/25" />
+          </div>
+        )}
+      </div>
+      <p class="font-display-lang mt-3 text-lg leading-snug transition-colors group-hover:text-crimson">
+        {tile.name}
+      </p>
+      {tile.count > 0 && (
+        <p class="mt-0.5 text-[11px] uppercase tracking-[0.15em] text-espresso/50">
+          {ui.catalog.piecesCount(tile.count)}
+        </p>
+      )}
+    </a>
+  ))}
+</div>

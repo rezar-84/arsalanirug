@@ -57,13 +57,15 @@ Production deployment remains owner-approved.
 | `src/components/*.astro` | design-system pieces (Header, RugCard, Gallery, FilterBar, forms, CTAs) | — | i18n, lib |
 | `src/lib/rugs.ts`, `src/lib/whatsapp.ts` | collection queries, locale fallback, WhatsApp URL building | — | astro:content, i18n |
 | `src/i18n/ui.ts` | all UI strings, locale metadata, contact constants | UI strings, contact details | — |
+| `src/data/brands.ts`, `src/data/regions.ts` | brand & weaving-region registries (multi-locale prose with EN fallback) | brand/region names + stories | i18n types |
 | `src/content/rugs/` | the catalog | rug entries | — |
 | `scripts/migrate.mjs` | one-off Drupal→collections migration | — | dump at `~/Documents/arsalani-rug`, sharp |
 
 **Boundary rules:** pages never query collections directly — they pass locale to a
 feature; features and components read strings only from `src/i18n/ui.ts`, never inline
-bilingual text (long-form heritage copy in `HeritagePage.astro` is the one exception).
-Contact details live only in `ui.ts`'s `contact` object.
+bilingual text. Exceptions: long-form page copy in `src/features/*` content objects and
+the brand/region registries in `src/data/` (both use the Partial-locale + EN-fallback
+pattern). Contact details live only in `ui.ts`'s `contact` object.
 
 ## Data flow
 

@@ -2,6 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Motif from "../components/Motif.astro";
+import RegionTiles from "../components/RegionTiles.astro";
+import SizeGuide from "../components/SizeGuide.astro";
+import { regions as regionRegistry, regionName, regionKicker, regionBody } from "../data/regions";
 import { t, localizedPath, type Locale } from "../i18n/ui";
 
 interface Props {
@@ -234,6 +237,7 @@ const content: Partial<Record<
 };
 
 const c = content[locale] ?? content.en!;
+const featuredRegions = regionRegistry.filter((r) => r.featured);
 ---
 
 <BaseLayout
@@ -276,27 +280,28 @@ const c = content[locale] ?? content.en!;
       {c.citiesIntro}
     </p>
     <div class="mt-14 grid gap-8 md:grid-cols-2">
-      {c.featured.map((city) => (
-        <article class="relative overflow-hidden rounded-3xl border border-espresso/25 bg-card p-8" data-reveal>
+      {featuredRegions.map((region) => (
+        <a
+          href={localizedPath(locale, `/regions/${region.slug}`)}
+          class="group relative overflow-hidden rounded-3xl border border-espresso/25 bg-card p-8 transition-colors hover:border-crimson/50"
+          data-reveal
+        >
           <Motif variant="medallion" class="pointer-events-none absolute -end-20 -top-20 h-64 w-64 text-espresso/[0.07]" />
-          <p class="text-xs uppercase tracking-[0.25em] text-saffron">{city.kicker}</p>
+          <p class="text-xs uppercase tracking-[0.25em] text-saffron">{regionKicker(region, locale)}</p>
           <div class="mt-2 flex items-baseline gap-4">
-            <h3 class="font-display text-4xl" lang="en">{city.name}</h3>
-            <span class="font-fa-display text-3xl text-crimson" lang="fa" dir="rtl">{city.fa}</span>
+            <h3 class="font-display-lang text-4xl transition-colors group-hover:text-crimson">{regionName(region, locale)}</h3>
+            {locale !== "fa" && region.name.fa && (
+              <span class="font-fa-display text-3xl text-crimson" lang="fa" dir="rtl">{region.name.fa}</span>
+            )}
           </div>
-          {city.text.map((p) => (
+          {regionBody(region, locale).map((p) => (
             <p class="mt-4 text-sm leading-loose text-espresso/90">{p}</p>
           ))}
-        </article>
+        </a>
       ))}
     </div>
-    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {c.regions.map((r) => (
-        <div class="rounded-2xl border border-espresso/20 bg-card p-5" data-reveal>
-          <h4 class="font-display-lang text-xl">{r.name}</h4>
-          <p class="mt-2 text-xs leading-relaxed text-espresso/80">{r.note}</p>
-        </div>
-      ))}
+    <div class="mt-10">
+      <RegionTiles locale={locale} compact />
     </div>
   </section>
 
@@ -319,6 +324,18 @@ const c = content[locale] ?? content.en!;
           </li>
         ))}
       </ol>
+    </div>
+  </section>
+
+  <!-- Traditional sizes, to scale -->
+  <section class="mx-auto max-w-[1100px] px-6 pt-24">
+    <h2 class="font-display-lang text-center text-4xl" data-reveal>{ui.explore.sizeGuideTitle}</h2>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <p class="mx-auto mt-6 max-w-xl text-center text-sm leading-relaxed text-espresso/80" data-reveal>
+      {ui.explore.sizeGuideIntro}
+    </p>
+    <div class="mt-12" data-reveal>
+      <SizeGuide locale={locale} />
     </div>
   </section>
 

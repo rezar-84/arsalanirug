@@ -110,7 +110,7 @@ lookup.
 | Role | Additional check |
 | --- | --- |
 | brand-designer | Changes stay within the parchment-gallery design system (tokens and rules in `src/styles/global.css`): cream canvas, hairline espresso borders, no shadows, pill (100px) / arch (900px) radius vocabulary, madder-crimson as the single accent. |
-| copywriter | Never state or imply a price. Rug provenance, dates, and family-history claims must trace to `docs/source-copy.md` or the owner — no invented heritage. |
+| copywriter | Never state or imply a price. Rug provenance, dates, and family-history claims must trace to `docs/source-copy.md` or the owner — no invented heritage. Guest-brand pages (`src/data/brands.ts`) state only what the catalog shows; no invented brand histories. |
 | localisation | Every EN string change checks its FA counterpart in `src/i18n/ui.ts`; FA pages must render RTL with the FA font stack (Vazirmatn/Amiri). |
 
 **Project-specific roles**

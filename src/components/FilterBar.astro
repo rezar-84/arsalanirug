@@ -1,7 +1,7 @@
 ---
 import { t, localizedPath, categorySlugs, type Locale, type CategorySlug, type MaterialSlug } from "../i18n/ui";
 import { getRugsWithFallback, regionOf } from "../lib/rugs";
-import { activeBrands, brandBySlug } from "../data/brands";
+import { brandBySlug } from "../data/brands";
 import { regionBySlug, regionName } from "../data/regions";
 
 interface Props {
@@ -47,6 +47,11 @@ if (regionsHere.length >= 2)
     })),
   });
 
+// Every possible localized count string, so the client stays translation-free.
+const countMap = Object.fromEntries(
+  Array.from({ length: scoped.length + 1 }, (_, n) => [n, ui.catalog.piecesCount(n)])
+);
+
 const catLink = (slug: string) =>
   localizedPath(locale, slug === "all" ? "/products" : `/categories/${slug}`);
 const pill = (active: boolean) =>
@@ -57,7 +62,7 @@ const pill = (active: boolean) =>
   }`;
 ---
 
-<div class="flex flex-col items-center gap-4" data-reveal>
+<div class="flex flex-col items-center gap-5" data-reveal>
   <div class="flex flex-wrap justify-center gap-2">
     {["all", ...nonEmptyCategories].map((slug) => (
       <a href={catLink(slug)} class={pill(slug === activeCategory)}>
@@ -66,40 +71,66 @@ const pill = (active: boolean) =>
     ))}
   </div>
 
-  <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3" data-filterbar>
-    {groups.map((g) => (
-      <div class="flex flex-wrap items-center justify-center gap-2">
-        <span class="text-xs text-espresso/60">{g.label}:</span>
-        <button type="button" data-filter={g.key} data-value="" class={pill(true)}>
-          {ui.cta.allFilter}
-        </button>
-        {g.values.map((v) => (
-          <button type="button" data-filter={g.key} data-value={v.value} class={pill(false)}>
-            {v.label}
-          </button>
+  {(groups.length > 0 || true) && (
+    <div
+      class="w-full max-w-[1000px] rounded-3xl border border-espresso/20 bg-linen/30 px-6 py-5"
+      data-filterbar
+      data-count-map={JSON.stringify(countMap)}
+    >
+      <div class="flex flex-col gap-3">
+        {groups.map((g) => (
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="w-16 shrink-0 text-xs uppercase tracking-[0.15em] text-espresso/50">{g.label}</span>
+            <button type="button" data-filter={g.key} data-value="" class={pill(true)}>
+              {ui.cta.allFilter}
+            </button>
+            {g.values.map((v) => (
+              <button type="button" data-filter={g.key} data-value={v.value} class={pill(false)}>
+                {v.label}
+              </button>
+            ))}
+          </div>
         ))}
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="w-16 shrink-0 text-xs uppercase tracking-[0.15em] text-espresso/50">{ui.catalog.sortLabel}</span>
+          <button type="button" data-sort="" class={pill(true)}>{ui.cta.allFilter}</button>
+          <button type="button" data-sort="largest" class={pill(false)}>{ui.catalog.sortLargest}</button>
+          <button type="button" data-sort="smallest" class={pill(false)}>{ui.catalog.sortSmallest}</button>
+        </div>
       </div>
-    ))}
 
-    <div class="flex flex-wrap items-center justify-center gap-2">
-      <span class="text-xs text-espresso/60">{ui.catalog.sortLabel}:</span>
-      <button type="button" data-sort="" class={pill(true)}>{ui.cta.allFilter}</button>
-      <button type="button" data-sort="largest" class={pill(false)}>{ui.catalog.sortLargest}</button>
-      <button type="button" data-sort="smallest" class={pill(false)}>{ui.catalog.sortSmallest}</button>
+      <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-espresso/15 pt-4">
+        <span class="text-xs uppercase tracking-[0.2em] text-espresso/60" data-result-count>
+          {ui.catalog.piecesCount(scoped.length)}
+        </span>
+        <button
+          type="button"
+          data-clear-filters
+          hidden
+          class="rounded-[100px] border border-crimson/50 px-4 py-1.5 text-xs text-crimson transition-colors hover:bg-crimson hover:text-canvas"
+        >
+          ✕ {ui.catalog.clearAll}
+        </button>
+      </div>
     </div>
-  </div>
+  )}
 </div>
 
 <script is:inline>
   (() => {
     const bar = document.querySelector("[data-filterbar]");
     if (!bar) return;
-    const cards = [...document.querySelectorAll("[data-rug-card]")];
+    const countEl = bar.querySelector("[data-result-count]");
+    const clearBtn = bar.querySelector("[data-clear-filters]");
+    const countMap = JSON.parse(bar.dataset.countMap || "{}");
     const active = ["border-crimson", "bg-crimson", "text-canvas"];
     const idle = ["border-espresso/30", "text-ink", "hover:border-crimson", "hover:text-crimson"];
     const state = { material: "", brand: "", region: "", sort: "" };
 
     const paint = () => {
+      // queried lazily: the grid renders after this component in the document
+      const cards = [...document.querySelectorAll("[data-rug-card]")];
+      const emptyEl = document.querySelector("[data-filter-empty]");
       for (const btn of bar.querySelectorAll("[data-filter],[data-sort]")) {
         const on =
           "filter" in btn.dataset
@@ -108,15 +139,22 @@ const pill = (active: boolean) =>
         btn.classList.remove(...(on ? idle : active));
         btn.classList.add(...(on ? active : idle));
       }
+      let visible = 0;
       for (const card of cards) {
-        card.hidden =
+        const hide =
           (state.material && card.dataset.material !== state.material) ||
           (state.brand && card.dataset.brand !== state.brand) ||
           (state.region && card.dataset.region !== state.region);
+        card.hidden = !!hide;
+        if (!hide) visible++;
         const area = Number(card.dataset.area) || 0;
         card.style.order =
           state.sort === "largest" ? -area : state.sort === "smallest" ? area : 0;
       }
+      if (countEl) countEl.textContent = countMap[visible] ?? String(visible);
+      const anyFilter = state.material || state.brand || state.region || state.sort;
+      if (clearBtn) clearBtn.hidden = !anyFilter;
+      if (emptyEl) emptyEl.hidden = visible !== 0;
       const params = new URLSearchParams();
       for (const k of ["material", "brand", "region", "sort"]) if (state[k]) params.set(k, state[k]);
       const q = params.toString();
@@ -124,16 +162,25 @@ const pill = (active: boolean) =>
     };
 
     bar.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-filter],[data-sort]");
+      const btn = e.target.closest("[data-filter],[data-sort],[data-clear-filters]");
       if (!btn) return;
-      if ("filter" in btn.dataset) state[btn.dataset.filter] = btn.dataset.value;
-      else state.sort = btn.dataset.sort;
+      if ("clearFilters" in btn.dataset) {
+        state.material = state.brand = state.region = state.sort = "";
+      } else if ("filter" in btn.dataset) {
+        state[btn.dataset.filter] = btn.dataset.value;
+      } else {
+        state.sort = btn.dataset.sort;
+      }
       paint();
     });
 
-    // Restore shareable filter links.
+    // Restore shareable filter links once the whole page (grid included) exists.
     const params = new URLSearchParams(location.search);
     for (const k of ["material", "brand", "region", "sort"]) state[k] = params.get(k) || "";
-    paint();
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", paint);
+    } else {
+      paint();
+    }
   })();
 </script>

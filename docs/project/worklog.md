@@ -172,6 +172,52 @@ records: `docs/project/reviews/ARSA-006-design.md` and
 
 ---
 
+## ARSA-025 — Multi-brand & multi-region architecture, catalog upgrade, size guide — 2026-09-01
+
+**Tier:** 2 (planned and approved via plan mode; owner also asked mid-build to
+"improve catalog and add filters" and to "improve catalog view to compensate for these
+more complex filters").
+
+**What was done.**
+- **Data**: rugs schema gained `brand` (default arsalani); dump brand assignments
+  applied — new-moshk-abad + one Lachak Torang → orian-rugs, hh → pyramid-rug-pads
+  (owner to confirm; may be old data-entry noise). New registries `src/data/brands.ts`
+  (Arsalani story EN+FA, guest stubs limited to what the catalog shows, Safavieh/Rhody
+  predefined inactive) and `src/data/regions.ts` (9 regions, Qom/Kashan featured
+  prose moved from the guide, `originToRegion` mapping). Helpers in lib/rugs.ts.
+- **Brand pages**: /brands + /brands/[slug] ×9 locales, CollectionPage LD; brand row in
+  specs (linked); guest-brand badge on cards; footer links.
+- **Region pages**: /regions + /regions/[slug] ×9 locales — kicker/prose/Persian name,
+  aggregated palette from the region's rugs, rug grid, CollectionPage LD; specs Origin
+  now links to its region; guide's Weaving Cities reads from the registry and links.
+- **Catalog**: FilterBar rebuilt as a linen filter card — category links + client
+  toggle groups for material/house/region (each renders only when it can narrow),
+  size sort (CSS order by cm² area), live localized result count (server-rendered
+  count map), Clear button, client-side empty state, shareable URL params restored on
+  load. Fixed a real bug found in browser testing: the inline script captured the card
+  list before the grid existed in the DOM — queries now run lazily inside paint().
+- **Home**: "The Houses We Carry" strip (brand cards + counts) and a region explorer
+  band (arch tiles; rug-crop thumbnails where the region has rugs, medallion motif
+  fallback where it does not). **Guide**: to-scale SVG size diagram (ghali → kenareh,
+  zarcharak highlighted in crimson) before the lexicon; region tiles band.
+- **i18n**: ~20 new strings ×9 locales (nav, filters incl. Clear, houses/regions
+  sections, size guide). **SEO/llms**: llms.txt Houses & regions section; llms-full
+  generator lists brand/region URLs.
+
+**Verification.** astro check 0 errors; build exit 0 — **532 pages** (was 406; +126 =
+14 new routes ×9 locales). Browser: /products/?material=full-silk&sort=largest restores
+both filters — 10 of 32 cards visible, all full-silk, visual order verified descending
+by area (18000 → 15000 → 9600 cm²), count reads "10 pieces", Clear appears; region page
+structure + palette row confirmed; size diagram renders. dist greps: CollectionPage LD
+on /brands/arsalani and /regions/qom; 9 region links on /guide; Orian badge on
+new-moshk-abad; houses/regions strips on home.
+
+**Not done.** Guest-brand rug assignments await owner confirmation; region pages for
+Tabriz/Isfahan/Nain have no rugs (editorial landing pages with "on commission" line);
+nav kept at five items (brands/regions reachable via footer, home strips, guide, specs).
+
+---
+
 ## ARSA-024 (addendum, Tier 3) — 2026-09-01 — Owner: hero's lower-right corner motif and the under-frame motif "not good". Replaced the bottom-end shamse sunburst with the soft medallion (now mirroring the top-start corner) and removed the guard band beneath the hero image frame; the lachak spandrels stay. Verified: build exit 0, screenshot shows matched corner medallions and a clean area under the frame.
 
 ---

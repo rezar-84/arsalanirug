@@ -50,6 +50,17 @@ const out = `# Arsalani Rug — full catalog
 
 ${rugs.map(line).join("\n")}
 
+## Houses
+
+- Arsalani: https://arsalanirug.com/brands/arsalani
+- All houses: https://arsalanirug.com/brands
+
+## Regions
+
+${["qom","kashan","malayer","shiraz","oushak","moshk-abad","tabriz","isfahan","nain"]
+  .map((r) => `- https://arsalanirug.com/regions/${r}`)
+  .join("\n")}
+
 ## Reference pages
 
 - History of the Persian rug: https://arsalanirug.com/history

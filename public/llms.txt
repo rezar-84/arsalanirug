@@ -23,6 +23,14 @@ Arabic (/ar/, RTL), and Chinese (/zh/).
 - Specialties: Qom silk (zarcharak and zaronim sizes, silk warp), Kashan old
   Manchester-wool pieces, Malayer boteh, Shiraz gabbeh, Oushak, Moshk Abad
 
+## Houses & regions
+
+- [The houses we carry](https://arsalanirug.com/brands): Arsalani (the family house)
+  and guest brands, each with its rugs listed
+- [Weaving regions](https://arsalanirug.com/regions): landing pages for Qom, Kashan,
+  Malayer, Shiraz & Fars, Oushak, Moshk Abad, Tabriz, Isfahan, and Nain — each with
+  its story and the rugs woven there
+
 ## Learn
 
 - [A Woven History](https://arsalanirug.com/history): the Persian rug from the Pazyryk

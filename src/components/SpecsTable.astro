@@ -1,6 +1,7 @@
 ---
-import { t, type Locale } from "../i18n/ui";
-import { formatDimensions, type Rug } from "../lib/rugs";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+import { formatDimensions, regionOf, type Rug } from "../lib/rugs";
+import { brandBySlug } from "../data/brands";
 
 interface Props {
   rug: Rug;
@@ -10,25 +11,40 @@ const { rug, locale } = Astro.props;
 const ui = t(locale);
 
 const colorEntries = Object.entries(rug.data.colors ?? {}).filter(([, v]) => v);
+const brand = brandBySlug(rug.data.brand);
+const region = regionOf(rug);
 
-const rows: [string, string][] = [
+const rows: [string, string, string?][] = [
   [ui.specs.sku, rug.data.sku],
   [ui.specs.dimensions, `${formatDimensions(rug, locale)} ${ui.specs.cm}`],
-  ...(rug.data.origin ? [[ui.specs.origin, rug.data.origin] as [string, string]] : []),
-  ...(rug.data.material
-    ? [[ui.specs.material, ui.materials[rug.data.material]] as [string, string]]
+  ...(rug.data.origin
+    ? [[ui.specs.origin, rug.data.origin, region ? localizedPath(locale, `/regions/${region}`) : undefined] as [string, string, string?]]
     : []),
-  [ui.specs.category, ui.categories[rug.data.category]],
+  ...(rug.data.material
+    ? [[ui.specs.material, ui.materials[rug.data.material]] as [string, string, string?]]
+    : []),
+  [ui.specs.category, ui.categories[rug.data.category], localizedPath(locale, `/categories/${rug.data.category}`)],
+  ...(brand
+    ? [[ui.catalog.filterBrand, brand.name, localizedPath(locale, `/brands/${brand.slug}`)] as [string, string, string?]]
+    : []),
 ];
 ---
 
 <div class="rounded-3xl border border-espresso/25 bg-card p-6">
   <h2 class="text-xs uppercase tracking-widest text-espresso/60">{ui.specs.title}</h2>
   <dl class="mt-4">
-    {rows.map(([label, value]) => (
+    {rows.map(([label, value, href]) => (
       <div class="flex items-baseline justify-between gap-4 border-b border-espresso/15 py-3 last:border-0">
         <dt class="text-sm text-espresso/70">{label}</dt>
-        <dd class="text-sm">{value}</dd>
+        <dd class="text-sm">
+          {href ? (
+            <a href={href} class="underline decoration-espresso/30 underline-offset-4 transition-colors hover:text-crimson">
+              {value}
+            </a>
+          ) : (
+            value
+          )}
+        </dd>
       </div>
     ))}
     {(rug.data.palette?.length || colorEntries.length > 0) && (

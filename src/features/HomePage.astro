@@ -5,8 +5,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Motif from "../components/Motif.astro";
 import RugCard from "../components/RugCard.astro";
+import RegionTiles from "../components/RegionTiles.astro";
 import { t, localizedPath, categorySlugs, type Locale } from "../i18n/ui";
-import { getRugsWithFallback, rugSlug } from "../lib/rugs";
+import { getRugsWithFallback, rugSlug, rugsByBrand } from "../lib/rugs";
+import { activeBrands, brandStory } from "../data/brands";
 
 interface Props {
   locale: Locale;
@@ -127,6 +129,40 @@ const counts = Object.fromEntries(
             <span class="ms-2 text-xs text-espresso/50">{counts[c]}</span>
           </a>
         ))}
+    </div>
+  </section>
+
+  <!-- The houses we carry -->
+  <section class="mx-auto max-w-[1100px] px-6 py-20">
+    <p class="text-center text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.explore.housesKicker}</p>
+    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>{ui.explore.housesTitle}</h2>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <div class={`mt-10 grid gap-6 ${activeBrands.length > 2 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
+      {activeBrands.map((brand) => {
+        const count = rugsByBrand(rugs, brand.slug).length;
+        const story = brandStory(brand, locale);
+        return (
+          <a
+            href={localizedPath(locale, `/brands/${brand.slug}`)}
+            class="group rounded-3xl border border-espresso/25 bg-card p-6 text-center transition-colors hover:border-crimson/50"
+            data-reveal
+          >
+            <h3 class="font-display text-2xl transition-colors group-hover:text-crimson" lang="en">{brand.name}</h3>
+            <p class="mt-1 text-[11px] uppercase tracking-[0.2em] text-espresso/50">{ui.catalog.piecesCount(count)}</p>
+            {story?.tagline && <p class="mt-3 text-xs leading-relaxed text-espresso/75">{story.tagline}</p>}
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- The weaving regions -->
+  <section class="mx-auto max-w-[1400px] px-6 py-8">
+    <p class="text-center text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.explore.regionsKicker}</p>
+    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>{ui.explore.regionsTitle}</h2>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <div class="mx-auto mt-10 max-w-[1100px]">
+      <RegionTiles locale={locale} compact />
     </div>
   </section>
 

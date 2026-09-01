@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Motif from "../components/Motif.astro";
+import RegionTiles from "../components/RegionTiles.astro";
+import { t, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  path="/regions"
+  title={`${ui.explore.regionsTitle} — ${ui.siteName}`}
+  description={ui.explore.regionsIntro}
+>
+  <section class="mx-auto max-w-[900px] px-6 pt-16 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.explore.regionsKicker}</p>
+    <h1 class="font-display-lang mt-4 text-5xl md:text-6xl" data-reveal>{ui.explore.regionsTitle}</h1>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <p class="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-espresso/80" data-reveal>
+      {ui.explore.regionsIntro}
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-[1100px] px-6 py-16">
+    <RegionTiles locale={locale} />
+  </section>
+</BaseLayout>
