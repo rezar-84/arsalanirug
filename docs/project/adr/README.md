@@ -23,3 +23,4 @@ the real reason an option lost — are in `../../process/05-change-control.md`,
 | # | Decision | Status | Date |
 | --- | --- | --- | --- |
 | 0001 | Use Cloudflare Workers Static Assets | Proposed | 2026-09-01 |
+| 0002 | Use Sole Owner Approval for This Repository | Approved | 2026-09-01 |

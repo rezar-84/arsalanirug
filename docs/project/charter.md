@@ -126,7 +126,7 @@ lookup.
 | **Always Tier 1 here** | public brand/heritage copy (EN and FA), contact details, the inquiry channels (WhatsApp number, form endpoint, email), deleting or bulk-editing catalog content |
 | **Never Tier 1 here** | auth/tenancy/payments (none exist — static catalog site with no accounts or checkout); data migration (the Drupal migration is one-off and re-runnable from the preserved dump) |
 | **Human approval required for** | production deploys, anything touching personal data, anything outward-facing (public posts, emails, announcements) |
-| **Approvers** | Rezar86 |
+| **Approvers** | Rezar86 (sole required human approver; explicit owner approval is sufficient) |
 | **Staleness threshold** | 90 days |
 
 ## Standards & targets

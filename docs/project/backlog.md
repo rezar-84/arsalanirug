@@ -50,6 +50,7 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status | Completed |
 | --- | --- | --- | --- | --- | --- | --- |
+| ARSA-017 | Set project approval gate to sole owner approval | 1 | product-manager | — | Done | 2026-09-01 |
 | ARSA-015 | Locales tr/es/ja/de: full UI translations, language menu, per-locale routes/hreflang, EN fallback for long-form | 2 | localisation | — | Done | 2026-09-01 |
 | ARSA-014 | Zoom lightbox, palette extraction, Persian motifs, design polish, /history + /guide pages (EN+FA) | 2 | ux-designer | — | Done | 2026-09-01 |
 | ARSA-013 | Verify no fake products; owner kept full live catalog (34); junk-titled rugs imported, FilterBar hides empty categories | 3 | product-manager | — | Done | 2026-09-01 |

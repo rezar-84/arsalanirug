@@ -19,6 +19,52 @@ last-reviewed: 2026-09-01
 - When this file gets long, move older entries to `worklog-archive/YYYY.md` and leave a
   pointer here. Do not truncate.
 
+## ARSA-017 — Set sole owner approval gate — 2026-09-01
+
+**Date:** 2026-09-01 **Tier:** 1 **Status:** Done
+**Branch/commits:** `sec/ARSA-016-update-sharp` / pending commit
+
+### What changed
+
+Recorded a project-specific override making Rezar86 the sole required human approver
+for this repository. Shared process documents were not changed.
+
+### Why
+
+The project has one accountable owner. This makes the approval rule executable while
+retaining reviews, verification, and rollback controls.
+
+### Verified
+
+- Documentation review — **Verified** — override is present in `AGENTS.md`, the charter
+  names Rezar86 as sole approver, and ADR-0002 records the decision.
+- Shared process files — **Verified** — no `docs/process/` file was changed.
+
+### Not done
+
+Nothing deferred.
+
+### Discovered
+
+None.
+
+### Decisions
+
+ADR-0002 records the project-only approval decision.
+
+### Assumptions used
+
+The charter's accountable human remains Rezar86.
+
+### Plan
+
+Project-only governance override; no shared process change.
+
+### Reviews
+
+Owner-authorised governance change; product-manager and architect surfaces reviewed in
+the changed documents.
+
 ## ARSA-006 — Add Cloudflare Workers Static Assets configuration — 2026-09-01
 
 **Date:** 2026-09-01 **Tier:** 1 **Status:** Partial
