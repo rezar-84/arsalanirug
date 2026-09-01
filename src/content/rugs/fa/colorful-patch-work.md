@@ -4,6 +4,7 @@ sku: "ZD032-131"
 lengthCm: 197
 widthCm: 157
 category: patch-work
+brand: arsalani
 palette:
   - "#8f5f43"
   - "#d8cfc2"

@@ -46,7 +46,7 @@ export const ui = {
       home: "Home",
       rugs: "The Collection",
       history: "History",
-      guide: "Rug Guide",
+      guide: "Rug Guide", brands: "The Houses", regions: "Regions",
       heritage: "Heritage",
       contact: "Contact",
     },
@@ -115,7 +115,8 @@ export const ui = {
       empty: "No rugs match this selection.",
       filterMaterial: "Material",
       piecesCount: (n: number) => `${n} ${n === 1 ? "piece" : "pieces"}`,
-    },
+     filterBrand: "House", filterRegion: "Region", sortLabel: "Size", sortLargest: "Largest first", sortSmallest: "Smallest first",    },
+    explore: { housesKicker: "Ateliers & houses", housesTitle: "The Houses We Carry", regionsKicker: "From loom to loom", regionsTitle: "The Weaving Regions", brandsIntro: "Every rug in the collection belongs to a house — ours first among them.", regionsIntro: "Every rug speaks the dialect of the place that wove it. Choose a region to hear its voice.", fromHouse: "From this house", fromRegion: "Woven in this region", regionPalette: "This region's palette in our collection", sizeGuideTitle: "The Traditional Sizes", sizeGuideIntro: "Persian rugs are named by their measure — drawn here to scale." },
     heritage: {
       title: "Our Heritage",
       intro: "More than a century of Persian carpet craft, from Kashan to the world.",
@@ -160,7 +161,7 @@ export const ui = {
       home: "خانه",
       rugs: "مجموعه فرش‌ها",
       history: "تاریخ فرش",
-      guide: "راهنمای فرش",
+      guide: "راهنمای فرش", brands: "خانه‌ها", regions: "خاستگاه‌ها",
       heritage: "میراث ما",
       contact: "تماس با ما",
     },
@@ -229,7 +230,8 @@ export const ui = {
       empty: "فرشی با این انتخاب یافت نشد.",
       filterMaterial: "جنس",
       piecesCount: (n: number) => `${n.toLocaleString("fa-IR")} تخته فرش`,
-    },
+     filterBrand: "خانه", filterRegion: "خاستگاه", sortLabel: "اندازه", sortLargest: "بزرگ‌ترین اول", sortSmallest: "کوچک‌ترین اول",    },
+    explore: { housesKicker: "کارگاه‌ها و خانه‌ها", housesTitle: "خانه‌هایی که عرضه می‌کنیم", regionsKicker: "از داری به داری", regionsTitle: "خاستگاه‌های بافندگی", brandsIntro: "هر فرشِ این مجموعه به خانه‌ای تعلق دارد — و خانه ما در صدر آن‌ها.", regionsIntro: "هر فرش به لهجه زادگاهش سخن می‌گوید. خاستگاهی را برگزینید تا صدایش را بشنوید.", fromHouse: "از این خانه", fromRegion: "بافته این خاستگاه", regionPalette: "رنگ‌بندی این خاستگاه در مجموعه ما", sizeGuideTitle: "قواره‌های سنتی", sizeGuideIntro: "فرش ایرانی را به اندازه‌اش می‌نامند — اینجا با مقیاس واقعی." },
     heritage: {
       title: "میراث ما",
       intro: "بیش از یک قرن هنر فرش ایرانی، از کاشان تا جهان.",
@@ -270,7 +272,7 @@ export const ui = {
 tr: {
     siteName: "Arsalani Halı",
     siteTagline: "El dokuması İran halılarında lüks — 1866'dan beri bir aile zanaatı.",
-    nav: { home: "Ana Sayfa", rugs: "Koleksiyon", history: "Tarihçe", guide: "Halı Rehberi", heritage: "Mirasımız", contact: "İletişim" },
+    nav: { home: "Ana Sayfa", rugs: "Koleksiyon", history: "Tarihçe", guide: "Halı Rehberi", brands: "Markalar", regions: "Bölgeler", heritage: "Mirasımız", contact: "İletişim" },
     categories: {
       all: "Tüm Halılar",
       "selected-available-rugs": "Seçilmiş & Mevcut",
@@ -305,7 +307,8 @@ tr: {
       intro: "El düğümü halılar, her biri tek bir eser — boyutlar ve menşei listelenmiştir, fiyatlar sorulur.",
       empty: "Bu seçime uyan halı yok.", filterMaterial: "Malzeme",
       piecesCount: (n: number) => `${n} parça`,
-    },
+     filterBrand: "Marka", filterRegion: "Bölge", sortLabel: "Boyut", sortLargest: "Önce en büyük", sortSmallest: "Önce en küçük",    },
+    explore: { housesKicker: "Atölyeler ve markalar", housesTitle: "Taşıdığımız Markalar", regionsKicker: "Tezgâhtan tezgâha", regionsTitle: "Dokuma Bölgeleri", brandsIntro: "Koleksiyondaki her halı bir markaya aittir — başta bizimki.", regionsIntro: "Her halı, dokunduğu yerin lehçesiyle konuşur. Sesini duymak için bir bölge seçin.", fromHouse: "Bu markadan", fromRegion: "Bu bölgede dokundu", regionPalette: "Bu bölgenin koleksiyonumuzdaki paleti", sizeGuideTitle: "Geleneksel Boyutlar", sizeGuideIntro: "İran halıları ölçüleriyle adlandırılır — burada ölçekli çizilmiştir." },
     heritage: { title: "Mirasımız", intro: "Kaşan'dan dünyaya, bir asrı aşkın İran halı zanaatı." },
     contactPage: {
       title: "İletişim",
@@ -327,7 +330,7 @@ tr: {
   es: {
     siteName: "Arsalani Rug",
     siteTagline: "Alfombras persas de lujo tejidas a mano — un oficio familiar desde 1866.",
-    nav: { home: "Inicio", rugs: "La Colección", history: "Historia", guide: "Guía de Alfombras", heritage: "Nuestro Legado", contact: "Contacto" },
+    nav: { home: "Inicio", rugs: "La Colección", history: "Historia", guide: "Guía de Alfombras", brands: "Las Casas", regions: "Regiones", heritage: "Nuestro Legado", contact: "Contacto" },
     categories: {
       all: "Todas las alfombras",
       "selected-available-rugs": "Selectas y disponibles",
@@ -362,7 +365,8 @@ tr: {
       intro: "Alfombras anudadas a mano, cada una obra única — dimensiones y procedencia listadas, precios a consultar.",
       empty: "Ninguna alfombra coincide con esta selección.", filterMaterial: "Material",
       piecesCount: (n: number) => `${n} ${n === 1 ? "pieza" : "piezas"}`,
-    },
+     filterBrand: "Casa", filterRegion: "Región", sortLabel: "Tamaño", sortLargest: "Más grandes primero", sortSmallest: "Más pequeñas primero",    },
+    explore: { housesKicker: "Talleres y casas", housesTitle: "Las Casas Que Representamos", regionsKicker: "De telar en telar", regionsTitle: "Las Regiones Tejedoras", brandsIntro: "Cada alfombra de la colección pertenece a una casa — la nuestra, la primera.", regionsIntro: "Cada alfombra habla el dialecto del lugar que la tejió. Elija una región para oír su voz.", fromHouse: "De esta casa", fromRegion: "Tejida en esta región", regionPalette: "La paleta de esta región en nuestra colección", sizeGuideTitle: "Los Tamaños Tradicionales", sizeGuideIntro: "Las alfombras persas se nombran por su medida — dibujadas aquí a escala." },
     heritage: { title: "Nuestro Legado", intro: "Más de un siglo de arte de la alfombra persa, de Kashan al mundo." },
     contactPage: {
       title: "Contacto",
@@ -384,7 +388,7 @@ tr: {
   ja: {
     siteName: "アルサラーニ・ラグ",
     siteTagline: "手織りペルシャ絨毯の名品 — 1866年から続く一族の技。",
-    nav: { home: "ホーム", rugs: "コレクション", history: "絨毯の歴史", guide: "絨毯ガイド", heritage: "私たちの歩み", contact: "お問い合わせ" },
+    nav: { home: "ホーム", rugs: "コレクション", history: "絨毯の歴史", guide: "絨毯ガイド", brands: "ブランド", regions: "産地", heritage: "私たちの歩み", contact: "お問い合わせ" },
     categories: {
       all: "すべての絨毯",
       "selected-available-rugs": "厳選・在庫あり",
@@ -419,7 +423,8 @@ tr: {
       intro: "手結びの絨毯、一枚一枚が唯一の作品 — サイズと産地を記載、価格はお問い合わせください。",
       empty: "この条件に合う絨毯はありません。", filterMaterial: "素材",
       piecesCount: (n: number) => `${n}枚`,
-    },
+     filterBrand: "ブランド", filterRegion: "産地", sortLabel: "サイズ", sortLargest: "大きい順", sortSmallest: "小さい順",    },
+    explore: { housesKicker: "工房とブランド", housesTitle: "取り扱いブランド", regionsKicker: "織機から織機へ", regionsTitle: "織りの産地", brandsIntro: "コレクションの絨毯はすべて、いずれかの家に属します — 筆頭は私たちの家。", regionsIntro: "絨毯は織られた土地の方言で語ります。産地を選んで、その声をお聞きください。", fromHouse: "このブランドの絨毯", fromRegion: "この産地の絨毯", regionPalette: "コレクションに見るこの産地の色", sizeGuideTitle: "伝統的なサイズ", sizeGuideIntro: "ペルシャ絨毯は寸法で呼ばれます — 実寸比で描いています。" },
     heritage: { title: "私たちの歩み", intro: "カーシャーンから世界へ — 一世紀を超えるペルシャ絨毯の技。" },
     contactPage: {
       title: "お問い合わせ",
@@ -441,7 +446,7 @@ tr: {
   de: {
     siteName: "Arsalani Rug",
     siteTagline: "Handgeknüpfte persische Teppiche von höchstem Rang — ein Familienhandwerk seit 1866.",
-    nav: { home: "Startseite", rugs: "Die Kollektion", history: "Geschichte", guide: "Teppich-Guide", heritage: "Unser Erbe", contact: "Kontakt" },
+    nav: { home: "Startseite", rugs: "Die Kollektion", history: "Geschichte", guide: "Teppich-Guide", brands: "Die Häuser", regions: "Regionen", heritage: "Unser Erbe", contact: "Kontakt" },
     categories: {
       all: "Alle Teppiche",
       "selected-available-rugs": "Ausgewählt & verfügbar",
@@ -476,7 +481,8 @@ tr: {
       intro: "Handgeknüpfte Teppiche, jeder ein Unikat — Maße und Herkunft verzeichnet, Preise auf Anfrage.",
       empty: "Kein Teppich entspricht dieser Auswahl.", filterMaterial: "Material",
       piecesCount: (n: number) => `${n} ${n === 1 ? "Stück" : "Stücke"}`,
-    },
+     filterBrand: "Haus", filterRegion: "Region", sortLabel: "Größe", sortLargest: "Größte zuerst", sortSmallest: "Kleinste zuerst",    },
+    explore: { housesKicker: "Ateliers & Häuser", housesTitle: "Die Häuser, die wir führen", regionsKicker: "Von Webstuhl zu Webstuhl", regionsTitle: "Die Webregionen", brandsIntro: "Jeder Teppich der Kollektion gehört zu einem Haus — unserem zuerst.", regionsIntro: "Jeder Teppich spricht den Dialekt seines Ursprungsorts. Wählen Sie eine Region und hören Sie ihre Stimme.", fromHouse: "Aus diesem Haus", fromRegion: "In dieser Region geknüpft", regionPalette: "Die Palette dieser Region in unserer Kollektion", sizeGuideTitle: "Die traditionellen Maße", sizeGuideIntro: "Persische Teppiche sind nach ihrem Maß benannt — hier maßstabsgetreu gezeichnet." },
     heritage: { title: "Unser Erbe", intro: "Über ein Jahrhundert persischer Teppichkunst, von Kaschan in die Welt." },
     contactPage: {
       title: "Kontakt",
@@ -498,7 +504,7 @@ tr: {
   ru: {
     siteName: "Arsalani Rug",
     siteTagline: "Роскошные персидские ковры ручной работы — семейное ремесло с 1866 года.",
-    nav: { home: "Главная", rugs: "Коллекция", history: "История", guide: "Гид по коврам", heritage: "Наше наследие", contact: "Контакты" },
+    nav: { home: "Главная", rugs: "Коллекция", history: "История", guide: "Гид по коврам", brands: "Дома", regions: "Регионы", heritage: "Наше наследие", contact: "Контакты" },
     categories: {
       all: "Все ковры", "selected-available-rugs": "Избранные и доступные", "boutique-rugs": "Бутиковые ковры", "patch-work": "Пэчворк", oushak: "Ушак", "moshk-abad": "Мошк-Абаад", "new-moshk-abad": "Новый Мошк-Абад",
     } satisfies Record<CategorySlug | "all", string>,
@@ -513,7 +519,8 @@ tr: {
       heritageTeaser: "От Голамхоссейна Арсалани, родившегося в Кашане в 1866 году, до базаров Тегерана и Кума — пять поколений, посвящённых искусству персидского ковра.",
       inquiryTitle: "Ищете особенный ковёр?", inquiryText: "Расскажите о желаемом размере, палитре и стиле — наша семья найдёт его или закажет для вас.",
     },
-    catalog: { title: "Коллекция", intro: "Ковры ручной работы, каждый — уникальное произведение; размеры и происхождение указаны, цена по запросу.", empty: "Ковров, соответствующих выбору, нет.", filterMaterial: "Материал", piecesCount: (n: number) => n + " изделий" },
+    catalog: { title: "Коллекция", intro: "Ковры ручной работы, каждый — уникальное произведение; размеры и происхождение указаны, цена по запросу.", empty: "Ковров, соответствующих выбору, нет.", filterMaterial: "Материал", piecesCount: (n: number) => n + " изделий", filterBrand: "Дом", filterRegion: "Регион", sortLabel: "Размер", sortLargest: "Сначала большие", sortSmallest: "Сначала маленькие" },
+    explore: { housesKicker: "Мастерские и дома", housesTitle: "Дома, которые мы представляем", regionsKicker: "От станка к станку", regionsTitle: "Ткацкие регионы", brandsIntro: "Каждый ковёр коллекции принадлежит дому — прежде всего нашему.", regionsIntro: "Каждый ковёр говорит на диалекте места, где он соткан. Выберите регион, чтобы услышать его голос.", fromHouse: "Из этого дома", fromRegion: "Соткан в этом регионе", regionPalette: "Палитра этого региона в нашей коллекции", sizeGuideTitle: "Традиционные размеры", sizeGuideIntro: "Персидские ковры называют по их мере — здесь они нарисованы в масштабе." },
     heritage: { title: "Наше наследие", intro: "Более века персидского коврового ремесла — от Кашана до всего мира." },
     contactPage: { title: "Свяжитесь с нами", intro: "Посетите наши представительства в Измире, Лос-Анджелесе и Торонто — или напишите нам ниже.", locationsTitle: "Наши адреса", formTitle: "Отправить сообщение", name: "Имя", email: "Электронная почта", phone: "Телефон (необязательно)", message: "Сообщение", submit: "Отправить", thankYouTitle: "Спасибо", thankYouText: "Ваше сообщение отправлено. Мы скоро свяжемся с вами." },
     locations: [
@@ -528,7 +535,7 @@ tr: {
   ar: {
     siteName: "سجاد أرسلاني",
     siteTagline: "سجاد فارسي فاخر منسوج يدوياً — حرفة عائلية منذ عام 1866.",
-    nav: { home: "الرئيسية", rugs: "المجموعة", history: "التاريخ", guide: "دليل السجاد", heritage: "تراثنا", contact: "اتصل بنا" },
+    nav: { home: "الرئيسية", rugs: "المجموعة", history: "التاريخ", guide: "دليل السجاد", brands: "الدور", regions: "المناطق", heritage: "تراثنا", contact: "اتصل بنا" },
     categories: {
       all: "كل السجاد", "selected-available-rugs": "مختار ومتاح", "boutique-rugs": "سجاد فاخر", "patch-work": "رقع فنية", oushak: "أوشاك", "moshk-abad": "موشك آباد", "new-moshk-abad": "موشك آباد الجديد",
     } satisfies Record<CategorySlug | "all", string>,
@@ -543,7 +550,8 @@ tr: {
       heritageTeaser: "من غلامحسين أرسلاني، المولود في كاشان عام 1866، إلى أسواق طهران وقم وما وراءهما — خمسة أجيال كرّست نفسها لفن السجاد الفارسي.",
       inquiryTitle: "هل تبحث عن قطعة مميزة؟", inquiryText: "أخبرنا بالمقاس والألوان والأسلوب الذي تريده — وستبحث عائلتنا عنها أو تطلب نسجها لك.",
     },
-    catalog: { title: "المجموعة", intro: "سجاد منسوج يدوياً، كل قطعة عمل فني فريدة — الأبعاد والمنشأ موضحان، والسعر عند الطلب.", empty: "لا توجد سجاد مطابق لهذا الاختيار.", filterMaterial: "الخامة", piecesCount: (n: number) => n + " قطع" },
+    catalog: { title: "المجموعة", intro: "سجاد منسوج يدوياً، كل قطعة عمل فني فريدة — الأبعاد والمنشأ موضحان، والسعر عند الطلب.", empty: "لا توجد سجاد مطابق لهذا الاختيار.", filterMaterial: "الخامة", piecesCount: (n: number) => n + " قطع", filterBrand: "الدار", filterRegion: "المنطقة", sortLabel: "الحجم", sortLargest: "الأكبر أولاً", sortSmallest: "الأصغر أولاً" },
+    explore: { housesKicker: "المشاغل والدور", housesTitle: "الدور التي نمثلها", regionsKicker: "من نولٍ إلى نول", regionsTitle: "مناطق النسيج", brandsIntro: "كل سجادة في المجموعة تنتمي إلى دار — ودارنا في مقدمتها.", regionsIntro: "كل سجادة تتحدث بلهجة المكان الذي نسجها. اختر منطقة لتسمع صوتها.", fromHouse: "من هذه الدار", fromRegion: "نُسجت في هذه المنطقة", regionPalette: "ألوان هذه المنطقة في مجموعتنا", sizeGuideTitle: "المقاسات التقليدية", sizeGuideIntro: "يُسمّى السجاد الفارسي بمقاسه — مرسومة هنا بمقياس حقيقي." },
     heritage: { title: "تراثنا", intro: "أكثر من قرن من حرفة السجاد الفارسي، من كاشان إلى العالم." },
     contactPage: { title: "اتصل بنا", intro: "تفضل بزيارتنا في إزمير أو لوس أنجلوس أو تورونتو — أو اكتب لنا أدناه.", locationsTitle: "مواقعنا", formTitle: "أرسل رسالة", name: "الاسم", email: "البريد الإلكتروني", phone: "الهاتف (اختياري)", message: "الرسالة", submit: "إرسال الرسالة", thankYouTitle: "شكراً لك", thankYouText: "تم إرسال رسالتك. سنتواصل معك قريباً." },
     locations: [
@@ -558,7 +566,7 @@ tr: {
   zh: {
     siteName: "Arsalani 地毯",
     siteTagline: "奢华手工波斯地毯——始于1866年的家族技艺。",
-    nav: { home: "首页", rugs: "地毯收藏", history: "历史", guide: "地毯指南", heritage: "家族传承", contact: "联系我们" },
+    nav: { home: "首页", rugs: "地毯收藏", history: "历史", guide: "地毯指南", brands: "品牌", regions: "产地", heritage: "家族传承", contact: "联系我们" },
     categories: {
       all: "全部地毯", "selected-available-rugs": "精选现货", "boutique-rugs": "精品地毯", "patch-work": "拼布地毯", oushak: "乌沙克", "moshk-abad": "莫什克·阿巴德", "new-moshk-abad": "新莫什克·阿巴德",
     } satisfies Record<CategorySlug | "all", string>,
@@ -573,7 +581,8 @@ tr: {
       heritageTeaser: "从1866年出生于卡尚的Gholamhossein Arsalani，到德黑兰、库姆及更远的集市——五代人致力于波斯地毯艺术。",
       inquiryTitle: "在寻找特别的地毯吗？", inquiryText: "告诉我们您心仪的尺寸、色彩和风格——我们家族会为您寻找或定制。",
     },
-    catalog: { title: "地毯收藏", intro: "手工编织的地毯，每一件都是独一无二的作品——尺寸与产地已列明，价格请咨询。", empty: "没有符合此选择的地毯。", filterMaterial: "材质", piecesCount: (n: number) => n + " 件" },
+    catalog: { title: "地毯收藏", intro: "手工编织的地毯，每一件都是独一无二的作品——尺寸与产地已列明，价格请咨询。", empty: "没有符合此选择的地毯。", filterMaterial: "材质", piecesCount: (n: number) => n + " 件", filterBrand: "品牌", filterRegion: "产地", sortLabel: "尺寸", sortLargest: "从大到小", sortSmallest: "从小到大" },
+    explore: { housesKicker: "工坊与品牌", housesTitle: "我们经营的品牌", regionsKicker: "从织机到织机", regionsTitle: "织毯产地", brandsIntro: "收藏中的每一块地毯都属于一个家族品牌——首先是我们自己的。", regionsIntro: "每块地毯都带着织造之地的方言。选择一个产地，聆听它的声音。", fromHouse: "来自此品牌", fromRegion: "织于此产地", regionPalette: "本产地在我们收藏中的色彩", sizeGuideTitle: "传统尺寸", sizeGuideIntro: "波斯地毯以尺寸命名——此处按真实比例绘制。" },
     heritage: { title: "家族传承", intro: "一个多世纪的波斯地毯技艺，从卡尚走向世界。" },
     contactPage: { title: "联系我们", intro: "欢迎到访我们在伊兹密尔、洛杉矶和多伦多的展厅——也可以在下方留言。", locationsTitle: "我们的地址", formTitle: "发送消息", name: "姓名", email: "电子邮箱", phone: "电话（可选）", message: "留言", submit: "发送消息", thankYouTitle: "谢谢", thankYouText: "您的消息已发送，我们会尽快与您联系。" },
     locations: [

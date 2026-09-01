@@ -4,6 +4,7 @@ sku: "HA031-03"
 lengthCm: 300
 widthCm: 60
 category: boutique-rugs
+brand: arsalani
 material: full-silk
 origin: "Qom"
 palette:

@@ -2,7 +2,8 @@
 import { Picture } from "astro:assets";
 import Badge from "./Badge.astro";
 import { t, localizedPath, type Locale } from "../i18n/ui";
-import { formatDimensions, rugSlug, type Rug } from "../lib/rugs";
+import { formatDimensions, rugSlug, regionOf, type Rug } from "../lib/rugs";
+import { brandBySlug } from "../data/brands";
 
 interface Props {
   rug: Rug;
@@ -12,9 +13,18 @@ interface Props {
 const { rug, locale, loading = "lazy" } = Astro.props;
 const ui = t(locale);
 const href = localizedPath(locale, `/content/${rugSlug(rug)}`);
+const guestBrand = rug.data.brand !== "arsalani" ? brandBySlug(rug.data.brand) : undefined;
 ---
 
-<article data-material={rug.data.material ?? ""} class="group" data-reveal>
+<article
+  data-rug-card
+  data-material={rug.data.material ?? ""}
+  data-brand={rug.data.brand}
+  data-region={regionOf(rug) ?? ""}
+  data-area={rug.data.lengthCm * rug.data.widthCm}
+  class="group"
+  data-reveal
+>
   <a href={href} class="block">
     <div class="arch border border-espresso/25 bg-card transition-colors duration-500 group-hover:border-crimson/50">
       <Picture
@@ -35,6 +45,7 @@ const href = localizedPath(locale, `/content/${rugSlug(rug)}`);
       <div class="mt-2 flex items-center justify-center gap-2">
         <Badge>{ui.categories[rug.data.category]}</Badge>
         {rug.data.material && <Badge tone="saffron">{ui.materials[rug.data.material]}</Badge>}
+        {guestBrand && <Badge tone="crimson">{guestBrand.name}</Badge>}
       </div>
       {rug.data.palette && (
         <div class="mt-2.5 flex items-center justify-center gap-1.5" aria-hidden="true">

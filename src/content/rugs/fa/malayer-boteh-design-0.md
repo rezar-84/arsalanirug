@@ -4,6 +4,7 @@ sku: "HA09213"
 lengthCm: 486
 widthCm: 193
 category: boutique-rugs
+brand: arsalani
 material: wool
 origin: "Malayer"
 colors:

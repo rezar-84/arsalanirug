@@ -4,6 +4,7 @@ sku: "HA011-02"
 lengthCm: 120
 widthCm: 80
 category: boutique-rugs
+brand: arsalani
 material: full-silk
 origin: "Qom"
 palette:

@@ -4,6 +4,7 @@ sku: "s-8999"
 lengthCm: 225
 widthCm: 170
 category: patch-work
+brand: pyramid-rug-pads
 palette:
   - "#78585a"
   - "#947c7f"

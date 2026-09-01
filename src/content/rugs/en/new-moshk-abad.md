@@ -4,6 +4,7 @@ sku: "ZD082-111"
 lengthCm: 342
 widthCm: 240
 category: new-moshk-abad
+brand: orian-rugs
 origin: "Moshk Abad"
 palette:
   - "#a98772"

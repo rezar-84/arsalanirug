@@ -4,6 +4,7 @@ sku: "ZD072-121"
 lengthCm: 342
 widthCm: 240
 category: oushak
+brand: arsalani
 origin: "Oushak"
 palette:
   - "#a98772"

@@ -4,6 +4,7 @@ sku: "HA19215"
 lengthCm: 510
 widthCm: 367
 category: boutique-rugs
+brand: arsalani
 material: wool
 origin: "Kashan"
 palette:

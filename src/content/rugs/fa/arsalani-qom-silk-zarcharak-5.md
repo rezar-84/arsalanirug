@@ -4,6 +4,7 @@ sku: "HA01114"
 lengthCm: 120
 widthCm: 80
 category: boutique-rugs
+brand: arsalani
 origin: "Qom"
 palette:
   - "#ae947a"

@@ -4,6 +4,7 @@ sku: "HA03216"
 lengthCm: 521
 widthCm: 399
 category: boutique-rugs
+brand: arsalani
 material: wool
 origin: "Qom"
 palette:

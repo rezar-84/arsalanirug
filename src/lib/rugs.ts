@@ -1,5 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { Locale } from "../i18n/ui";
+import { originToRegion } from "../data/regions";
 
 export type Rug = CollectionEntry<"rugs">;
 
@@ -33,3 +34,12 @@ export const formatDimensions = (rug: Rug, locale: Locale) => {
   const fmt = (n: number) => n.toLocaleString(locale === "fa" ? "fa-IR" : locale);
   return `${fmt(rug.data.lengthCm)} × ${fmt(rug.data.widthCm)}`;
 };
+
+export const regionOf = (rug: Rug): string | undefined =>
+  originToRegion(rug.data.origin, rug.data.category);
+
+export const rugsByBrand = (rugs: Rug[], brand: string) =>
+  rugs.filter((r) => r.data.brand === brand);
+
+export const rugsByRegion = (rugs: Rug[], region: string) =>
+  rugs.filter((r) => regionOf(r) === region);

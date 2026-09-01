@@ -4,6 +4,7 @@ sku: "VA063-10"
 lengthCm: 300
 widthCm: 200
 category: boutique-rugs
+brand: arsalani
 material: silk-touch
 origin: "Qom"
 palette:

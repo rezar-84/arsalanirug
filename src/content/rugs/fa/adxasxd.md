@@ -4,6 +4,7 @@ sku: "S-9443"
 lengthCm: 235
 widthCm: 158
 category: oushak
+brand: arsalani
 palette:
   - "#845955"
   - "#6a333b"

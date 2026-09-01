@@ -4,6 +4,7 @@ sku: "HA12212"
 lengthCm: 700
 widthCm: 200
 category: boutique-rugs
+brand: arsalani
 material: wool
 origin: "Shiraz"
 palette:

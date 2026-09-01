@@ -4,6 +4,7 @@ sku: "s-6911"
 lengthCm: 225
 widthCm: 183
 category: patch-work
+brand: arsalani
 palette:
   - "#68444a"
   - "#855e60"

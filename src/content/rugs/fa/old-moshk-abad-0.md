@@ -4,6 +4,7 @@ sku: "ZD062-102"
 lengthCm: 310
 widthCm: 220
 category: moshk-abad
+brand: arsalani
 origin: "Moshk Abad"
 palette:
   - "#8a7e76"

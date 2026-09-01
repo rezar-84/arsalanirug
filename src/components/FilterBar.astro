@@ -1,6 +1,8 @@
 ---
-import { t, localizedPath, categorySlugs, materialSlugs, type Locale, type CategorySlug } from "../i18n/ui";
-import { getRugsWithFallback } from "../lib/rugs";
+import { t, localizedPath, categorySlugs, type Locale, type CategorySlug, type MaterialSlug } from "../i18n/ui";
+import { getRugsWithFallback, regionOf } from "../lib/rugs";
+import { activeBrands, brandBySlug } from "../data/brands";
+import { regionBySlug, regionName } from "../data/regions";
 
 interface Props {
   locale: Locale;
@@ -9,12 +11,41 @@ interface Props {
 const { locale, activeCategory = "all" } = Astro.props;
 const ui = t(locale);
 
-// Hide categories with no rugs (e.g. "Selected & Available" is empty in the
-// migrated data) — the /categories/<slug> page itself still exists.
-const rugs = await getRugsWithFallback(locale);
-const nonEmpty = categorySlugs.filter(
-  (c) => c === activeCategory || rugs.some((r) => r.data.category === c)
+const all = await getRugsWithFallback(locale);
+const scoped = activeCategory === "all" ? all : all.filter((r) => r.data.category === activeCategory);
+
+const nonEmptyCategories = categorySlugs.filter(
+  (c) => c === activeCategory || all.some((r) => r.data.category === c)
 );
+
+const distinct = <T,>(vals: (T | undefined)[]) => [...new Set(vals.filter(Boolean))] as T[];
+const materials = distinct(scoped.map((r) => r.data.material)) as MaterialSlug[];
+const brandsHere = distinct(scoped.map((r) => r.data.brand)).filter((b) => brandBySlug(b));
+const regionsHere = distinct(scoped.map((r) => regionOf(r)));
+
+// A filter group only appears when it can actually narrow something.
+const groups: { key: string; label: string; values: { value: string; label: string }[] }[] = [];
+if (materials.length >= 2)
+  groups.push({
+    key: "material",
+    label: ui.catalog.filterMaterial,
+    values: materials.map((m) => ({ value: m, label: ui.materials[m] })),
+  });
+if (brandsHere.length >= 2)
+  groups.push({
+    key: "brand",
+    label: ui.catalog.filterBrand,
+    values: brandsHere.map((b) => ({ value: b, label: brandBySlug(b)!.name })),
+  });
+if (regionsHere.length >= 2)
+  groups.push({
+    key: "region",
+    label: ui.catalog.filterRegion,
+    values: regionsHere.map((r) => ({
+      value: r,
+      label: regionBySlug(r) ? regionName(regionBySlug(r)!, locale) : r,
+    })),
+  });
 
 const catLink = (slug: string) =>
   localizedPath(locale, slug === "all" ? "/products" : `/categories/${slug}`);
@@ -28,43 +59,81 @@ const pill = (active: boolean) =>
 
 <div class="flex flex-col items-center gap-4" data-reveal>
   <div class="flex flex-wrap justify-center gap-2">
-    {["all", ...nonEmpty].map((slug) => (
+    {["all", ...nonEmptyCategories].map((slug) => (
       <a href={catLink(slug)} class={pill(slug === activeCategory)}>
         {ui.categories[slug as CategorySlug | "all"]}
       </a>
     ))}
   </div>
-  <div class="flex flex-wrap items-center justify-center gap-2">
-    <span class="text-xs text-espresso/60">{ui.catalog.filterMaterial}:</span>
-    <button type="button" data-material-filter="" class={pill(true)} data-material-active>
-      {ui.cta.allFilter}
-    </button>
-    {materialSlugs.map((slug) => (
-      <button type="button" data-material-filter={slug} class={pill(false)}>
-        {ui.materials[slug]}
-      </button>
+
+  <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3" data-filterbar>
+    {groups.map((g) => (
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <span class="text-xs text-espresso/60">{g.label}:</span>
+        <button type="button" data-filter={g.key} data-value="" class={pill(true)}>
+          {ui.cta.allFilter}
+        </button>
+        {g.values.map((v) => (
+          <button type="button" data-filter={g.key} data-value={v.value} class={pill(false)}>
+            {v.label}
+          </button>
+        ))}
+      </div>
     ))}
+
+    <div class="flex flex-wrap items-center justify-center gap-2">
+      <span class="text-xs text-espresso/60">{ui.catalog.sortLabel}:</span>
+      <button type="button" data-sort="" class={pill(true)}>{ui.cta.allFilter}</button>
+      <button type="button" data-sort="largest" class={pill(false)}>{ui.catalog.sortLargest}</button>
+      <button type="button" data-sort="smallest" class={pill(false)}>{ui.catalog.sortSmallest}</button>
+    </div>
   </div>
 </div>
 
 <script is:inline>
   (() => {
-    const buttons = [...document.querySelectorAll("[data-material-filter]")];
+    const bar = document.querySelector("[data-filterbar]");
+    if (!bar) return;
+    const cards = [...document.querySelectorAll("[data-rug-card]")];
     const active = ["border-crimson", "bg-crimson", "text-canvas"];
     const idle = ["border-espresso/30", "text-ink", "hover:border-crimson", "hover:text-crimson"];
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const value = btn.dataset.materialFilter;
-        document.querySelectorAll("[data-material]").forEach((card) => {
-          card.hidden = value !== "" && card.dataset.material !== value;
-        });
-        buttons.forEach((b) => {
-          b.classList.remove(...active);
-          b.classList.add(...idle);
-        });
-        btn.classList.remove(...idle);
-        btn.classList.add(...active);
-      });
+    const state = { material: "", brand: "", region: "", sort: "" };
+
+    const paint = () => {
+      for (const btn of bar.querySelectorAll("[data-filter],[data-sort]")) {
+        const on =
+          "filter" in btn.dataset
+            ? state[btn.dataset.filter] === btn.dataset.value
+            : state.sort === btn.dataset.sort;
+        btn.classList.remove(...(on ? idle : active));
+        btn.classList.add(...(on ? active : idle));
+      }
+      for (const card of cards) {
+        card.hidden =
+          (state.material && card.dataset.material !== state.material) ||
+          (state.brand && card.dataset.brand !== state.brand) ||
+          (state.region && card.dataset.region !== state.region);
+        const area = Number(card.dataset.area) || 0;
+        card.style.order =
+          state.sort === "largest" ? -area : state.sort === "smallest" ? area : 0;
+      }
+      const params = new URLSearchParams();
+      for (const k of ["material", "brand", "region", "sort"]) if (state[k]) params.set(k, state[k]);
+      const q = params.toString();
+      history.replaceState(null, "", q ? `?${q}` : location.pathname);
+    };
+
+    bar.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-filter],[data-sort]");
+      if (!btn) return;
+      if ("filter" in btn.dataset) state[btn.dataset.filter] = btn.dataset.value;
+      else state.sort = btn.dataset.sort;
+      paint();
     });
+
+    // Restore shareable filter links.
+    const params = new URLSearchParams(location.search);
+    for (const k of ["material", "brand", "region", "sort"]) state[k] = params.get(k) || "";
+    paint();
   })();
 </script>

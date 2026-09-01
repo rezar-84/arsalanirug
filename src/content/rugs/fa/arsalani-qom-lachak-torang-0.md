@@ -4,6 +4,7 @@ sku: "VA063-18"
 lengthCm: 300
 widthCm: 200
 category: boutique-rugs
+brand: orian-rugs
 material: silk-touch
 origin: "Qom"
 palette:

@@ -13,6 +13,8 @@ const rugs = defineCollection({
       lengthCm: z.number(),
       widthCm: z.number(),
       category: z.enum(categorySlugs),
+      // House/brand slug; resolved against src/data/brands.ts
+      brand: z.string().default("arsalani"),
       material: z.enum(materialSlugs).optional(),
       origin: z.string().optional(),
       colors: z
