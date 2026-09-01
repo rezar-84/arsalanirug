@@ -39,3 +39,4 @@ Arabic (/ar/, RTL), and Chinese (/zh/).
 
 - [Contact](https://arsalanirug.com/contact): locations, phone, WhatsApp, form
 - Sitemap: https://arsalanirug.com/sitemap-index.xml
+- Full machine-readable catalog: https://arsalanirug.com/llms-full.txt

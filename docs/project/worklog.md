@@ -188,6 +188,10 @@ records: `docs/project/reviews/ARSA-006-design.md` and
 
 ---
 
+## ARSA-021 (addendum, Tier 3) — 2026-09-01 — Owner asked again for "fix seo, build sitemap, llm and etc"; audit confirmed all ARSA-021 artifacts intact after the parallel agent's merges (396-URL sitemap, llms.txt, robots, OG/favicons, Product+Breadcrumb+Organization LD). Two real gaps fixed: `wrangler.jsonc` assets now set `not_found_handling: "404-page"` (custom 404 was not being served on the Workers deploy) and `html_handling: "auto-trailing-slash"`; added generated `public/llms-full.txt` — the complete 32-rug catalog with refs/dimensions/categories plus reference-page links — produced by `scripts/generate-llms-full.mjs`, wired into `npm run build` so it tracks the catalog, and linked from llms.txt. Verified: build exit 0 (406 pages), dist carries llms-full.txt (32 rugs), llms.txt references it.
+
+---
+
 ## ARSA-021 — SEO pass: brand assets, structured data, sitemap tuning, llms.txt — 2026-09-01
 
 **Tier:** 2. **Request.** Owner: "fix seo issues, add sitemap, llm and etc".
