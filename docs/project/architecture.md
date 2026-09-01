@@ -43,9 +43,10 @@ Visitor ─► page ─► WhatsApp deep link / tel: / mailto:
               └─► <form POST> ─► api.web3forms.com ─► info@arsalanirug.com
 ```
 
-Deploy target: static host/CDN (Cloudflare Pages-shaped: `npm run build`, output `dist`,
-Node 22), decided by the owner 2026-09-01. A Dokploy deploy was mentioned at kit install;
-if chosen later it serves the same `dist/` — see assumptions A1.
+Deploy target: Cloudflare Workers Static Assets (`npm run build`, then `npx wrangler
+deploy`, with `assets.directory` set to `./dist`), selected by the owner 2026-09-01.
+The `wrangler.jsonc` file is the repository source of truth for the Worker asset boundary.
+Production deployment remains owner-approved.
 
 ## Components
 

@@ -23,4 +23,5 @@ Full rules: `../../process/00-operating-model.md` (step 2, PLAN).
 
 | Work item | Title | Status |
 | --- | --- | --- |
+| ARSA-006 | Cloudflare Workers static assets | Active |
 | | | |

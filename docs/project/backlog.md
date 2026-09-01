@@ -36,7 +36,7 @@ last-reviewed: 2026-09-01
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | ARSA-002 | Replace placeholder WhatsApp number in `src/i18n/ui.ts` (currently the old Qom landline +98 253 7723684) | 1 | product-manager | — | Parked | Rezar86 | the actual WhatsApp business number | 2026-09-01 |
 | ARSA-003 | Register Web3Forms for info@arsalanirug.com and replace the placeholder key in `src/components/ContactForm.astro` | 1 | devops-sre | — | Parked | Rezar86 | account registration (free) | 2026-09-01 |
-| ARSA-006 | Connect hosting and deploy (`dist/` to Cloudflare Pages or Dokploy — see architecture.md, assumption A1) | 1 | devops-sre | ARSA-002, ARSA-003 | Parked | Rezar86 | hosting choice + production deploy approval | 2026-09-01 |
+| ARSA-006 | Connect hosting and deploy `dist/` through Cloudflare Workers Static Assets | 1 | devops-sre | ARSA-002, ARSA-003 | In review | Rezar86 | security audit finding, production deploy approval, and inquiry-channel dependencies | 2026-09-01 |
 
 ## Later
 

@@ -22,4 +22,4 @@ the real reason an option lost — are in `../../process/05-change-control.md`,
 
 | # | Decision | Status | Date |
 | --- | --- | --- | --- |
-| 0001 | _(none yet)_ | | |
+| 0001 | Use Cloudflare Workers Static Assets | Proposed | 2026-09-01 |
