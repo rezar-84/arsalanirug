@@ -172,6 +172,10 @@ records: `docs/project/reviews/ARSA-006-design.md` and
 
 ---
 
+## ARSA-022 (third addendum, Tier 3) — 2026-09-01 — Owner supplied a flat-design Persian carpet reference (`~/Downloads/flat-design-persian-carpet-pattern/`) and asked to learn from it. Timeline scroll rebuilt in that flat idiom, replacing line-art with filled silhouettes: thin winding stem (stroke), filled almond leaves seated at computed stem/branch points with tangent-matched rotations, two filled crescent fronds, crimson filled buds at branch tips, and the era node as a flat layered rosette — five crimson petals over five saffron inner petals with an espresso center (colors via the theme's CSS variables). Verified: astro check 0 errors, build exit 0, full-page and zoomed screenshots read like the reference's vinework.
+
+---
+
 ## ARSA-022 (second addendum, Tier 3) — 2026-09-01 — Owner rejected the first vine ("like a 2-year-old's painting… olive leaf which is never part of it… leaves floating in air"). Root causes: generic leaf shapes and a vertically-stretched SVG (preserveAspectRatio="none") that tore hand-placed elements off the stem. Rebuilt on Persian vocabulary: the connector is now straight guard lines above/below with a fixed-proportion (undistorted) 80×280 khataei scroll centered in each gap — S-stem with two curved-blade saz leaves whose bases sit on computed stem points (with drawn veins), an eslimi spiral tendril, a ghoncheh bud on a stemlet with sepal, and a peduncle carrying a redrawn shah-abbasi palmette (pointed-oval crown, side wings, inner teardrop, calyx) in crimson at each era, rotated to bloom horizontally. Verified: build exit 0, zoomed screenshot confirms every element attaches to the stem and the palmette silhouette reads correctly.
 
 ---
