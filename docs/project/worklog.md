@@ -172,6 +172,36 @@ records: `docs/project/reviews/ARSA-006-design.md` and
 
 ---
 
+## ARSA-021 — SEO pass: brand assets, structured data, sitemap tuning, llms.txt — 2026-09-01
+
+**Tier:** 2. **Request.** Owner: "fix seo issues, add sitemap, llm and etc".
+
+**What was done.** Generated real brand assets from the logo via sharp (`og-default.jpg`
+1200×630 on the bitter ground; favicon 16/32/180/512 white-on-crimson — the bare
+white-on-transparent logo was invisible in light tabs and link previews); BaseLayout now
+links them, takes `ogType`/`noindex` props, adds og:site_name, and its Organization LD
+gained foundingDate/addresses/logo/image. Rug pages: `<title>` now includes the SKU
+(deduplicates the eight same-named Zarcharaks), Product LD enriched (url, description,
+all images, material, size, countryOfOrigin, category) plus a BreadcrumbList LD;
+og:type=product. 404/thank-you pages are noindex and filtered out of the sitemap
+(@astrojs/sitemap filter — the sitemap itself already existed). Added `public/llms.txt`
+(site overview for language models, updated to the nine current locales) and referenced
+it from robots.txt. Reconciled with the parallel agent's ARSA-016..020 commits: their
+hero/catalog/locale work untouched (my in-flight hero frontmatter edits reverted per
+owner — "we changed hero no need to do that"); they had already extended my ogLocales
+map to ru/ar/zh.
+
+**Verification.** `npx astro check` 0 errors; `npm run build` exit 0 — 406 pages;
+sitemap-0.xml lists 396 URLs with zero thank-you/404 entries; dist carries
+favicon-32/og-default/llms.txt; grep confirms noindex on 404.html and Product
+LD with sku + BreadcrumbList on a rug page.
+
+**Not done.** No per-rug custom OG images (rug photo is used as-is); hosting-side
+redirects/headers for the Workers deploy unchanged; search-console submission is a
+post-launch owner step.
+
+---
+
 ## ARSA-015 — Add Turkish, Spanish, Japanese, German locales — 2026-09-01
 
 **Tier:** 2. **Request.** Owner: "add turkish, spanish, japanese and german".

@@ -1,0 +1,41 @@
+# Arsalani Rug
+
+> Arsalani Luxury and Modern Rugs (arsalanirug.com) — a family house of hand-knotted
+> Persian rugs, in the trade since 1866, founded from Kashan and rooted in Qom, Iran.
+> The site is a catalog-and-inquiry gallery: every rug lists its reference (SKU),
+> dimensions in centimetres, collection, material, origin, and a color palette
+> extracted from its photographs. Prices are on request — there is no online checkout.
+> Inquiries go by WhatsApp, phone, email (info@arsalanirug.com), or the contact form.
+> Locations: Tehran Grand Bazaar (Bazar Booali Sara), Qom (Bazar Amjadi Sara),
+> Izmir (Türkiye), and Los Angeles (USA).
+
+The site ships in nine languages: English (default, at /), Persian (/fa/, RTL),
+Turkish (/tr/), Spanish (/es/), Japanese (/ja/), German (/de/), Russian (/ru/),
+Arabic (/ar/, RTL), and Chinese (/zh/).
+
+## Catalog
+
+- [The Collection](https://arsalanirug.com/products): all rugs, filterable by material
+- [Categories](https://arsalanirug.com/categories/boutique-rugs): boutique-rugs,
+  oushak, moshk-abad, new-moshk-abad, patch-work, selected-available-rugs
+- Individual rugs live at /content/<slug>, e.g.
+  [Qom Lachak Torang Gerd](https://arsalanirug.com/content/arsalani-qom-lachak-torang-gerd)
+- Specialties: Qom silk (zarcharak and zaronim sizes, silk warp), Kashan old
+  Manchester-wool pieces, Malayer boteh, Shiraz gabbeh, Oushak, Moshk Abad
+
+## Learn
+
+- [A Woven History](https://arsalanirug.com/history): the Persian rug from the Pazyryk
+  carpet (c. 400 BC) and the Sasanian Spring of Khosrow to the Safavid Ardabil carpet,
+  Mohtasham Kashan, Qom's 20th-century rise, and UNESCO's 2010 listing
+- [How to Read a Persian Rug](https://arsalanirug.com/guide): motifs (lachak-toranj,
+  boteh, herati, gol farang, kheshti, gabbeh), weaving cities (Qom and Kashan
+  profiled), how to judge quality (raj/knot density, kork wool, abrash), and a
+  weaver's lexicon of trade terms
+- [Our Heritage](https://arsalanirug.com/about): the Arsalani family story — five
+  generations from Gholamhossein Arsalani (b. Kashan, 1866) to today
+
+## Contact
+
+- [Contact](https://arsalanirug.com/contact): locations, phone, WhatsApp, form
+- Sitemap: https://arsalanirug.com/sitemap-index.xml

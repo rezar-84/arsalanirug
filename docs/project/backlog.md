@@ -23,7 +23,6 @@ last-reviewed: 2026-09-01
 | --- | --- | --- | --- | --- | --- |
 | ARSA-004 | Translation review: FA rug titles/descriptions + FA/tr/es/ja/de long-form pages (History/Guide/Heritage) currently falling back to English | 1 | copywriter | — | Ready |
 | ARSA-005 | Write real EN descriptions for the 29 rugs (bodies are TODO placeholders) | 2 | copywriter | — | Ready |
-| ARSA-008 | Proper favicon set + OG default image from logo.png | 3 | brand-designer | — | Ready |
 
 ## Blocked
 
@@ -50,6 +49,8 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status | Completed |
 | --- | --- | --- | --- | --- | --- | --- |
+| ARSA-021 | SEO pass: favicons/OG image, SKU-deduped titles, Product+Breadcrumb LD, noindex+sitemap filter, llms.txt | 2 | seo | — | Done | 2026-09-01 |
+| ARSA-008 | Favicon set + OG default image — done within ARSA-021 | 3 | brand-designer | — | Done | 2026-09-01 |
 | ARSA-018 | Replace the main hero image with `IMG_5840_0.jpg` and fit it to the arch frame | 2 | brand-designer | owner-provided image | Done | 2026-09-01 |
 | ARSA-020 | Add Russian, Arabic, and Chinese UI locales with localized routes and language metadata | 2 | localisation | — | Done | 2026-09-01 |
 | ARSA-017 | Set project approval gate to sole owner approval | 1 | product-manager | — | Done | 2026-09-01 |

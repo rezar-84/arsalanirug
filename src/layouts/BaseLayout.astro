@@ -10,7 +10,9 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  ogType?: "website" | "product" | "article";
   hasAltLocale?: boolean; // false omits hreflang + language-switcher link
+  noindex?: boolean; // utility pages (404, thank-you) stay out of the index
   jsonLd?: Record<string, unknown>[];
 }
 
@@ -19,8 +21,10 @@ const {
   path,
   title,
   description,
-  ogImage = "/logo.png",
+  ogImage = "/og-default.jpg",
+  ogType = "website",
   hasAltLocale = true,
+  noindex = false,
   jsonLd = [],
 } = Astro.props;
 
@@ -34,10 +38,19 @@ const organizationLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Arsalani Rug",
+  alternateName: "Arsalani Luxury and Modern Rugs",
   url: site,
-  logo: `${site}/logo.png`,
+  logo: `${site}/favicon-512.png`,
+  image: `${site}/og-default.jpg`,
   email: contact.email,
   telephone: contact.phone,
+  foundingDate: "1866",
+  address: [
+    { "@type": "PostalAddress", addressLocality: "Tehran", addressCountry: "IR" },
+    { "@type": "PostalAddress", addressLocality: "Qom", addressCountry: "IR" },
+    { "@type": "PostalAddress", addressLocality: "Izmir", addressCountry: "TR" },
+    { "@type": "PostalAddress", addressLocality: "Los Angeles", addressRegion: "CA", addressCountry: "US" },
+  ],
 };
 ---
 
@@ -49,6 +62,7 @@ const organizationLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     {hasAltLocale && (
       <>
         {locales.map((l) => (
@@ -57,14 +71,17 @@ const organizationLd = {
         <link rel="alternate" hreflang="x-default" href={urlFor("en")} />
       </>
     )}
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, site).toString()} />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Arsalani Rug" />
     <meta property="og:locale" content={ogLocales[locale]} />
     <meta name="twitter:card" content="summary_large_image" />
 

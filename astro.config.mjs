@@ -33,7 +33,11 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  // hreflang is emitted per-page in BaseLayout (only when the FA counterpart
-  // exists); the sitemap just lists URLs.
-  integrations: [sitemap()],
+  // hreflang is emitted per-page in BaseLayout; the sitemap just lists URLs.
+  // Utility pages stay out of it (they are also noindex).
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/thank-you') && !page.includes('/404'),
+    }),
+  ],
 });

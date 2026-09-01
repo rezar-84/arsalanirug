@@ -26,27 +26,45 @@ const canonicalUrl = `${site}${localizedPath(locale, path)}`;
 const { Content, headings } = await render(rug);
 const hasBody = rug.body && !/^\s*(<!--.*-->)?\s*$/s.test(rug.body);
 
+const description = `${rug.data.title} — ${formatDimensions(rug, locale)} ${ui.specs.cm}. ${ui.cta.priceOnRequest}.`;
+
 const productLd = {
   "@context": "https://schema.org",
   "@type": "Product",
   name: rug.data.title,
   sku: rug.data.sku,
-  image: `${site}${rug.data.images[0].src}`,
+  url: canonicalUrl,
+  description,
+  image: rug.data.images.map((img) => `${site}${img.src}`),
   brand: { "@type": "Brand", name: "Arsalani Rug" },
+  ...(rug.data.material ? { material: ui.materials[rug.data.material] } : {}),
+  size: `${rug.data.lengthCm} × ${rug.data.widthCm} cm`,
+  countryOfOrigin: "IR",
+  category: ui.categories[rug.data.category],
   // No offers block: prices are on request.
 };
 
-const description = `${rug.data.title} — ${formatDimensions(rug, locale)} ${ui.specs.cm}. ${ui.cta.priceOnRequest}.`;
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: ui.nav.home, item: `${site}${localizedPath(locale, "/")}` },
+    { "@type": "ListItem", position: 2, name: ui.nav.rugs, item: `${site}${localizedPath(locale, "/products")}` },
+    { "@type": "ListItem", position: 3, name: ui.categories[rug.data.category], item: `${site}${localizedPath(locale, `/categories/${rug.data.category}`)}` },
+    { "@type": "ListItem", position: 4, name: rug.data.title, item: canonicalUrl },
+  ],
+};
 ---
 
 <BaseLayout
   locale={locale}
   path={path}
-  title={`${rug.data.title} — ${ui.siteName}`}
+  title={`${rug.data.title} · ${rug.data.sku} — ${ui.siteName}`}
   description={description}
   ogImage={rug.data.images[0].src}
   hasAltLocale={hasAltLocale}
-  jsonLd={[productLd]}
+  ogType="product"
+  jsonLd={[productLd, breadcrumbLd]}
 >
   <section class="mx-auto max-w-[1200px] px-6 pt-16">
     <nav class="mb-8 text-xs text-espresso/60" aria-label="Breadcrumb">
