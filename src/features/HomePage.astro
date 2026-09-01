@@ -1,6 +1,6 @@
 ---
 import { Picture } from "astro:assets";
-import heroImage from "../assets/hero/IMG_5840_0.jpg";
+import heroImage from "../assets/rugs/qom-lachak-torang-gerd/01.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Motif from "../components/Motif.astro";
@@ -17,6 +17,7 @@ const ui = t(locale);
 const rugs = await getRugsWithFallback(locale);
 const featured = rugs.filter((r) => r.data.featured);
 const showcase = (featured.length >= 4 ? featured.slice(1, 7) : rugs.slice(1, 7)).slice(0, 6);
+const heroRugPath = localizedPath(locale, "/content/arsalani-qom-lachak-torang-gerd");
 
 const counts = Object.fromEntries(
   categorySlugs.map((c) => [c, rugs.filter((r) => r.data.category === c).length])
@@ -59,7 +60,7 @@ const counts = Object.fromEntries(
             </Button>
           </div>
         </div>
-        <div class="arch mx-auto block w-full max-w-sm border border-canvas/20">
+        <a href={heroRugPath} class="arch mx-auto block w-full max-w-sm border border-canvas/20">
           <Picture
             src={heroImage}
             widths={[500, 900]}
@@ -69,7 +70,7 @@ const counts = Object.fromEntries(
             loading="eager"
             class="aspect-[3/4] w-full object-cover object-top"
           />
-        </div>
+        </a>
       </div>
     </div>
   </section>

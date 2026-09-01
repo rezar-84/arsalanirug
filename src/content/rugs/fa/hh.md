@@ -1,5 +1,5 @@
 ---
-title: "hh"
+title: "چهل تکه ۲"
 sku: "s-8999"
 lengthCm: 225
 widthCm: 170

@@ -1,5 +1,5 @@
 ---
-title: "bb"
+title: "چهل تکه"
 sku: "s-8559"
 lengthCm: 236
 widthCm: 182
