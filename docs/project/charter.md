@@ -29,7 +29,7 @@ table, so it cannot drift.
 | Framework(s) | Astro 7 (static output, built-in i18n) + Tailwind CSS 4 (`@tailwindcss/vite`) |
 | Data store(s) | none — content lives in Astro content collections (`src/content/rugs/{en,fa}/*.md`) |
 | Auth | none — public site, no accounts |
-| Hosting | static host/CDN (Cloudflare Pages-ready: build `npm run build`, output `dist`, Node 22); host-agnostic |
+| Hosting | Cloudflare Workers Static Assets (build `npm run build`, assets `./dist`, Node 22) |
 | CI | none yet |
 | Test tooling | none yet — verification is `astro check` + `astro build` (see Commands) |
 
@@ -126,7 +126,7 @@ lookup.
 | **Always Tier 1 here** | public brand/heritage copy (EN and FA), contact details, the inquiry channels (WhatsApp number, form endpoint, email), deleting or bulk-editing catalog content |
 | **Never Tier 1 here** | auth/tenancy/payments (none exist — static catalog site with no accounts or checkout); data migration (the Drupal migration is one-off and re-runnable from the preserved dump) |
 | **Human approval required for** | production deploys, anything touching personal data, anything outward-facing (public posts, emails, announcements) |
-| **Approvers** | Rezar86 |
+| **Approvers** | Rezar86 (sole required human approver; explicit owner approval is sufficient) |
 | **Staleness threshold** | 90 days |
 
 ## Standards & targets

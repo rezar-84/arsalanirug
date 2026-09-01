@@ -36,7 +36,7 @@ last-reviewed: 2026-09-01
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | ARSA-002 | Replace placeholder WhatsApp number in `src/i18n/ui.ts` (currently the old Qom landline +98 253 7723684) | 1 | product-manager | — | Parked | Rezar86 | the actual WhatsApp business number | 2026-09-01 |
 | ARSA-003 | Register Web3Forms for info@arsalanirug.com and replace the placeholder key in `src/components/ContactForm.astro` | 1 | devops-sre | — | Parked | Rezar86 | account registration (free) | 2026-09-01 |
-| ARSA-006 | Connect hosting and deploy (`dist/` to Cloudflare Pages or Dokploy — see architecture.md, assumption A1) | 1 | devops-sre | ARSA-002, ARSA-003 | Parked | Rezar86 | hosting choice + production deploy approval | 2026-09-01 |
+| ARSA-006 | Connect hosting and deploy `dist/` through Cloudflare Workers Static Assets | 1 | devops-sre | ARSA-002, ARSA-003 | In review | Rezar86 | security audit finding, production deploy approval, and inquiry-channel dependencies | 2026-09-01 |
 
 ## Later
 
@@ -50,6 +50,7 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status | Completed |
 | --- | --- | --- | --- | --- | --- | --- |
+| ARSA-017 | Set project approval gate to sole owner approval | 1 | product-manager | — | Done | 2026-09-01 |
 | ARSA-015 | Locales tr/es/ja/de: full UI translations, language menu, per-locale routes/hreflang, EN fallback for long-form | 2 | localisation | — | Done | 2026-09-01 |
 | ARSA-014 | Zoom lightbox, palette extraction, Persian motifs, design polish, /history + /guide pages (EN+FA) | 2 | ux-designer | — | Done | 2026-09-01 |
 | ARSA-013 | Verify no fake products; owner kept full live catalog (34); junk-titled rugs imported, FilterBar hides empty categories | 3 | product-manager | — | Done | 2026-09-01 |

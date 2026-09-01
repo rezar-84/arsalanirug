@@ -240,3 +240,7 @@ them here; edit them in the template and re-install with `--upgrade`.)_
 - Publishing FA machine translations as final (dropping `draft: true`) without owner review.
 
 **Human approval required for:** production deploys, anything touching personal data, anything outward-facing (public posts, emails, announcements)
+
+**Project approval override:** For this repository, Rezar86 is the sole required human
+approver. The owner's explicit approval satisfies the project's approval gate; shared
+process documents are not modified.

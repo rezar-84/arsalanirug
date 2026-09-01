@@ -19,6 +19,114 @@ last-reviewed: 2026-09-01
 - When this file gets long, move older entries to `worklog-archive/YYYY.md` and leave a
   pointer here. Do not truncate.
 
+## ARSA-017 — Set sole owner approval gate — 2026-09-01
+
+**Date:** 2026-09-01 **Tier:** 1 **Status:** Done
+**Branch/commits:** `sec/ARSA-016-update-sharp` / pending commit
+
+### What changed
+
+Recorded a project-specific override making Rezar86 the sole required human approver
+for this repository. Shared process documents were not changed.
+
+### Why
+
+The project has one accountable owner. This makes the approval rule executable while
+retaining reviews, verification, and rollback controls.
+
+### Verified
+
+- Documentation review — **Verified** — override is present in `AGENTS.md`, the charter
+  names Rezar86 as sole approver, and ADR-0002 records the decision.
+- Shared process files — **Verified** — no `docs/process/` file was changed.
+
+### Not done
+
+Nothing deferred.
+
+### Discovered
+
+None.
+
+### Decisions
+
+ADR-0002 records the project-only approval decision.
+
+### Assumptions used
+
+The charter's accountable human remains Rezar86.
+
+### Plan
+
+Project-only governance override; no shared process change.
+
+### Reviews
+
+Owner-authorised governance change; product-manager and architect surfaces reviewed in
+the changed documents.
+
+## ARSA-006 — Add Cloudflare Workers Static Assets configuration — 2026-09-01
+
+**Date:** 2026-09-01 **Tier:** 1 **Status:** Partial
+**Branch/commits:** `sec/ARSA-016-update-sharp` / pending commit — deployment remains gated
+
+### What changed
+
+Added `wrangler.jsonc` pointing the `arsalanirug` Worker at the Astro build output
+(`./dist`). Added the Tier 1 plan, proposed hosting ADR, design and ship review records,
+and updated the charter, architecture, assumptions/risk register, backlog, and indexes.
+
+### Why
+
+The generated HTML references hashed image files under `/_astro/`. Cloudflare Workers
+needs an explicit `assets.directory` so the complete `dist/` output is uploaded with the
+Worker.
+
+### Verified
+
+- `npx astro check` — **Verified** — exit 0, 0 errors, 0 warnings, 22 hints.
+- `npm run build` — **Verified** — exit 0, 283 pages built; `dist/_astro` contains 763 files.
+- Config/output probe — **Verified** — valid JSONC content; `assets.directory=./dist`; generated HTML contains 5,454 image attribute lines.
+- `npm audit --audit-level=high` — **Verified** — exit 0, found 0 vulnerabilities after upgrading `sharp` to `0.35.4`.
+- Format — **Absent** — no formatter configured.
+- Lint — **Absent** — no linter configured.
+- Unit — **Absent** — no unit suite configured.
+- Integration — **Absent** — no integration suite configured.
+- Contract — **Absent** — no API contract suite configured.
+- Accessibility — **Absent** — no automated accessibility command configured.
+- End-to-end — **Absent** — no automated e2e command configured; Cloudflare deployment smoke test was not run.
+
+### Not done
+
+- Commit and deployment → commit is ready; production deployment remains pending human approval.
+- Cloudflare preview/production smoke test and rollback → requires owner authorisation.
+- Exposed Cloudflare API token rotation → must be completed in the Cloudflare dashboard.
+
+### Discovered
+
+The required audit initially found one high-severity vulnerability in the pre-existing
+`sharp` dependency. The dependency was upgraded to `0.35.4`; the follow-up audit reports
+0 vulnerabilities.
+
+### Decisions
+
+Hosting is recorded as a Proposed ADR (`docs/project/adr/0001-cloudflare-workers-static-assets.md`)
+pending human approval.
+
+### Assumptions used
+
+Assumption A1 now records the owner's selection of Cloudflare Workers Static Assets.
+
+### Plan
+
+`docs/project/plans/ARSA-006.md`
+
+### Reviews
+
+Design review: Pass with conditions. Ship review: Pass with conditions;
+records: `docs/project/reviews/ARSA-006-design.md` and
+`docs/project/reviews/ARSA-006-ship.md`.
+
 ---
 
 ## ARSA-015 — Add Turkish, Spanish, Japanese, German locales — 2026-09-01

@@ -26,4 +26,6 @@ these, not after.
 
 | Work item | Stage | Date | Outcome |
 | --- | --- | --- | --- |
+| ARSA-006 | design | 2026-09-01 | Pass with conditions |
+| ARSA-006 | ship | 2026-09-01 | Block |
 | | | | |
