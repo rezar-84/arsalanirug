@@ -1,0 +1,34 @@
+---
+import Button from "./Button.astro";
+import { t, contact, localizedPath, type Locale } from "../i18n/ui";
+import { rugWhatsappUrl } from "../lib/whatsapp";
+
+interface Props {
+  locale: Locale;
+  title: string;
+  sku: string;
+  url: string;
+}
+const { locale, title, sku, url } = Astro.props;
+const ui = t(locale);
+---
+
+<div class="rounded-3xl border border-espresso/25 bg-card p-6 text-center">
+  <p class="font-display-lang text-2xl text-crimson">{ui.cta.priceOnRequest}</p>
+  <p class="mt-2 text-sm text-espresso/70">{ui.cta.inquire}</p>
+  <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+    <Button href={rugWhatsappUrl(locale, title, sku, url)} variant="whatsapp" external>
+      {ui.cta.whatsapp}
+    </Button>
+    <Button href={`tel:${contact.phone}`} variant="outline">{ui.cta.call}</Button>
+    <Button href={`mailto:${contact.email}?subject=${encodeURIComponent(`${title} (${sku})`)}`} variant="outline">
+      {ui.cta.email}
+    </Button>
+  </div>
+  <a
+    href={localizedPath(locale, "/contact")}
+    class="mt-4 inline-block text-xs text-espresso/60 underline underline-offset-4 hover:text-crimson"
+  >
+    {ui.nav.contact}
+  </a>
+</div>

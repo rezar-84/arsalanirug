@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Motif from "../components/Motif.astro";
+import ContactForm from "../components/ContactForm.astro";
+import Button from "../components/Button.astro";
+import { t, contact, type Locale } from "../i18n/ui";
+import { whatsappUrl } from "../lib/whatsapp";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  path="/contact"
+  title={`${ui.contactPage.title} — ${ui.siteName}`}
+  description={ui.contactPage.intro}
+>
+  <section class="mx-auto max-w-[1100px] px-6 pt-16">
+    <h1 class="font-display-lang text-center text-5xl" data-reveal>{ui.contactPage.title}</h1>
+    <p class="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-espresso/80" data-reveal>
+      {ui.contactPage.intro}
+    </p>
+
+    <div class="mt-14 grid gap-10 md:grid-cols-2">
+      <div class="flex flex-col gap-6" data-reveal>
+        <div class="relative overflow-hidden rounded-3xl border border-espresso/25 bg-card p-6">
+          <Motif variant="medallion" class="pointer-events-none absolute -end-16 -top-16 h-48 w-48 text-espresso/[0.07]" />
+          <h2 class="text-xs uppercase tracking-widest text-espresso/60">
+            {ui.contactPage.locationsTitle}
+          </h2>
+          <ul class="mt-4 flex flex-col gap-4">
+            {ui.locations.map((loc) => (
+              <li class="border-b border-espresso/15 pb-4 last:border-0 last:pb-0">
+                <p class="font-display-lang text-lg">{loc.city}</p>
+                <p class="mt-1 text-sm text-espresso/70">{loc.address}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-espresso/25 bg-card p-6">
+          <h2 class="text-xs uppercase tracking-widest text-espresso/60">
+            {ui.footer.contactTitle}
+          </h2>
+          <div class="mt-4 flex flex-col gap-2 text-sm" dir="ltr">
+            <a href={`tel:${contact.phone}`} class="hover:text-crimson">{contact.phoneDisplay}</a>
+            <a href={`mailto:${contact.email}`} class="hover:text-crimson">{contact.email}</a>
+          </div>
+          <div class="mt-5">
+            <Button href={whatsappUrl(locale)} variant="whatsapp" external>
+              {ui.cta.whatsapp}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-3xl border border-espresso/25 bg-card p-6" data-reveal>
+        <Motif variant="lachak" class="pointer-events-none absolute end-0 top-0 h-24 w-24 -scale-x-100 text-espresso/15" />
+        <Motif variant="lachak" class="pointer-events-none absolute bottom-0 start-0 h-24 w-24 -scale-y-100 text-espresso/15" />
+        <h2 class="text-xs uppercase tracking-widest text-espresso/60">{ui.contactPage.formTitle}</h2>
+        <div class="mt-4">
+          <ContactForm locale={locale} />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

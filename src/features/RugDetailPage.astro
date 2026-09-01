@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Motif from "../components/Motif.astro";
+import Gallery from "../components/Gallery.astro";
+import SpecsTable from "../components/SpecsTable.astro";
+import InquiryCta from "../components/InquiryCta.astro";
+import RugCard from "../components/RugCard.astro";
+import Badge from "../components/Badge.astro";
+import { render } from "astro:content";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+import { formatDimensions, rugSlug, type Rug } from "../lib/rugs";
+
+interface Props {
+  locale: Locale;
+  rug: Rug;
+  related: Rug[];
+  hasAltLocale?: boolean;
+}
+const { locale, rug, related, hasAltLocale = true } = Astro.props;
+const ui = t(locale);
+const slug = rugSlug(rug);
+const path = `/content/${slug}`;
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://arsalanirug.com";
+const canonicalUrl = `${site}${localizedPath(locale, path)}`;
+
+const { Content, headings } = await render(rug);
+const hasBody = rug.body && !/^\s*(<!--.*-->)?\s*$/s.test(rug.body);
+
+const productLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: rug.data.title,
+  sku: rug.data.sku,
+  image: `${site}${rug.data.images[0].src}`,
+  brand: { "@type": "Brand", name: "Arsalani Rug" },
+  // No offers block: prices are on request.
+};
+
+const description = `${rug.data.title} — ${formatDimensions(rug, locale)} ${ui.specs.cm}. ${ui.cta.priceOnRequest}.`;
+---
+
+<BaseLayout
+  locale={locale}
+  path={path}
+  title={`${rug.data.title} — ${ui.siteName}`}
+  description={description}
+  ogImage={rug.data.images[0].src}
+  hasAltLocale={hasAltLocale}
+  jsonLd={[productLd]}
+>
+  <section class="mx-auto max-w-[1200px] px-6 pt-16">
+    <nav class="mb-8 text-xs text-espresso/60" aria-label="Breadcrumb">
+      <a href={localizedPath(locale, "/")} class="hover:text-crimson">{ui.nav.home}</a>
+      <span class="mx-2">/</span>
+      <a href={localizedPath(locale, "/products")} class="hover:text-crimson">{ui.nav.rugs}</a>
+      <span class="mx-2">/</span>
+      <a href={localizedPath(locale, `/categories/${rug.data.category}`)} class="hover:text-crimson">
+        {ui.categories[rug.data.category]}
+      </a>
+      <span class="mx-2">/</span>
+      <span class="text-ink">{rug.data.title}</span>
+    </nav>
+
+    <div class="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
+      <Gallery rug={rug} locale={locale} />
+
+      <div class="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
+        <div data-reveal>
+          <div class="flex flex-wrap gap-2">
+            <Badge>{ui.categories[rug.data.category]}</Badge>
+            {rug.data.material && <Badge tone="saffron">{ui.materials[rug.data.material]}</Badge>}
+          </div>
+          <h1 class="font-display-lang mt-4 text-5xl leading-tight">{rug.data.title}</h1>
+          {rug.data.origin && (
+            <p class="mt-2 text-sm text-espresso/70">{ui.specs.origin}: {rug.data.origin}</p>
+          )}
+        </div>
+
+        <SpecsTable rug={rug} locale={locale} />
+        <InquiryCta
+          locale={locale}
+          title={rug.data.title}
+          sku={rug.data.sku}
+          url={canonicalUrl}
+        />
+
+        {hasBody && (
+          <div class="prose-sm max-w-none text-sm leading-relaxed text-espresso/90" data-reveal>
+            <Content />
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="mx-auto max-w-[1400px] px-6 py-24">
+      <h2 class="font-display-lang text-center text-3xl" data-reveal>{ui.cta.relatedRugs}</h2>
+      <Motif variant="divider" class="mt-5 text-espresso/25" data-reveal />
+      <div class="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        {related.slice(0, 3).map((r) => (
+          <RugCard rug={r} locale={locale} />
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>

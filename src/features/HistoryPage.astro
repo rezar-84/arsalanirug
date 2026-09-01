@@ -1,0 +1,192 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import Motif from "../components/Motif.astro";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+
+// A cultural history of the Persian rug — deliberately separate from the
+// Arsalani family story on /about. Dates cross-checked against standard
+// references (Hermitage/Pazyryk, V&A/Ardabil, UNESCO ICH 2010).
+const content: Record<
+  Locale,
+  {
+    kicker: string;
+    title: string;
+    intro: string;
+    eras: { era: string; title: string; text: string }[];
+    closingTitle: string;
+    closing: string;
+    toGuide: string;
+  }
+> = {
+  en: {
+    kicker: "The Persian Rug",
+    title: "A Woven History",
+    intro:
+      "Empires burned their libraries and dynasties fell, but the knot survived. For two and a half thousand years Iranians have written their gardens, their poetry and their cosmology into wool and silk — and carried that memory on their floors across every exile and every age. Follow the thread.",
+    eras: [
+      {
+        era: "c. 400 BC · the steppe",
+        title: "The Pazyryk Carpet",
+        text: "The oldest knotted carpet known to the world was found frozen in a Siberian burial mound in 1949. Around two and a half millennia old, its border of horsemen and grazing deer is drawn with such assurance — in the manner of Achaemenid Persia — that scholars read it as proof of a craft already centuries mature. The very first surviving carpet is already a masterpiece.",
+      },
+      {
+        era: "224–651 · Ctesiphon",
+        title: "The Spring of Khosrow",
+        text: "In the Sasanian palace at Ctesiphon lay the Baharestan — a garden woven for winter, its streams of silver thread, its blossoms of jewels, so a king could walk in spring while snow fell outside. When the palace fell in 637, the conquerors could not divide its beauty except by cutting it to pieces. The most famous carpet in history survives only as a story — and as the garden plan Persian weavers have redrawn ever since.",
+      },
+      {
+        era: "8th–15th c. · bazaar & caravan",
+        title: "Memory in the Weave",
+        text: "Through conquests and dynasties, weaving moved between court, village and nomad tent. The arabesque — the eslimi — entered the vocabulary; the boteh, the cypress, the tree of life travelled from fire-temple iconography into wool. When books were burned, the motifs kept their meanings; a rug is a text that cannot easily be confiscated.",
+      },
+      {
+        era: "1501–1736 · Safavid Isfahan",
+        title: "The Golden Age",
+        text: "The Safavid shahs raised carpet weaving from craft to imperial art, with royal workshops in Isfahan, Kashan and Tabriz. Its supreme surviving witness is the Ardabil Carpet of 1539 — thirty-odd square metres of prayer-hall sky now in London's Victoria and Albert Museum, signed humbly by Maqsud Kashani, 'a servant of the court'. It is the oldest carpet in the world to carry its date woven into its own border.",
+      },
+      {
+        era: "19th c. · Kashan",
+        title: "Revival and the Manchester Thread",
+        text: "After decades of decline, Kashan's master workshops — Mohtasham above all — led a renaissance of the classical style. Their luminous wool was spun from imported merino fleece by way of Manchester's mills, and 'Manchester Kashan' became a name collectors whisper. Two rugs of this very lineage live in our own collection.",
+      },
+      {
+        era: "1930s · Qom",
+        title: "The Youngest Master City",
+        text: "Qom is the paradox of the Persian rug: a weaving city barely a century old that climbed straight to the summit. Weavers arriving from Kashan seeded workshops that chose the hardest road — silk on silk, knot counts beyond a thousand per square inch — until 'Qom silk' became the measure by which fineness itself is judged.",
+      },
+      {
+        era: "2010 · the world",
+        title: "Heritage of Humanity",
+        text: "UNESCO inscribed the traditional carpet-weaving skills of Kashan and of Fars on the list of the Intangible Cultural Heritage of Humanity. What a grandmother taught at the loom is now protected the way cathedrals and symphonies are. The knot that outlived empires has become, officially, a treasure of everyone.",
+      },
+    ],
+    closingTitle: "Why it endures",
+    closing:
+      "Persia was invaded, renamed, partitioned and sanctioned — and through all of it the rug kept working quietly as the nation's portable homeland. It holds the garden when there is no garden, the spring when it is winter, and the names of motifs whose first tellers are three thousand years gone. To own one is to hold a thread of that unbroken line.",
+    toGuide: "Learn to read the rugs",
+  },
+  fa: {
+    kicker: "فرش ایرانی",
+    title: "تاریخِ بافته",
+    intro:
+      "امپراتوری‌ها کتابخانه‌هایشان را سوزاندند و سلسله‌ها فروریختند، اما گره ماند. ایرانیان دو هزار و پانصد سال است که باغ‌ها، شعر و جهان‌بینی‌شان را در پشم و ابریشم می‌نویسند — و این حافظه را بر کف خانه‌هایشان از هر تبعید و هر روزگاری عبور داده‌اند. این رشته را دنبال کنید.",
+    eras: [
+      {
+        era: "حدود ۴۰۰ پیش از میلاد · دشت‌های سیبری",
+        title: "فرش پازیریک",
+        text: "کهن‌ترین فرش گره‌بافت جهان در سال ۱۹۴۹ در گوری یخ‌زده در سیبری یافت شد. این فرشِ نزدیک به دوهزاروپانصدساله، با حاشیه سوارکاران و گوزن‌هایش — به شیوه هخامنشی — چنان پخته ترسیم شده که پژوهشگران آن را گواه هنری می‌دانند که قرن‌ها پیش از آن بالیده بود. نخستین فرش بازمانده تاریخ، خود یک شاهکار است.",
+      },
+      {
+        era: "۲۲۴–۶۵۱ میلادی · تیسفون",
+        title: "بهارستانِ خسرو",
+        text: "در کاخ ساسانی تیسفون، بهارستان گسترده بود — باغی بافته برای زمستان؛ جوی‌هایش از نقره، شکوفه‌هایش از گوهر، تا شاه در میان برف در بهار قدم بزند. چون تیسفون در سال ۶۳۷ سقوط کرد، فاتحان زیبایی‌اش را جز با تکه‌تکه‌کردن نتوانستند قسمت کنند. نامدارترین فرش تاریخ تنها در روایت زنده است — و در همان نقشه باغی که بافندگان ایرانی از آن روز تا امروز بازمی‌بافند.",
+      },
+      {
+        era: "قرن ۲ تا ۹ هجری · بازار و کاروان",
+        title: "حافظه در تار و پود",
+        text: "در گذر فتوحات و سلسله‌ها، بافندگی میان دربار و روستا و سیاه‌چادر دست‌به‌دست شد. اسلیمی به واژگان نقش راه یافت؛ بته، سرو و درخت زندگی از نگاره‌های کهن به پشم کوچیدند. وقتی کتاب‌ها می‌سوخت، نقش‌ها معنایشان را نگه می‌داشتند؛ فرش متنی است که به‌آسانی مصادره نمی‌شود.",
+      },
+      {
+        era: "۹۰۷–۱۱۴۸ هجری · اصفهانِ صفوی",
+        title: "عصر طلایی",
+        text: "شاهان صفوی فرش‌بافی را از پیشه به هنر شاهانه برکشیدند و کارگاه‌های سلطنتی در اصفهان و کاشان و تبریز برپا کردند. گواه بزرگِ بازمانده آن دوران، فرش اردبیل است بافته ۹۴۶ هجری (۱۵۳۹ میلادی) — آسمانی گسترده که امروز در موزه ویکتوریا و آلبرت لندن است و امضایی فروتنانه دارد: «مقصود کاشانی، بنده درگاه». کهن‌ترین فرش جهان که تاریخش را بر حاشیه خود بافته است.",
+      },
+      {
+        era: "قرن سیزدهم هجری · کاشان",
+        title: "نوزایی و رشته منچستر",
+        text: "پس از دهه‌ها رکود، کارگاه‌های استادان کاشان — و پیش از همه محتشم — شیوه کلاسیک را دوباره زنده کردند. پشم درخشانشان از الیاف مرینوسِ وارداتی بود که از راه کارخانه‌های منچستر می‌رسید، و «کاشان منچستر» نامی شد که مجموعه‌داران آهسته بر زبان می‌آورند. دو فرش از همین تبار در مجموعه ما زنده‌اند.",
+      },
+      {
+        era: "دهه ۱۳۱۰ خورشیدی · قم",
+        title: "جوان‌ترین شهرِ استادان",
+        text: "قم تناقض شیرین فرش ایرانی است: شهری بافنده با عمری به‌زحمت صدساله که یک‌راست بر قله نشست. بافندگانی که از کاشان آمدند کارگاه‌هایی بنیان نهادند که دشوارترین راه را برگزید — ابریشم بر ابریشم و رج‌شمارهای افسانه‌ای — تا «ابریشم قم» خودِ معیار ظرافت شود.",
+      },
+      {
+        era: "۱۳۸۹ خورشیدی · جهان",
+        title: "میراث بشریت",
+        text: "یونسکو مهارت‌های سنتی فرش‌بافی کاشان و فارس را در فهرست میراث فرهنگی ناملموس بشریت ثبت کرد. آنچه مادربزرگی پای دار قالی می‌آموخت، امروز همان‌گونه پاس داشته می‌شود که کلیساهای جامع و سمفونی‌ها. گرهی که از امپراتوری‌ها جان به در برد، اکنون رسماً گنجینه همه جهان است.",
+      },
+    ],
+    closingTitle: "راز ماندگاری",
+    closing:
+      "به این سرزمین تاختند، نامش را عوض کردند و راه‌هایش را بستند — و در تمام این سال‌ها فرش، آرام، وطنِ قابل‌حملِ ایرانیان بود. وقتی باغی نیست، باغ را نگه می‌دارد؛ در زمستان، بهار را؛ و نامِ نقش‌هایی را که نخستین راویانشان سه هزار سال است رفته‌اند. داشتن یک فرش، در دست داشتن رشته‌ای از همین پیوند ناگسسته است.",
+    toGuide: "خواندن فرش را بیاموزید",
+  },
+};
+
+const c = content[locale];
+---
+
+<BaseLayout
+  locale={locale}
+  path="/history"
+  title={`${c.title} — ${ui.siteName}`}
+  description={c.intro.slice(0, 155)}
+>
+  <section class="mx-auto max-w-[800px] px-6 pt-16 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{c.kicker}</p>
+    <h1 class="font-display-lang mt-4 text-5xl md:text-6xl" data-reveal>{c.title}</h1>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <p class="mt-8 text-start text-base leading-loose text-espresso/90" data-reveal>{c.intro}</p>
+  </section>
+
+  <!-- The winding timeline: a continuous curve like a rug's branching stem -->
+  <section class="mx-auto max-w-[1000px] px-6 py-16">
+    <div class="flex flex-col">
+      {c.eras.map((item, i) => (
+        <div class="grid gap-x-0 md:grid-cols-[1fr_5rem_1fr]">
+          {/* connecting curve segment — alternates direction each era */}
+          <div class="relative hidden md:col-start-2 md:row-span-1 md:block">
+            <svg
+              viewBox="0 0 80 300"
+              preserveAspectRatio="none"
+              class={`absolute inset-0 h-full w-full text-espresso/30 ${i % 2 ? "-scale-x-100" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path d="M40 0 C 75 70 5 110 5 150 C 5 190 75 230 40 300" vector-effect="non-scaling-stroke" />
+            </svg>
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"
+              class={`absolute top-1/2 h-6 w-6 -translate-y-1/2 text-crimson ${i % 2 ? "right-[-2px] -scale-x-100" : "left-[-2px]"}`}
+              aria-hidden="true">
+              <path d="M50 88 C 27 77 19 49 33 29 C 41 17 57 12 66 20 C 73 27 71 37 63 39 C 57 40 52 36 53 30" />
+            </svg>
+          </div>
+
+          <div
+            class={`border-s-2 border-espresso/20 ps-6 md:border-0 md:ps-0 ${i % 2 ? "md:col-start-3 md:text-start" : "md:col-start-1 md:text-end"} py-10 md:py-14 md:row-start-1`}
+            data-reveal
+          >
+            <p class="text-xs uppercase tracking-[0.25em] text-saffron">{item.era}</p>
+            <h2 class="font-display-lang mt-2 text-3xl md:text-4xl">{item.title}</h2>
+            <p class="mt-4 text-sm leading-loose text-espresso/90">{item.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-4 pb-8">
+    <div
+      class="relative mx-auto max-w-[900px] overflow-hidden rounded-[2.5rem] bg-bitter px-8 py-14 text-center text-canvas"
+      data-reveal
+    >
+      <Motif variant="medallion" class="pointer-events-none absolute -end-24 -top-24 h-80 w-80 text-canvas/[0.06]" />
+      <h2 class="font-display-lang text-3xl md:text-4xl">{c.closingTitle}</h2>
+      <p class="mx-auto mt-6 max-w-xl text-sm leading-loose text-canvas/80">{c.closing}</p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <Button href={localizedPath(locale, "/guide")} variant="outline-light">{c.toGuide}</Button>
+        <Button href={localizedPath(locale, "/products")} variant="primary">{ui.cta.viewCollection}</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

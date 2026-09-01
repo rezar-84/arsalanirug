@@ -1,0 +1,30 @@
+{
+  "name": "arsalanirug-com",
+  "type": "module",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "migrate": "node scripts/migrate.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/cormorant": "^5.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/amiri": "^5.3.0",
+    "@fontsource/vazirmatn": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.1.6",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "sharp": "^0.34.0",
+    "typescript": "^6.0.3"
+  }
+}

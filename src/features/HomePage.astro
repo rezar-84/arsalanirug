@@ -1,0 +1,156 @@
+---
+import { Picture } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import Motif from "../components/Motif.astro";
+import RugCard from "../components/RugCard.astro";
+import { t, localizedPath, categorySlugs, type Locale } from "../i18n/ui";
+import { getRugsWithFallback, rugSlug } from "../lib/rugs";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+
+const rugs = await getRugsWithFallback(locale);
+const featured = rugs.filter((r) => r.data.featured);
+const heroRug = featured[0] ?? rugs[0];
+const showcase = (featured.length >= 4 ? featured.slice(1, 7) : rugs.slice(1, 7)).slice(0, 6);
+
+const counts = Object.fromEntries(
+  categorySlugs.map((c) => [c, rugs.filter((r) => r.data.category === c).length])
+);
+---
+
+<BaseLayout
+  locale={locale}
+  path="/"
+  title={`${ui.siteName} — ${ui.home.heroTitle}`}
+  description={ui.siteTagline}
+>
+  <!-- Dark specimen hero — the one dark moment on the page -->
+  <section class="px-4 pt-6">
+    <div
+      class="relative mx-auto max-w-[1400px] overflow-hidden rounded-t-[3rem] rounded-b-[2.5rem] bg-bitter px-6 py-16 text-canvas md:py-24"
+    >
+      <Motif variant="medallion" class="pointer-events-none absolute -start-40 -top-40 h-[34rem] w-[34rem] text-canvas/[0.06]" />
+      <Motif variant="medallion" class="pointer-events-none absolute -bottom-48 -end-24 h-[28rem] w-[28rem] text-canvas/[0.05]" />
+      <div class="relative mx-auto grid max-w-[1100px] items-center gap-12 md:grid-cols-2">
+        <div class="text-center md:text-start">
+          <img
+            src="/logo.png"
+            alt="Arsalani"
+            class="mx-auto mb-6 h-16 w-auto md:mx-0"
+          />
+          <p class="text-xs uppercase tracking-[0.3em] text-saffron">{ui.home.heroKicker}</p>
+          <h1 class="font-display-lang mt-6 text-6xl leading-none md:text-7xl lg:text-8xl">
+            {ui.home.heroTitle}
+          </h1>
+          <p class="mt-6 max-w-md text-sm leading-relaxed text-canvas/80 md:text-base mx-auto md:mx-0">
+            {ui.home.heroText}
+          </p>
+          <div class="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+            <Button href={localizedPath(locale, "/products")} variant="primary">
+              {ui.cta.viewCollection}
+            </Button>
+            <Button href={localizedPath(locale, "/about")} variant="outline-light">
+              {ui.cta.readStory}
+            </Button>
+          </div>
+        </div>
+        {heroRug && (
+          <a
+            href={localizedPath(locale, `/content/${rugSlug(heroRug)}`)}
+            class="arch mx-auto block w-full max-w-sm border border-canvas/20"
+          >
+            <Picture
+              src={heroRug.data.images[0]}
+              widths={[500, 900]}
+              sizes="(min-width: 768px) 384px, 90vw"
+              formats={["avif", "webp"]}
+              alt={heroRug.data.title}
+              loading="eager"
+              class="aspect-[3/4] w-full object-cover object-top"
+            />
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured pieces -->
+  <section class="mx-auto max-w-[1400px] px-6 py-20 md:py-24">
+    <p class="text-center text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.home.featuredKicker}</p>
+    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>{ui.home.featuredTitle}</h2>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <div class="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+      {showcase.map((rug) => (
+        <RugCard rug={rug} locale={locale} />
+      ))}
+    </div>
+    <div class="mt-14 text-center" data-reveal>
+      <Button href={localizedPath(locale, "/products")} variant="outline">
+        {ui.cta.viewCollection}
+      </Button>
+    </div>
+  </section>
+
+  <!-- Collections -->
+  <section class="mx-auto max-w-[1400px] px-6 py-8">
+    <p class="text-center text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.home.categoriesKicker}</p>
+    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>{ui.home.categoriesTitle}</h2>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <div class="mt-10 flex flex-wrap justify-center gap-3" data-reveal>
+      {categorySlugs
+        .filter((c) => counts[c] > 0)
+        .map((c) => (
+          <a
+            href={localizedPath(locale, `/categories/${c}`)}
+            class="rounded-[100px] border border-espresso/30 px-6 py-3 text-sm transition-colors hover:border-crimson hover:text-crimson"
+          >
+            {ui.categories[c]}
+            <span class="ms-2 text-xs text-espresso/50">{counts[c]}</span>
+          </a>
+        ))}
+    </div>
+  </section>
+
+  <!-- Heritage band — the single soft color wash -->
+  <section class="px-4 py-20 md:py-24">
+    <div
+      class="mx-auto max-w-[1400px] rounded-[2.5rem] px-6 py-16 text-center md:py-20"
+      style="background: linear-gradient(115deg, rgba(201,154,60,0.14), rgba(138,31,45,0.10));"
+      data-reveal
+    >
+      <h2 class="font-display-lang mx-auto max-w-2xl text-4xl leading-tight md:text-5xl">
+        {ui.home.heritageTitle}
+      </h2>
+      <p class="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-espresso/80 md:text-base">
+        {ui.home.heritageTeaser}
+      </p>
+      <div class="mt-8">
+        <Button href={localizedPath(locale, "/about")} variant="outline">
+          {ui.cta.readStory}
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inquiry strip -->
+  <section class="mx-auto max-w-[900px] px-6 pb-8 text-center" data-reveal>
+    <div class="flex items-end justify-center gap-8">
+      <Motif variant="cypress" class="hidden h-20 w-9 text-espresso/20 sm:block" />
+      <h2 class="font-display-lang text-3xl">{ui.home.inquiryTitle}</h2>
+      <Motif variant="cypress" class="hidden h-20 w-9 -scale-x-100 text-espresso/20 sm:block" />
+    </div>
+    <p class="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-espresso/80">
+      {ui.home.inquiryText}
+    </p>
+    <div class="mt-6">
+      <Button href={localizedPath(locale, "/contact")} variant="primary">
+        {ui.nav.contact}
+      </Button>
+    </div>
+  </section>
+</BaseLayout>

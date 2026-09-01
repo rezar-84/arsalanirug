@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* Self-hosted fonts */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/cormorant";
+@import "@fontsource/vazirmatn";
+@import "@fontsource/vazirmatn/500.css";
+@import "@fontsource/amiri";
+@import "@fontsource/amiri/700.css";
+
+@theme {
+  /* Parchment-gallery palette, adapted for Persian rugs:
+     madder crimson accent (the classic rug dye) with saffron as a rare secondary. */
+  --color-canvas: #fcfbf7;
+  --color-card: #ffffff;
+  --color-linen: #e7e4e0;
+  --color-ink: #0d0d0f;
+  --color-espresso: #2b1b1b;
+  --color-bitter: #100401;
+  --color-crimson: #8a1f2d;
+  --color-saffron: #c99a3c;
+
+  /* Two-mode radius language: 100px pills for interactive chrome,
+     900px arches for full-bleed image cards (mihrab silhouette). */
+  --radius-pill: 100px;
+  --radius-arch: 900px;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Variable", Georgia, serif;
+  --font-fa: "Vazirmatn", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-fa-display: "Amiri", "Vazirmatn", Georgia, serif;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Persian pages swap the whole type system; layout flips via logical utilities. */
+  html[dir="rtl"] {
+    font-family: var(--font-fa);
+  }
+
+  ::selection {
+    background-color: var(--color-crimson);
+    color: var(--color-canvas);
+  }
+}
+
+@layer utilities {
+  /* Display type: Cormorant for EN, Amiri for FA — always via this class so
+     the swap stays in one place. */
+  .font-display-lang {
+    font-family: var(--font-display);
+  }
+  html[dir="rtl"] .font-display-lang {
+    font-family: var(--font-fa-display);
+  }
+
+  /* Signature arched (tombstone/mihrab) image frame. */
+  .arch {
+    border-start-start-radius: var(--radius-arch);
+    border-start-end-radius: var(--radius-arch);
+    border-end-start-radius: 1rem;
+    border-end-end-radius: 1rem;
+    overflow: hidden;
+  }
+
+  /* Hairline borders define surfaces — the system is shadow-free. */
+  .hairline {
+    border: 1px solid --alpha(var(--color-espresso) / 25%);
+  }
+}
+
+/* Scroll-reveal (progressive enhancement; .js-reveal is added by script). */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.js-reveal [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

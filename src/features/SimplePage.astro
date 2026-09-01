@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Motif from "../components/Motif.astro";
+import Button from "../components/Button.astro";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  kind: "thank-you" | "not-found";
+}
+const { locale, kind } = Astro.props;
+const ui = t(locale);
+const content =
+  kind === "thank-you"
+    ? { title: ui.contactPage.thankYouTitle, text: ui.contactPage.thankYouText, path: "/thank-you" }
+    : { title: ui.notFound.title, text: ui.notFound.text, path: "/404" };
+---
+
+<BaseLayout
+  locale={locale}
+  path={content.path}
+  title={`${content.title} — ${ui.siteName}`}
+  description={content.text}
+  hasAltLocale={kind === "thank-you"}
+>
+  <section class="relative mx-auto max-w-[600px] px-6 py-32 text-center">
+    <Motif variant="boteh" class="pointer-events-none absolute start-1/2 top-16 h-64 w-64 -translate-x-1/2 rtl:translate-x-1/2 text-espresso/[0.07]" />
+    <h1 class="font-display-lang relative text-5xl">{content.title}</h1>
+    <p class="mt-4 text-sm leading-relaxed text-espresso/80">{content.text}</p>
+    <div class="mt-8">
+      <Button href={localizedPath(locale, "/")} variant="primary">{ui.notFound.backHome}</Button>
+    </div>
+  </section>
+</BaseLayout>

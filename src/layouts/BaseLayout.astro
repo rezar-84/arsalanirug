@@ -1,0 +1,97 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { localeMeta, localizedPath, contact, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  path: string; // canonical, locale-agnostic path, e.g. "/rugs/qom-golfarang" or "/"
+  title: string;
+  description: string;
+  ogImage?: string;
+  hasAltLocale?: boolean; // false omits hreflang + language-switcher link
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  locale,
+  path,
+  title,
+  description,
+  ogImage = "/logo.png",
+  hasAltLocale = true,
+  jsonLd = [],
+} = Astro.props;
+
+const meta = localeMeta[locale];
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://arsalanirug.com";
+const enUrl = `${site}${localizedPath("en", path)}`;
+const faUrl = `${site}${localizedPath("fa", path)}`;
+const canonicalUrl = locale === "en" ? enUrl : faUrl;
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Arsalani Rug",
+  url: site,
+  logo: `${site}/logo.png`,
+  email: contact.email,
+  telephone: contact.phone,
+};
+---
+
+<!doctype html>
+<html lang={meta.htmlLang} dir={meta.dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {hasAltLocale && (
+      <>
+        <link rel="alternate" hreflang="en" href={enUrl} />
+        <link rel="alternate" hreflang="fa" href={faUrl} />
+        <link rel="alternate" hreflang="x-default" href={enUrl} />
+      </>
+    )}
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, site).toString()} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={locale === "en" ? "en_US" : "fa_IR"} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} is:inline />
+    {jsonLd.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} is:inline />
+    ))}
+  </head>
+  <body class="min-h-screen flex flex-col bg-canvas text-ink">
+    <Header locale={locale} path={path} hasAltLocale={hasAltLocale} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <script is:inline>
+      document.documentElement.classList.add("js-reveal");
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          }
+        },
+        { rootMargin: "0px 0px -10% 0px", threshold: 0.05 }
+      );
+      document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

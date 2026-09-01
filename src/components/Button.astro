@@ -1,0 +1,23 @@
+---
+interface Props {
+  href: string;
+  variant?: "primary" | "outline" | "outline-light" | "whatsapp";
+  class?: string;
+  external?: boolean;
+}
+const { href, variant = "primary", class: cls = "", external = false } = Astro.props;
+const variants = {
+  primary: "bg-crimson text-canvas hover:bg-espresso",
+  outline: "border border-espresso/40 text-ink hover:border-crimson hover:text-crimson",
+  "outline-light": "border border-canvas/60 text-canvas hover:bg-canvas hover:text-ink",
+  whatsapp: "bg-[#1faa55] text-white hover:bg-[#178a45]",
+};
+---
+
+<a
+  href={href}
+  class={`inline-flex items-center justify-center gap-2 rounded-[100px] px-6 py-3 text-sm transition-colors ${variants[variant]} ${cls}`}
+  {...external ? { target: "_blank", rel: "noopener" } : {}}
+>
+  <slot />
+</a>

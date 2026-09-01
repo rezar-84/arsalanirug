@@ -1,0 +1,87 @@
+---
+import { t, localizedPath, alternatePath, localeMeta, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  path: string;
+  hasAltLocale?: boolean;
+}
+const { locale, path, hasAltLocale = true } = Astro.props;
+const ui = t(locale);
+const other: Locale = locale === "en" ? "fa" : "en";
+
+const links = [
+  { href: localizedPath(locale, "/products"), label: ui.nav.rugs },
+  { href: localizedPath(locale, "/history"), label: ui.nav.history },
+  { href: localizedPath(locale, "/guide"), label: ui.nav.guide },
+  { href: localizedPath(locale, "/about"), label: ui.nav.heritage },
+  { href: localizedPath(locale, "/contact"), label: ui.nav.contact },
+];
+---
+
+<header class="sticky top-4 z-50 px-4">
+  <nav
+    class="mx-auto flex max-w-[1000px] items-center justify-between gap-2 rounded-[100px] border border-espresso/30 bg-linen/70 px-5 py-3 backdrop-blur-md"
+  >
+    <a
+      href={localizedPath(locale, "/")}
+      class="flex items-center gap-2 font-display-lang text-xl tracking-wide text-ink"
+    >
+      <!-- The brand calligraphy is white-on-transparent (drawn for the old dark
+           header); invert() renders it ink-dark on this cream nav. -->
+      <img src="/logo.png" alt="" class="h-9 w-auto invert" />
+      <span class="sr-only sm:not-sr-only">{ui.siteName}</span>
+    </a>
+
+    <div class="hidden items-center gap-6 sm:flex">
+      {links.map((l) => (
+        <a href={l.href} class="text-sm text-ink transition-colors hover:text-crimson">
+          {l.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="flex items-center gap-2">
+      {hasAltLocale && (
+        <a
+          href={alternatePath(other, localizedPath(locale, path))}
+          lang={localeMeta[other].htmlLang}
+          dir={localeMeta[other].dir}
+          class="rounded-[100px] border border-espresso/30 px-3 py-1 text-xs text-ink transition-colors hover:border-crimson hover:text-crimson"
+        >
+          {localeMeta[other].label}
+        </a>
+      )}
+      <button
+        type="button"
+        class="sm:hidden rounded-[100px] border border-espresso/30 px-3 py-1 text-xs"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        ☰
+      </button>
+    </div>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    hidden
+    class="mx-auto mt-2 max-w-[1000px] rounded-3xl border border-espresso/30 bg-canvas px-6 py-4 sm:hidden"
+  >
+    {links.map((l) => (
+      <a href={l.href} class="block py-2 text-sm text-ink">
+        {l.label}
+      </a>
+    ))}
+  </div>
+</header>
+
+<script is:inline>
+  document.querySelector("[data-menu-toggle]")?.addEventListener("click", (e) => {
+    const menu = document.getElementById("mobile-menu");
+    if (!menu) return;
+    menu.hidden = !menu.hidden;
+    e.currentTarget.setAttribute("aria-expanded", String(!menu.hidden));
+  });
+</script>

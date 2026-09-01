@@ -1,0 +1,149 @@
+---
+import { Picture } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Motif from "../components/Motif.astro";
+import Button from "../components/Button.astro";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+import { getRugsWithFallback } from "../lib/rugs";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+
+// Long-form story, rewritten from the old site's About page (docs/source-copy.md).
+const story: Record<Locale, { mission: string; timeline: { era: string; title: string; text: string }[]; closing: string }> = {
+  en: {
+    mission:
+      "Our mission is simple: to bring the finest Persian hand-woven carpets to connoisseurs anywhere in the world — from our own signature pieces to rugs sourced, on commission, from the most reputable weaving houses of Iran. Behind that promise stand more than a hundred years of family craft.",
+    timeline: [
+      {
+        era: "1866 — Kashan",
+        title: "Gholamhossein Arsalani",
+        text: "Gholamhossein, son of Mohammad Rasool, was born in the ancient city of Kashan — a city whose civilization reaches back seven thousand years. Orphaned young and raised by his aunt, he married and raised a family in his hometown before hardship drove him toward the capital.",
+      },
+      {
+        era: "1910 — Qom",
+        title: "A workshop is born",
+        text: "It was his wife — a dedicated mother of seven — who persuaded him to settle in Qom, promising to open a carpet-weaving workshop there. That workshop became the family business. Their first great carpet, twelve square metres woven over months by mother and daughters, sold for 302 tomans — two of them a tip. Carpet weaving was rare in Qom then; Gholamhossein was among the first to practice it professionally.",
+      },
+      {
+        era: "1913–1987",
+        title: "Ali Asghar Arsalani & Farsh Qom",
+        text: "His youngest son Ali Asghar founded the Farsh Qom carpet company, raising production to 170 carpets a year — an extraordinary feat for its time. A masterly craftsman who never shunned hard work, the carpet industry of Qom remains indebted to his legacy.",
+      },
+      {
+        era: "1960s — today",
+        title: "Mehdi, and Qom silk goes to the world",
+        text: "Mehdi Arsalani led the house for fifty years, working with the finest weavers of Qom. With his father-in-law Mohammad Saberi — the man credited with introducing Qom silk carpets to world markets — the family helped establish Qom silk as the standard against which all others are measured.",
+      },
+      {
+        era: "The fifth generation",
+        title: "Hamid & Vahid Arsalani",
+        text: "Today Hamid and Vahid Arsalani lead the production of magnificent carpets in Qom. Arsalani rugs travel to the four corners of the world; the finest among them hang in museums and grace private mansions at home and abroad.",
+      },
+    ],
+    closing:
+      "Every rug in our collection carries this lineage — knot by knot, from Kashan in 1866 to your home today.",
+  },
+  fa: {
+    mission:
+      "رسالت ما ساده است: رساندن نفیس‌ترین فرش‌های دستباف ایرانی به دوستداران آن در سراسر جهان — از بافته‌های خودمان تا فرش‌هایی که به سفارش شما از معتبرترین کارگاه‌های بافندگی ایران فراهم می‌کنیم. پشتوانه این وعده، بیش از صد سال هنر خانوادگی است.",
+    timeline: [
+      {
+        era: "۱۲۴۵ خورشیدی — کاشان",
+        title: "غلامحسین ارسلانی",
+        text: "غلامحسین، فرزند محمدرسول، در شهر کهن کاشان زاده شد — شهری با تمدنی هفت‌هزارساله. او که در کودکی یتیم شد و در دامان عمه‌اش بزرگ شد، در زادگاهش تشکیل خانواده داد تا آنکه تنگدستی او را به سوی پایتخت راند.",
+      },
+      {
+        era: "۱۲۸۹ — قم",
+        title: "تولد یک کارگاه",
+        text: "این همسر او بود — مادری فداکار با هفت فرزند — که او را به ماندن در قم واداشت و قول داد کارگاه فرش‌بافی برپا کند. همان کارگاه، بنیان کسب‌وکار خانوادگی شد. نخستین فرش بزرگشان، دوازده متری‌ای که مادر و دختران ماه‌ها بر آن بافتند، ۳۰۲ تومان فروخته شد — که دو تومانش انعام بود. در آن روزگار فرش‌بافی در قم رایج نبود؛ غلامحسین از نخستین کسانی بود که حرفه‌ای به آن پرداخت.",
+      },
+      {
+        era: "۱۲۹۲–۱۳۶۶",
+        title: "علی‌اصغر ارسلانی و فرش قم",
+        text: "کوچک‌ترین پسرش علی‌اصغر، شرکت فرش قم را بنیان نهاد و تولید را به ۱۷۰ تخته فرش در سال رساند — دستاوردی کم‌نظیر در آن زمان. استادکاری خستگی‌ناپذیر که صنعت فرش قم وامدار میراث اوست.",
+      },
+      {
+        era: "دهه ۴۰ — امروز",
+        title: "مهدی، و ابریشم قم در جهان",
+        text: "مهدی ارسلانی پنجاه سال این خانه را رهبری کرد و با بهترین بافندگان قم کار کرد. در کنار پدرهمسرش محمد صابری — که ابریشم قم را به بازارهای جهانی شناساند — این خانواده در جا انداختن فرش ابریشم قم به‌عنوان معیار برتری سهمی بسزا داشت.",
+      },
+      {
+        era: "نسل پنجم",
+        title: "حمید و وحید ارسلانی",
+        text: "امروز حمید و وحید ارسلانی تولید فرش‌های فاخر را در قم رهبری می‌کنند. فرش‌های ارسلانی به چهارگوشه جهان می‌روند؛ نفیس‌ترین‌هایشان در موزه‌ها و خانه‌های اعیانی داخل و خارج جای دارند.",
+      },
+    ],
+    closing:
+      "هر فرشِ این مجموعه، گره به گره، همین تبار را با خود دارد — از کاشانِ ۱۲۴۵ تا خانه امروز شما.",
+  },
+};
+
+const s = story[locale];
+const rugs = await getRugsWithFallback(locale);
+const galleryRugs = rugs.filter((r) => r.data.images.length > 1).slice(0, 3);
+---
+
+<BaseLayout
+  locale={locale}
+  path="/about"
+  title={`${ui.heritage.title} — ${ui.siteName}`}
+  description={ui.heritage.intro}
+>
+  <section class="relative mx-auto max-w-[800px] px-6 pt-16 text-center">
+    <Motif variant="rosette" class="pointer-events-none absolute -top-2 start-1/2 h-16 w-16 -translate-x-1/2 rtl:translate-x-1/2 text-espresso/20" />
+    <h1 class="font-display-lang mt-8 text-5xl md:text-6xl" data-reveal>{ui.heritage.title}</h1>
+    <p class="mt-4 text-sm text-espresso/70" data-reveal>{ui.heritage.intro}</p>
+    <p class="mt-10 text-start text-base leading-loose text-espresso/90" data-reveal>{s.mission}</p>
+  </section>
+
+  <section class="mx-auto max-w-[800px] px-6 py-16">
+    <ol class="relative border-s border-espresso/25 ps-8 md:ps-12">
+      {s.timeline.map((item) => (
+        <li class="relative pb-14 last:pb-0" data-reveal>
+          <span class="absolute -start-[41px] top-1 h-4 w-4 rounded-full border border-espresso/40 bg-canvas md:-start-[57px]">
+            <span class="absolute inset-1 rounded-full bg-crimson"></span>
+          </span>
+          <p class="text-xs uppercase tracking-[0.25em] text-saffron">{item.era}</p>
+          <h2 class="font-display-lang mt-2 text-3xl">{item.title}</h2>
+          <p class="mt-3 text-sm leading-loose text-espresso/90">{item.text}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  {galleryRugs.length > 0 && (
+    <section class="mx-auto max-w-[1100px] px-6 pb-8">
+      <div class="grid gap-6 sm:grid-cols-3">
+        {galleryRugs.map((rug) => (
+          <div class="arch border border-espresso/25" data-reveal>
+            <Picture
+              src={rug.data.images[0]}
+              widths={[400, 700]}
+              sizes="(min-width: 640px) 30vw, 90vw"
+              formats={["avif", "webp"]}
+              alt={rug.data.title}
+              loading="lazy"
+              class="aspect-[3/4] w-full object-cover object-top"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="mx-auto max-w-[700px] px-6 py-16 text-center" data-reveal>
+    <div class="mb-8 flex items-end justify-center gap-6 text-espresso/20">
+      <Motif variant="cypress" class="h-16 w-8" />
+      <Motif variant="rosette" class="h-10 w-10 mb-3" />
+      <Motif variant="cypress" class="h-16 w-8 -scale-x-100" />
+    </div>
+    <p class="font-display-lang text-2xl leading-relaxed text-espresso">{s.closing}</p>
+    <div class="mt-8">
+      <Button href={localizedPath(locale, "/products")} variant="primary">{ui.cta.viewCollection}</Button>
+    </div>
+  </section>
+</BaseLayout>

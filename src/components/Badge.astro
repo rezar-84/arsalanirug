@@ -1,0 +1,16 @@
+---
+interface Props {
+  tone?: "outline" | "crimson" | "saffron";
+  class?: string;
+}
+const { tone = "outline", class: cls = "" } = Astro.props;
+const tones = {
+  outline: "border border-espresso/30 text-espresso",
+  crimson: "bg-crimson text-canvas",
+  saffron: "bg-saffron/20 border border-saffron/50 text-espresso",
+};
+---
+
+<span class={`inline-block rounded-[100px] px-3 py-1 text-xs ${tones[tone]} ${cls}`}>
+  <slot />
+</span>

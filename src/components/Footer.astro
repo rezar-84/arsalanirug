@@ -1,0 +1,57 @@
+---
+import { t, localizedPath, contact, type Locale } from "../i18n/ui";
+import { whatsappUrl } from "../lib/whatsapp";
+import Motif from "../components/Motif.astro";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-espresso/25 bg-canvas">
+  <div class="mx-auto max-w-[1400px] px-6 py-16">
+    <Motif variant="divider" class="mb-12 text-espresso/25" />
+    <div class="grid gap-12 md:grid-cols-3">
+      <div>
+        <img src="/logo.png" alt="" class="mb-3 h-10 w-auto invert opacity-80" />
+        <p class="font-display-lang text-2xl">{ui.siteName}</p>
+        <p class="mt-3 max-w-xs text-sm leading-relaxed text-espresso/80">{ui.footer.tagline}</p>
+      </div>
+
+      <div>
+        <p class="text-xs uppercase tracking-widest text-espresso/60">{ui.footer.navTitle}</p>
+        <div class="mt-4 flex flex-col gap-2 text-sm">
+          <a href={localizedPath(locale, "/products")} class="hover:text-crimson">{ui.nav.rugs}</a>
+          <a href={localizedPath(locale, "/history")} class="hover:text-crimson">{ui.nav.history}</a>
+          <a href={localizedPath(locale, "/guide")} class="hover:text-crimson">{ui.nav.guide}</a>
+          <a href={localizedPath(locale, "/about")} class="hover:text-crimson">{ui.nav.heritage}</a>
+          <a href={localizedPath(locale, "/contact")} class="hover:text-crimson">{ui.nav.contact}</a>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-xs uppercase tracking-widest text-espresso/60">{ui.footer.contactTitle}</p>
+        <div class="mt-4 flex flex-col gap-2 text-sm" dir="ltr">
+          <a href={`tel:${contact.phone}`} class="hover:text-crimson">{contact.phoneDisplay}</a>
+          <a href={`mailto:${contact.email}`} class="hover:text-crimson">{contact.email}</a>
+          <a href={whatsappUrl(locale)} class="hover:text-crimson" rel="noopener" target="_blank">
+            WhatsApp
+          </a>
+        </div>
+        <div class="mt-4 flex flex-col gap-1 text-xs text-espresso/70">
+          {ui.locations.map((loc) => (
+            <span>{loc.city} — {loc.address}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <Motif variant="band" class="mt-14 text-espresso/25" />
+    <div class="mt-4 border-t border-espresso/20 pt-6 text-xs text-espresso/60">
+      © {year} Arsalani Rug. {ui.footer.rights}
+    </div>
+  </div>
+</footer>

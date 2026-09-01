@@ -1,0 +1,52 @@
+---
+import { Picture } from "astro:assets";
+import Badge from "./Badge.astro";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+import { formatDimensions, rugSlug, type Rug } from "../lib/rugs";
+
+interface Props {
+  rug: Rug;
+  locale: Locale;
+  loading?: "lazy" | "eager";
+}
+const { rug, locale, loading = "lazy" } = Astro.props;
+const ui = t(locale);
+const href = localizedPath(locale, `/content/${rugSlug(rug)}`);
+---
+
+<article data-material={rug.data.material ?? ""} class="group" data-reveal>
+  <a href={href} class="block">
+    <div class="arch border border-espresso/25 bg-card transition-colors duration-500 group-hover:border-crimson/50">
+      <Picture
+        src={rug.data.images[0]}
+        widths={[400, 800]}
+        sizes="(min-width: 1280px) 320px, (min-width: 640px) 45vw, 90vw"
+        formats={["avif", "webp"]}
+        alt={rug.data.title}
+        loading={loading}
+        class="aspect-[3/4] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+      />
+    </div>
+    <div class="mt-4 text-center">
+      <h3 class="font-display-lang text-xl leading-snug">{rug.data.title}</h3>
+      <p class="mt-1 text-xs text-espresso/70">
+        {formatDimensions(rug, locale)} {ui.specs.cm}
+      </p>
+      <div class="mt-2 flex items-center justify-center gap-2">
+        <Badge>{ui.categories[rug.data.category]}</Badge>
+        {rug.data.material && <Badge tone="saffron">{ui.materials[rug.data.material]}</Badge>}
+      </div>
+      {rug.data.palette && (
+        <div class="mt-2.5 flex items-center justify-center gap-1.5" aria-hidden="true">
+          {rug.data.palette.slice(0, 4).map((hex) => (
+            <span
+              class="inline-block h-2.5 w-2.5 rounded-full border border-espresso/20"
+              style={`background-color: ${hex}`}
+            />
+          ))}
+        </div>
+      )}
+      <p class="mt-2 text-xs tracking-widest text-crimson">{ui.cta.priceOnRequest}</p>
+    </div>
+  </a>
+</article>

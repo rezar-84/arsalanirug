@@ -1,0 +1,63 @@
+---
+status: active
+owner: product-manager
+last-reviewed: 2026-09-01
+---
+
+# Backlog — arsalanirug
+
+> **This table stays terse. One line per item.** Narrative — what happened, what was
+> verified, what was discovered — goes in `worklog.md`, found via the ID.
+>
+> Column rules, the eight status values, and why the separation matters:
+> `../process/07-traceability.md`.
+
+## Now
+
+| ID | Task | Tier | Owner role | Depends on | Status |
+| --- | --- | --- | --- | --- | --- |
+
+## Next
+
+| ID | Task | Tier | Owner role | Depends on | Status |
+| --- | --- | --- | --- | --- | --- |
+| ARSA-004 | FA translation pass: Persian titles + descriptions for the 29 rug entries, drop `draft: true` after owner review | 1 | copywriter | — | Ready |
+| ARSA-005 | Write real EN descriptions for the 29 rugs (bodies are TODO placeholders) | 2 | copywriter | — | Ready |
+| ARSA-008 | Proper favicon set + OG default image from logo.png | 3 | brand-designer | — | Ready |
+
+## Blocked
+
+| ID | Task | Tier | Owner role | Depends on | Status | Who can unblock | Since |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+
+## Parked — awaiting a human
+
+| ID | Task | Tier | Owner role | Depends on | Status | Waiting on whom | For what decision | Since |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ARSA-002 | Replace placeholder WhatsApp number in `src/i18n/ui.ts` (currently the old Qom landline +98 253 7723684) | 1 | product-manager | — | Parked | Rezar86 | the actual WhatsApp business number | 2026-09-01 |
+| ARSA-003 | Register Web3Forms for info@arsalanirug.com and replace the placeholder key in `src/components/ContactForm.astro` | 1 | devops-sre | — | Parked | Rezar86 | account registration (free) | 2026-09-01 |
+| ARSA-006 | Connect hosting and deploy (`dist/` to Cloudflare Pages or Dokploy — see architecture.md, assumption A1) | 1 | devops-sre | ARSA-002, ARSA-003 | Parked | Rezar86 | hosting choice + production deploy approval | 2026-09-01 |
+
+## Later
+
+| ID | Task | Tier | Owner role | Depends on | Status | Becomes relevant when |
+| --- | --- | --- | --- | --- | --- | --- |
+| ARSA-009 | Automated a11y + e2e checks (fills the charter's absent stages) | 2 | qa | — | Deferred | CI exists |
+| ARSA-010 | Trim dist size (currently 121MB — consider fewer image widths/formats) | 3 | devops-sre | — | Deferred | host imposes a size limit or builds get slow |
+| ARSA-011 | Re-shoot weak 2016 phone photos | 2 | brand-designer | — | Deferred | owner can arrange photography |
+
+## Done
+
+| ID | Task | Tier | Owner role | Depends on | Status | Completed |
+| --- | --- | --- | --- | --- | --- | --- |
+| ARSA-014 | Zoom lightbox, palette extraction, Persian motifs, design polish, /history + /guide pages (EN+FA) | 2 | ux-designer | — | Done | 2026-09-01 |
+| ARSA-013 | Verify no fake products; owner kept full live catalog (34); junk-titled rugs imported, FilterBar hides empty categories | 3 | product-manager | — | Done | 2026-09-01 |
+| ARSA-012 | Match live site: verbatim titles, old URL structure (`/content/`, `/categories/`, `/products`, `/about`), brand logo | 2 | architect | — | Done | 2026-09-01 |
+| ARSA-007 | Old-URL redirects — resolved by ARSA-012 adopting the old URL structure natively; leftover paths (`/gallery`, `/boutique-rugs`, `/news`) redirect | 3 | seo | — | Done | 2026-09-01 |
+| ARSA-001 | Bootstrap: new Astro/Tailwind bilingual site, design system, Drupal catalog migration (29 rugs), all pages, SDLC kit adopted | 2 | architect | — | Done | 2026-09-01 |
+
+## Dropped
+
+| ID | Task | Tier | Owner role | Depends on | Status | Why dropped | When |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| — | Migrate old FAQ/blog/news/forum/webform content | 3 | product-manager | — | Dropped | all demo, lorem-ipsum, or spam content (see worklog ARSA-001) | 2026-09-01 |

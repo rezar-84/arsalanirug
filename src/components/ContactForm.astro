@@ -1,0 +1,49 @@
+---
+import { t, localizedPath, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+
+// Web3Forms public access key — replace the placeholder after registering
+// info@arsalanirug.com at https://web3forms.com (free). See README "Open items".
+const WEB3FORMS_KEY = "REPLACE-WITH-WEB3FORMS-ACCESS-KEY";
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
+const redirect = `${site}${localizedPath(locale, "/thank-you")}`;
+
+const input =
+  "w-full rounded-2xl border border-espresso/30 bg-canvas px-4 py-3 text-sm outline-none transition-colors focus:border-crimson";
+---
+
+<form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4">
+  <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+  <input type="hidden" name="subject" value="Inquiry from arsalanirug.com" />
+  <input type="hidden" name="redirect" value={redirect} />
+  <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+  <label class="flex flex-col gap-1.5 text-sm">
+    {ui.contactPage.name}
+    <input type="text" name="name" required class={input} />
+  </label>
+  <label class="flex flex-col gap-1.5 text-sm">
+    {ui.contactPage.email}
+    <input type="email" name="email" required class={input} />
+  </label>
+  <label class="flex flex-col gap-1.5 text-sm">
+    {ui.contactPage.phone}
+    <input type="tel" name="phone" class={input} />
+  </label>
+  <label class="flex flex-col gap-1.5 text-sm">
+    {ui.contactPage.message}
+    <textarea name="message" rows="5" required class={input}></textarea>
+  </label>
+
+  <button
+    type="submit"
+    class="mt-2 self-start rounded-[100px] bg-crimson px-8 py-3 text-sm text-canvas transition-colors hover:bg-espresso"
+  >
+    {ui.contactPage.submit}
+  </button>
+</form>

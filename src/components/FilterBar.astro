@@ -1,0 +1,70 @@
+---
+import { t, localizedPath, categorySlugs, materialSlugs, type Locale, type CategorySlug } from "../i18n/ui";
+import { getRugsWithFallback } from "../lib/rugs";
+
+interface Props {
+  locale: Locale;
+  activeCategory?: CategorySlug | "all";
+}
+const { locale, activeCategory = "all" } = Astro.props;
+const ui = t(locale);
+
+// Hide categories with no rugs (e.g. "Selected & Available" is empty in the
+// migrated data) — the /categories/<slug> page itself still exists.
+const rugs = await getRugsWithFallback(locale);
+const nonEmpty = categorySlugs.filter(
+  (c) => c === activeCategory || rugs.some((r) => r.data.category === c)
+);
+
+const catLink = (slug: string) =>
+  localizedPath(locale, slug === "all" ? "/products" : `/categories/${slug}`);
+const pill = (active: boolean) =>
+  `rounded-[100px] border px-4 py-2 text-xs transition-colors ${
+    active
+      ? "border-crimson bg-crimson text-canvas"
+      : "border-espresso/30 text-ink hover:border-crimson hover:text-crimson"
+  }`;
+---
+
+<div class="flex flex-col items-center gap-4" data-reveal>
+  <div class="flex flex-wrap justify-center gap-2">
+    {["all", ...nonEmpty].map((slug) => (
+      <a href={catLink(slug)} class={pill(slug === activeCategory)}>
+        {ui.categories[slug as CategorySlug | "all"]}
+      </a>
+    ))}
+  </div>
+  <div class="flex flex-wrap items-center justify-center gap-2">
+    <span class="text-xs text-espresso/60">{ui.catalog.filterMaterial}:</span>
+    <button type="button" data-material-filter="" class={pill(true)} data-material-active>
+      {ui.cta.allFilter}
+    </button>
+    {materialSlugs.map((slug) => (
+      <button type="button" data-material-filter={slug} class={pill(false)}>
+        {ui.materials[slug]}
+      </button>
+    ))}
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const buttons = [...document.querySelectorAll("[data-material-filter]")];
+    const active = ["border-crimson", "bg-crimson", "text-canvas"];
+    const idle = ["border-espresso/30", "text-ink", "hover:border-crimson", "hover:text-crimson"];
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const value = btn.dataset.materialFilter;
+        document.querySelectorAll("[data-material]").forEach((card) => {
+          card.hidden = value !== "" && card.dataset.material !== value;
+        });
+        buttons.forEach((b) => {
+          b.classList.remove(...active);
+          b.classList.add(...idle);
+        });
+        btn.classList.remove(...idle);
+        btn.classList.add(...active);
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,354 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import Motif from "../components/Motif.astro";
+import { t, localizedPath, type Locale } from "../i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const ui = t(locale);
+
+type Entry = { term: string; fa: string; text: string };
+
+const content: Record<
+  Locale,
+  {
+    kicker: string;
+    title: string;
+    intro: string;
+    designTitle: string;
+    designIntro: string;
+    designs: Entry[];
+    citiesTitle: string;
+    citiesIntro: string;
+    featured: { name: string; fa: string; kicker: string; text: string[] }[];
+    regions: { name: string; note: string }[];
+    qualityTitle: string;
+    qualityIntro: string;
+    quality: { title: string; text: string }[];
+    lexiconTitle: string;
+    lexiconIntro: string;
+    lexicon: Entry[];
+  }
+> = {
+  en: {
+    kicker: "A Collector's Companion",
+    title: "How to Read a Persian Rug",
+    intro:
+      "A Persian rug is not a pattern; it is a language with dialects, grammar and handwriting. This guide teaches you enough of that language to walk through our collection — or any bazaar on earth — and understand what the weave is saying.",
+    designTitle: "The Language of Design",
+    designIntro:
+      "Every motif is a word inherited from somewhere: a fire temple, a paradise garden, a shawl from Kerman. Learn a handful and the rugs begin to speak.",
+    designs: [
+      {
+        term: "Lachak-Toranj",
+        fa: "لچک‌ترنج",
+        text: "The medallion-and-corners scheme — a sun (toranj) floating at the centre of a field, echoed by four quarter-suns (lachak) in the corners. Legend traces it to the gilded domes of book covers; it remains the most royal of all compositions.",
+      },
+      {
+        term: "Boteh",
+        fa: "بته",
+        text: "The bent teardrop the West renamed 'paisley'. Read variously as a cypress bowing in the wind, a flame, or a seed — a symbol of life persisting. Our Malayer carries entire orchards of them.",
+      },
+      {
+        term: "Herati · Mahi",
+        fa: "هراتی · ماهی",
+        text: "A diamond with four curved leaves — 'fish' — swimming around a rosette, repeated to infinity. The connoisseur's pattern: quiet at a distance, endlessly busy up close.",
+      },
+      {
+        term: "Gol Farang",
+        fa: "گل‌فرنگ",
+        text: "'Foreign flower' — cabbage roses that drifted in from Europe in the 19th century and were made utterly Persian by the dyer's palette. Romantic, painterly, beloved of Qom and Kerman.",
+      },
+      {
+        term: "Kheshti",
+        fa: "خشتی",
+        text: "The garden plot: the field divided into bricks, each tile holding its own flower, tree or bird — a Persian paradise garden seen from above, descendant of the Spring of Khosrow.",
+      },
+      {
+        term: "Afshan",
+        fa: "افشان",
+        text: "'Scattered' — an allover field with no medallion, blossoms and vines strewn as if by wind. The absence of a centre is itself a statement of abundance.",
+      },
+      {
+        term: "Gabbeh",
+        fa: "گبه",
+        text: "The nomad's thick-piled canvas from Fars — few colors, bold fields, a goat or a lone tree where geometry relaxes into poetry. Modern art centuries before the term existed.",
+      },
+      {
+        term: "Derakht-e Zendegi",
+        fa: "درخت زندگی",
+        text: "The tree of life, rooted at the rug's base and flowering toward the top border — the oldest prayer in the weaver's vocabulary: may the house stand, may the family branch.",
+      },
+    ],
+    citiesTitle: "The Weaving Cities",
+    citiesIntro:
+      "Origin is dialect: the same medallion speaks differently in silk from Qom and wool from Kashan. Two cities matter most to this house.",
+    featured: [
+      {
+        name: "Qom",
+        fa: "قم",
+        kicker: "Silk · c. 1930 – today",
+        text: [
+          "The youngest of the great weaving cities — and, in fineness, the summit. Qom had no carpet tradition until weavers from Kashan seeded workshops here in the early 20th century; unburdened by habit, the city specialised in what is hardest: silk warp, silk weft, silk pile, at knot counts that turn a floor covering into optics.",
+          "A true Qom is usually small — a zarcharak, a zaronim, a prayer-size ghalicheh — because silk this fine is counted in years, not months. Look for jewel-box color, a signature woven into the end border, and a surface that changes hue as you walk around it. Most of our boutique collection is woven here; our own family helped write this city's short, astonishing history.",
+        ],
+      },
+      {
+        name: "Kashan",
+        fa: "کاشان",
+        kicker: "Wool & silk · Safavid roots, UNESCO 2010",
+        text: [
+          "Kashan is memory. A royal workshop city under the Safavids — the Ardabil Carpet itself is signed by a Kashani — it led the 19th-century revival under masters like Mohtasham, whose luminous rugs of imported merino wool, spun via Manchester's mills, gave the trade the name 'Manchester Kashan'.",
+          "In 2010 UNESCO inscribed Kashan's traditional carpet-weaving skills on the Intangible Cultural Heritage of Humanity list. The classic Kashan look: a dignified lachak-toranj in madder red and deep indigo, wool with a soft inner glow. Two old Manchester-wool Kashans anchor our collection — and our founder was born in this city in 1866.",
+        ],
+      },
+    ],
+    regions: [
+      { name: "Tabriz", note: "The great mercantile school of the northwest — masterly in every genre, from hunting scenes to pictorial rugs." },
+      { name: "Isfahan", note: "Safavid court refinement continued: ivory grounds, eslimi arabesques, silk-on-silk precision." },
+      { name: "Nain", note: "Cool palettes of ivory and blue, wool trimmed with silk highlights — quiet formality." },
+      { name: "Malayer", note: "Village weaving of the west: sincere, sturdy, rich in boteh — a collector's secret." },
+      { name: "Shiraz & Fars", note: "Homeland of the Gabbeh and of tribal geometry; carpet-weaving skills UNESCO-listed alongside Kashan's." },
+      { name: "Oushak", note: "The Anatolian neighbour: monumental scale, apricot and gold, beloved of decorators — an honorary guest in Persian collections, and in ours." },
+    ],
+    qualityTitle: "How to Judge Quality",
+    qualityIntro: "Five habits of the connoisseur — no laboratory required.",
+    quality: [
+      {
+        title: "Turn it over",
+        text: "The back never lies. Knots should read as an even, fine grain — in Persia fineness is counted in raj, knots per 7 cm of width; the West counts per square inch (KPSI). A fine Qom exceeds a thousand knots to the inch; a noble village rug needs far fewer to be honest.",
+      },
+      {
+        title: "Pinch the pile",
+        text: "Material is destiny. Kork — lamb's wool from the shoulder — feels alive and springy; silk is cool and instantly luminous. Dead, dry wool or shiny synthetic 'art silk' betray themselves to the fingertips within seconds.",
+      },
+      {
+        title: "Befriend the abrash",
+        text: "Natural dyes shift subtly from dye-lot to dye-lot, leaving soft horizontal bands of tone — abrash. Machine-perfect, poreless color is a warning; abrash is the weave breathing.",
+      },
+      {
+        title: "Study the drawing",
+        text: "In a curvilinear city rug, vines should flow without stutter and the medallion should sit true on its axes. In tribal work, cherish the asymmetries — but the selvedges must be straight and the corners honestly resolved.",
+      },
+      {
+        title: "Seek the signature",
+        text: "Master workshops sign the end border — as Maqsud Kashani signed the Ardabil in 1539. A woven signature is a maker standing behind centuries of reputation. Ask us to read one for you.",
+      },
+    ],
+    lexiconTitle: "A Weaver's Lexicon",
+    lexiconIntro:
+      "Words from the loom — the terms you will meet in our catalogue, told the way the bazaar tells them.",
+    lexicon: [
+      { term: "Raj", fa: "رج", text: "The Persian measure of fineness: rows of knots in 7 centimetres. At fifty raj a rug is respectable; at eighty it is jewellery." },
+      { term: "Kork", fa: "کرک", text: "Wool of the lamb's first shearing, from neck and shoulder — soft enough that the great Kashans glow with it." },
+      { term: "Chele Abrisham", fa: "چله ابریشم", text: "Silk warp: the invisible skeleton of the finest rugs, betrayed only by the fringe's cool shine." },
+      { term: "Abrash", fa: "ابرش", text: "The gentle banding of hand-dyed color — the rug's weather, proof a human hand stirred the vat." },
+      { term: "Toranj", fa: "ترنج", text: "The central medallion; literally the citron fruit. The sun around which a classical rug orbits." },
+      { term: "Eslimi", fa: "اسلیمی", text: "The arabesque: a vine that never ends, drawn by a hand that never lifted." },
+      { term: "Zarcharak", fa: "ذرع و چارک", text: "A size, not a style: about 120 × 80 cm — one zar and a quarter. The classic cabinet piece of Qom silk; you will meet eight of them in our collection." },
+      { term: "Zaronim", fa: "ذرع و نیم", text: "A zar and a half — around 150 × 100 cm. The step between treasure and carpet." },
+      { term: "Ghalicheh", fa: "قالیچه", text: "The 'little carpet' — rugs of roughly dozar size and smaller, made for walls, prayer, and the joy of holding a whole design in one glance." },
+      { term: "Kenareh", fa: "کناره", text: "The runner: woven for corridors and the sides of a traditional room's carpet arrangement." },
+      { term: "Shesh Metri", fa: "شش‌متری", text: "'Six metres' — the generous 3 × 2 m family size that anchors an Iranian living room." },
+      { term: "Dastbaf", fa: "دستباف", text: "Hand-woven. The single word that separates everything in this house from everything made by machine." },
+    ],
+  },
+  fa: {
+    kicker: "همراهِ مجموعه‌دار",
+    title: "فرش ایرانی را چگونه بخوانیم",
+    intro:
+      "فرش ایرانی یک طرح نیست؛ زبانی است با لهجه‌ها، دستور و دست‌خط. این راهنما آن‌قدر از این زبان به شما می‌آموزد که در مجموعه ما — یا هر بازاری در جهان — قدم بزنید و بفهمید تار و پود چه می‌گوید.",
+    designTitle: "زبانِ نقش",
+    designIntro:
+      "هر نگاره واژه‌ای است به ارث رسیده از جایی: از آتشکده‌ای، از باغ بهشتی، از شالی کرمانی. چند واژه بیاموزید تا فرش‌ها به سخن درآیند.",
+    designs: [
+      { term: "Lachak-Toranj", fa: "لچک‌ترنج", text: "طرح ترنج و لچک — خورشیدی (ترنج) شناور در میانه متن و پژواک آن در چهار ربع‌خورشیدِ کنج‌ها (لچک). ریشه‌اش را از جلدسازی کتاب‌های زرین می‌دانند؛ همچنان شاهانه‌ترینِ ترکیب‌هاست." },
+      { term: "Boteh", fa: "بته", text: "اشکِ خمیده‌ای که غرب «پیزلی» نامید. آن را سروِ خم‌شده در باد، شعله، یا دانه خوانده‌اند — نماد جانِ پایدار. ملایرِ ما باغی از آن بر تن دارد." },
+      { term: "Herati · Mahi", fa: "هراتی · ماهی", text: "لوزی‌ای با چهار برگ خمیده — «ماهی» — گرد گلی شناور، تکرارشده تا بی‌نهایت. نقشِ اهل فن: از دور آرام، از نزدیک بی‌قرار." },
+      { term: "Gol Farang", fa: "گل‌فرنگ", text: "«گلِ فرنگی» — رزهایی که در قرن سیزدهم از اروپا آمدند و رنگرز ایرانی یکسره ایرانی‌شان کرد. رمانتیک و نقاشانه؛ محبوب قم و کرمان." },
+      { term: "Kheshti", fa: "خشتی", text: "باغچه‌بندی: متن به خشت‌ها تقسیم می‌شود و هر خشت گل و درخت و پرنده خود را دارد — باغ بهشت ایرانی از فراز، از تبار بهارستانِ خسرو." },
+      { term: "Afshan", fa: "افشان", text: "متنِ سراسری بی‌ترنج؛ گل‌ها و پیچک‌ها گویی به دست باد پراکنده‌اند. نبودِ مرکز، خود بیانِ فراوانی است." },
+      { term: "Gabbeh", fa: "گبه", text: "بومِ پُرزبلندِ عشایر فارس — رنگ‌هایی اندک، متن‌هایی دلیر، و بزی یا درختی تنها آنجا که هندسه به شعر می‌رسد. هنر مدرن، قرن‌ها پیش از این نام." },
+      { term: "Derakht-e Zendegi", fa: "درخت زندگی", text: "درختی ریشه‌کرده در پایین فرش و شکوفا به سوی حاشیه بالا — کهن‌ترین دعای بافنده: خانه برپا، خاندان پرشاخه." },
+    ],
+    citiesTitle: "شهرهای بافنده",
+    citiesIntro:
+      "خاستگاه، لهجه است: یک ترنج در ابریشمِ قم به زبانی سخن می‌گوید و در پشمِ کاشان به زبانی دیگر. دو شهر برای این خانه از همه مهم‌ترند.",
+    featured: [
+      {
+        name: "Qom",
+        fa: "قم",
+        kicker: "ابریشم · از حدود ۱۳۱۰ تا امروز",
+        text: [
+          "جوان‌ترینِ شهرهای بزرگ بافندگی — و در ظرافت، بر قله. قم تا اوایل قرن چهاردهم خورشیدی سنت فرش نداشت؛ بافندگانی که از کاشان آمدند کارگاه‌هایش را بنیان نهادند و این شهرِ بی‌عادت، دشوارترین راه را برگزید: چله ابریشم، پود ابریشم، پرز ابریشم، با رج‌شمارهایی که کف‌پوش را به شیشه‌گریِ نور بدل می‌کند.",
+          "قمِ اصیل معمولاً کوچک است — ذرع‌وچارک، ذرع‌ونیم، قالیچه — چون ابریشمی چنین ریز را به سال می‌شمارند نه به ماه. در پی رنگ‌های جواهرگون، امضای بافته در حاشیه، و سطحی باشید که با هر قدم رنگ عوض می‌کند. بیشترِ مجموعه بوتیک ما بافته همین شهر است؛ و خاندان ما در نوشتن همین تاریخِ کوتاهِ شگفت سهم داشته است.",
+        ],
+      },
+      {
+        name: "Kashan",
+        fa: "کاشان",
+        kicker: "پشم و ابریشم · ریشه صفوی، ثبت یونسکو ۱۳۸۹",
+        text: [
+          "کاشان یعنی حافظه. شهرِ کارگاه‌های شاهی صفوی — فرش اردبیل امضای یک کاشانی را بر خود دارد — و پیشتازِ نوزایی قرن سیزدهم به دست استادانی چون محتشم؛ فرش‌های درخشانشان از پشم مرینوسِ رسیده از کارخانه‌های منچستر بود و «کاشان منچستر» از همین‌جا نام گرفت.",
+          "در سال ۱۳۸۹ یونسکو مهارت‌های سنتی فرش‌بافی کاشان را میراث ناملموس بشریت شناخت. سیمای کلاسیک کاشان: لچک‌ترنجی باوقار در قرمزِ روناسی و سرمه‌ای، با پشمی که از درون می‌تابد. دو کاشانِ کهنه از پشم منچستر ستون مجموعه ما هستند — و بنیان‌گذار ما در همین شهر، به سال ۱۲۴۵، زاده شد.",
+        ],
+      },
+    ],
+    regions: [
+      { name: "تبریز", note: "مکتب بزرگ بازرگانی شمال غرب — چیره‌دست در هر ژانر، از شکارگاه تا فرش‌های تصویری." },
+      { name: "اصفهان", note: "ادامه ظرافت درباری صفوی: زمینه‌های کرم، اسلیمی‌ها، و دقتِ ابریشم بر ابریشم." },
+      { name: "نایین", note: "رنگ‌بندی خنکِ کرم و آبی، پشمِ گل‌ابریشم — رسمیتی آرام." },
+      { name: "ملایر", note: "بافته روستایی غرب: صمیمی، استوار، سرشار از بته — رازِ مجموعه‌داران." },
+      { name: "شیراز و فارس", note: "زادگاه گبه و هندسه ایلیاتی؛ مهارت فرش‌بافی فارس هم‌رده کاشان در یونسکو ثبت است." },
+      { name: "اوشاک", note: "همسایه آناتولیایی: مقیاس باشکوه، هلویی و طلایی — میهمانِ گرامی مجموعه‌های ایرانی، و مجموعه ما." },
+    ],
+    qualityTitle: "کیفیت را چگونه بسنجیم",
+    qualityIntro: "پنج عادتِ اهل فن — بی‌نیاز از آزمایشگاه.",
+    quality: [
+      { title: "فرش را برگردانید", text: "پشتِ فرش هرگز دروغ نمی‌گوید. گره‌ها باید بافتی یکدست و ریز داشته باشند — در ایران ظرافت را به «رج» می‌شمارند: شمار گره در هفت سانتی‌متر. قمِ ریزباف از هزار گره در اینچ می‌گذرد؛ فرش روستاییِ نجیب به بسیار کمتر از آن راستگوست." },
+      { title: "پرز را لمس کنید", text: "جنس، سرنوشت است. کرک — پشمِ نخستین چینِ بره — زنده و فنری است؛ ابریشم خنک است و بی‌درنگ نورانی. پشمِ مرده یا «ابریشمِ مصنوعی» براق، در چند ثانیه خود را به سرانگشت لو می‌دهد." },
+      { title: "با ابرش دوست شوید", text: "رنگ‌های گیاهی از خمره‌ای به خمره‌ای اندکی می‌گردند و نوارهای نرمِ افقی بر متن می‌گذارند — ابرش. رنگِ بی‌منفذِ ماشینی هشدار است؛ ابرش نفس‌کشیدنِ بافته است." },
+      { title: "در طراحی دقیق شوید", text: "در فرش شهریِ گردان، پیچک‌ها باید بی‌لکنت روان باشند و ترنج راست بر محورش بنشیند. در بافته ایلیاتی، بی‌قرینگی‌ها را گرامی بدارید — اما شیرازه‌ها باید راست و کنج‌ها صادقانه بسته شده باشند." },
+      { title: "در پی امضا بگردید", text: "کارگاه‌های استادان حاشیه را امضا می‌کنند — چنان‌که مقصود کاشانی اردبیل را در ۹۴۶ امضا کرد. امضای بافته یعنی سازنده‌ای که پشت قرن‌ها آبرو ایستاده است. از ما بخواهید یکی را برایتان بخوانیم." },
+    ],
+    lexiconTitle: "واژه‌نامه بافنده",
+    lexiconIntro: "واژه‌هایی از پای دار — اصطلاح‌هایی که در کاتالوگ ما می‌بینید، به همان زبانی که بازار می‌گوید.",
+    lexicon: [
+      { term: "Raj", fa: "رج", text: "سنجه ایرانیِ ظرافت: شمار رج گره در هفت سانتی‌متر. در پنجاه رج فرش آبرومند است؛ در هشتاد، جواهر." },
+      { term: "Kork", fa: "کرک", text: "پشم نخستین چینِ بره از گردن و شانه — چندان نرم که کاشان‌های بزرگ با آن می‌درخشند." },
+      { term: "Chele Abrisham", fa: "چله ابریشم", text: "چله ابریشمی: اسکلت ناپیدای ریزبافت‌ترین فرش‌ها، که تنها درخشش خنک ریشه‌ها لوش می‌دهد." },
+      { term: "Abrash", fa: "ابرش", text: "نوارنوارشدنِ ملایم رنگِ دست‌ساز — آب‌وهوای فرش، و گواه دستی که خمره را به هم زد." },
+      { term: "Toranj", fa: "ترنج", text: "نشان میانی فرش؛ به معنای میوه بالنگ. خورشیدی که فرش کلاسیک گردش می‌گردد." },
+      { term: "Eslimi", fa: "اسلیمی", text: "پیچکی که هرگز پایان نمی‌گیرد، کشیده به دستی که هرگز از کاغذ برنخاست." },
+      { term: "Zarcharak", fa: "ذرع و چارک", text: "اندازه است، نه سبک: حدود ۱۲۰ در ۸۰ سانتی‌متر — یک ذرع و یک چارک. قابِ کلاسیک ابریشم قم؛ در مجموعه ما هشت تخته از آن خواهید دید." },
+      { term: "Zaronim", fa: "ذرع و نیم", text: "یک ذرع و نیم — حدود ۱۵۰ در ۱۰۰. پله میان گنجینه و قالی." },
+      { term: "Ghalicheh", fa: "قالیچه", text: "«قالیِ کوچک» — برای دیوار، برای نماز، و برای لذتِ یکجا در آغوش گرفتنِ تمامِ یک نقش." },
+      { term: "Kenareh", fa: "کناره", text: "باریکه‌بافِ راهروها و کناره‌های چیدمان سنتی اتاق ایرانی." },
+      { term: "Shesh Metri", fa: "شش‌متری", text: "قواره سخاوتمند ۳ در ۲ متر که میهمان‌خانه ایرانی بر آن بنا می‌شود." },
+      { term: "Dastbaf", fa: "دستباف", text: "همان یک واژه که هرچه در این خانه است را از هرچه ماشین بافته جدا می‌کند." },
+    ],
+  },
+};
+
+const c = content[locale];
+---
+
+<BaseLayout
+  locale={locale}
+  path="/guide"
+  title={`${c.title} — ${ui.siteName}`}
+  description={c.intro.slice(0, 155)}
+>
+  <section class="mx-auto max-w-[800px] px-6 pt-16 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{c.kicker}</p>
+    <h1 class="font-display-lang mt-4 text-5xl md:text-6xl" data-reveal>{c.title}</h1>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <p class="mt-8 text-start text-base leading-loose text-espresso/90" data-reveal>{c.intro}</p>
+  </section>
+
+  <!-- Designs -->
+  <section class="mx-auto max-w-[1100px] px-6 pt-20">
+    <h2 class="font-display-lang text-center text-4xl" data-reveal>{c.designTitle}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-espresso/80" data-reveal>
+      {c.designIntro}
+    </p>
+    <div class="mt-14 grid gap-x-12 gap-y-12 md:grid-cols-2">
+      {c.designs.map((d) => (
+        <div class="border-s-2 border-saffron/40 ps-6" data-reveal>
+          <div class="flex flex-wrap items-baseline gap-x-4">
+            <h3 class="font-display text-3xl" lang="en">{d.term}</h3>
+            <span class="font-fa-display text-2xl text-crimson" lang="fa" dir="rtl">{d.fa}</span>
+          </div>
+          <p class="mt-3 text-sm leading-loose text-espresso/90">{d.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Cities: Qom & Kashan featured -->
+  <section class="mx-auto max-w-[1100px] px-6 pt-24">
+    <h2 class="font-display-lang text-center text-4xl" data-reveal>{c.citiesTitle}</h2>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <p class="mx-auto mt-6 max-w-xl text-center text-sm leading-relaxed text-espresso/80" data-reveal>
+      {c.citiesIntro}
+    </p>
+    <div class="mt-14 grid gap-8 md:grid-cols-2">
+      {c.featured.map((city) => (
+        <article class="relative overflow-hidden rounded-3xl border border-espresso/25 bg-card p-8" data-reveal>
+          <Motif variant="medallion" class="pointer-events-none absolute -end-20 -top-20 h-64 w-64 text-espresso/[0.07]" />
+          <p class="text-xs uppercase tracking-[0.25em] text-saffron">{city.kicker}</p>
+          <div class="mt-2 flex items-baseline gap-4">
+            <h3 class="font-display text-4xl" lang="en">{city.name}</h3>
+            <span class="font-fa-display text-3xl text-crimson" lang="fa" dir="rtl">{city.fa}</span>
+          </div>
+          {city.text.map((p) => (
+            <p class="mt-4 text-sm leading-loose text-espresso/90">{p}</p>
+          ))}
+        </article>
+      ))}
+    </div>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {c.regions.map((r) => (
+        <div class="rounded-2xl border border-espresso/20 bg-card p-5" data-reveal>
+          <h4 class="font-display-lang text-xl">{r.name}</h4>
+          <p class="mt-2 text-xs leading-relaxed text-espresso/80">{r.note}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quality -->
+  <section class="px-4 pt-24">
+    <div class="relative mx-auto max-w-[1100px] overflow-hidden rounded-[2.5rem] bg-bitter px-8 py-16 text-canvas">
+      <Motif variant="medallion" class="pointer-events-none absolute -bottom-32 -start-32 h-96 w-96 text-canvas/[0.05]" />
+      <h2 class="font-display-lang text-center text-4xl" data-reveal>{c.qualityTitle}</h2>
+      <p class="mt-4 text-center text-sm text-canvas/70" data-reveal>{c.qualityIntro}</p>
+      <ol class="relative mx-auto mt-12 grid max-w-[900px] gap-10">
+        {c.quality.map((q, i) => (
+          <li class="grid grid-cols-[3rem_1fr] items-start gap-5" data-reveal>
+            <span class="font-display flex h-12 w-12 items-center justify-center rounded-full border border-saffron/50 text-xl text-saffron">
+              {(i + 1).toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}
+            </span>
+            <div>
+              <h3 class="font-display-lang text-2xl">{q.title}</h3>
+              <p class="mt-2 text-sm leading-loose text-canvas/80">{q.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Lexicon -->
+  <section class="mx-auto max-w-[1100px] px-6 pt-24">
+    <h2 class="font-display-lang text-center text-4xl" data-reveal>{c.lexiconTitle}</h2>
+    <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
+    <p class="mx-auto mt-6 max-w-xl text-center text-sm leading-relaxed text-espresso/80" data-reveal>
+      {c.lexiconIntro}
+    </p>
+    <div class="mt-14 columns-1 gap-10 md:columns-2 lg:columns-3">
+      {c.lexicon.map((w) => (
+        <div class="mb-10 break-inside-avoid text-center" data-reveal>
+          <span class="font-fa-display block text-3xl leading-relaxed text-crimson" lang="fa" dir="rtl">{w.fa}</span>
+          <span class="font-display mt-1 block text-lg tracking-wide" lang="en">{w.term}</span>
+          <span class="mx-auto mt-3 block h-px w-10 bg-saffron/60"></span>
+          <p class="mt-3 text-sm leading-loose text-espresso/85">{w.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[700px] px-6 py-20 text-center" data-reveal>
+    <p class="font-display-lang text-2xl leading-relaxed text-espresso">
+      {locale === "en"
+        ? "Now walk the collection with new eyes."
+        : "اکنون با چشمانی تازه در مجموعه قدم بزنید."}
+    </p>
+    <div class="mt-8">
+      <Button href={localizedPath(locale, "/products")} variant="primary">{ui.cta.viewCollection}</Button>
+    </div>
+  </section>
+</BaseLayout>

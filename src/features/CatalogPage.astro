@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FilterBar from "../components/FilterBar.astro";
+import RugCard from "../components/RugCard.astro";
+import Motif from "../components/Motif.astro";
+import { t, type Locale, type CategorySlug } from "../i18n/ui";
+import { getRugsWithFallback } from "../lib/rugs";
+
+interface Props {
+  locale: Locale;
+  category?: CategorySlug;
+}
+const { locale, category } = Astro.props;
+const ui = t(locale);
+
+const all = await getRugsWithFallback(locale);
+const rugs = category ? all.filter((r) => r.data.category === category) : all;
+const path = category ? `/categories/${category}` : "/products";
+const title = category ? ui.categories[category] : ui.catalog.title;
+---
+
+<BaseLayout
+  locale={locale}
+  path={path}
+  title={`${title} — ${ui.siteName}`}
+  description={ui.catalog.intro}
+>
+  <section class="mx-auto max-w-[1400px] px-6 pt-16 md:pt-20">
+    <h1 class="font-display-lang text-center text-5xl" data-reveal>{title}</h1>
+    <Motif variant="divider" class="mt-5 text-espresso/25" data-reveal />
+    <p class="mx-auto mt-5 max-w-xl text-center text-sm leading-relaxed text-espresso/80" data-reveal>
+      {ui.catalog.intro}
+    </p>
+    <p class="mt-3 text-center text-xs uppercase tracking-[0.25em] text-espresso/50" data-reveal>
+      {ui.catalog.piecesCount(rugs.length)}
+    </p>
+    <div class="mt-10">
+      <FilterBar locale={locale} activeCategory={category ?? "all"} />
+    </div>
+
+    {rugs.length === 0 ? (
+      <p class="py-24 text-center text-espresso/60">{ui.catalog.empty}</p>
+    ) : (
+      <div class="mt-14 grid gap-x-6 gap-y-14 pb-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {rugs.map((rug, i) => (
+          <RugCard rug={rug} locale={locale} loading={i < 4 ? "eager" : "lazy"} />
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

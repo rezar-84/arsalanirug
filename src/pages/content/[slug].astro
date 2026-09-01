@@ -1,0 +1,21 @@
+---
+import RugDetailPage from "../../features/RugDetailPage.astro";
+import { getRugs, rugSlug } from "../../lib/rugs";
+
+export async function getStaticPaths() {
+  const rugs = await getRugs("en");
+  return rugs.map((rug) => ({
+    params: { slug: rugSlug(rug) },
+    props: {
+      rug,
+      related: rugs
+        .filter((r) => r.id !== rug.id && r.data.category === rug.data.category)
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { rug, related } = Astro.props;
+---
+
+<RugDetailPage locale="en" rug={rug} related={related} />

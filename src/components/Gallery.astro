@@ -1,0 +1,228 @@
+---
+import { Picture, Image, getImage } from "astro:assets";
+import { t, type Locale } from "../i18n/ui";
+import type { Rug } from "../lib/rugs";
+
+interface Props {
+  rug: Rug;
+  locale: Locale;
+}
+const { rug, locale } = Astro.props;
+const ui = t(locale);
+
+// High-resolution variants for the zoom lightbox.
+const hiRes = await Promise.all(
+  rug.data.images.map((img) =>
+    getImage({ src: img, width: 2200, format: "webp", quality: 82 })
+  )
+);
+---
+
+<div class="flex flex-col gap-4" data-gallery data-hires={JSON.stringify(hiRes.map((h) => h.src))}>
+  {rug.data.images.map((img, i) => (
+    <button
+      type="button"
+      class="arch group relative block w-full cursor-zoom-in border border-espresso/25 bg-card"
+      data-gallery-slide={i}
+      data-lightbox-open={i}
+      hidden={i !== 0}
+      aria-label={ui.gallery.zoomHint}
+      data-reveal
+    >
+      <Picture
+        src={img}
+        widths={[600, 1000, 1600]}
+        sizes="(min-width: 1024px) 640px, 92vw"
+        formats={["avif", "webp"]}
+        alt={`${rug.data.title}${i > 0 ? ` — ${i + 1}` : ""}`}
+        loading={i === 0 ? "eager" : "lazy"}
+        class="w-full object-cover"
+      />
+      <span
+        class="pointer-events-none absolute bottom-4 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 rounded-[100px] border border-canvas/40 bg-bitter/60 px-4 py-1.5 text-xs text-canvas opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
+      >
+        {ui.gallery.zoomHint} ⊕
+      </span>
+    </button>
+  ))}
+  {rug.data.images.length > 1 && (
+    <div class="grid grid-cols-4 gap-3">
+      {rug.data.images.map((img, i) => (
+        <button
+          type="button"
+          data-gallery-thumb={i}
+          aria-label={`${i + 1}`}
+          class={`overflow-hidden rounded-2xl border transition-colors ${i === 0 ? "border-crimson" : "border-espresso/25 hover:border-crimson/60"}`}
+        >
+          <Image
+            src={img}
+            width={300}
+            alt=""
+            loading="lazy"
+            class="aspect-square w-full object-cover"
+          />
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+<!-- Zoom lightbox -->
+<div
+  id="lightbox"
+  hidden
+  class="fixed inset-0 z-[100] flex items-center justify-center bg-bitter/95"
+  role="dialog"
+  aria-modal="true"
+  aria-label={rug.data.title}
+>
+  <div id="lightbox-stage" class="h-full w-full touch-none overflow-hidden">
+    <img
+      id="lightbox-img"
+      src=""
+      alt={rug.data.title}
+      draggable="false"
+      class="h-full w-full select-none object-contain will-change-transform"
+      style="transform-origin: 0 0;"
+    />
+  </div>
+
+  <p class="pointer-events-none absolute bottom-5 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 whitespace-nowrap text-xs text-canvas/60">
+    {ui.gallery.zoomHelp}
+  </p>
+
+  <button
+    type="button"
+    data-lightbox-close
+    aria-label={ui.gallery.close}
+    class="absolute top-5 end-5 flex h-11 w-11 items-center justify-center rounded-[100px] border border-canvas/40 text-xl text-canvas transition-colors hover:bg-canvas hover:text-ink"
+  >✕</button>
+
+  {rug.data.images.length > 1 && (
+    <>
+      <button
+        type="button"
+        data-lightbox-nav="-1"
+        aria-label={ui.gallery.prev}
+        class="absolute left-5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[100px] border border-canvas/40 text-xl text-canvas transition-colors hover:bg-canvas hover:text-ink"
+      >‹</button>
+      <button
+        type="button"
+        data-lightbox-nav="1"
+        aria-label={ui.gallery.next}
+        class="absolute right-5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[100px] border border-canvas/40 text-xl text-canvas transition-colors hover:bg-canvas hover:text-ink"
+      >›</button>
+      <span id="lightbox-counter" class="absolute top-6 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 text-xs tracking-widest text-canvas/70" dir="ltr"></span>
+    </>
+  )}
+</div>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector("[data-gallery]");
+    if (!root) return;
+    const slides = [...root.querySelectorAll("[data-gallery-slide]")];
+    const thumbs = [...root.querySelectorAll("[data-gallery-thumb]")];
+    const hires = JSON.parse(root.dataset.hires || "[]");
+
+    const showSlide = (i) => {
+      slides.forEach((s, j) => (s.hidden = j !== i));
+      thumbs.forEach((b, j) => {
+        b.classList.toggle("border-crimson", j === i);
+        b.classList.toggle("border-espresso/25", j !== i);
+      });
+    };
+    thumbs.forEach((btn, i) => btn.addEventListener("click", () => showSlide(i)));
+
+    /* ---- lightbox with zoom & pan ---- */
+    const box = document.getElementById("lightbox");
+    const stage = document.getElementById("lightbox-stage");
+    const img = document.getElementById("lightbox-img");
+    const counter = document.getElementById("lightbox-counter");
+    let index = 0, scale = 1, tx = 0, ty = 0;
+    let dragging = false, moved = false, sx = 0, sy = 0;
+
+    const apply = () => {
+      img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+      img.style.cursor = scale > 1 ? (dragging ? "grabbing" : "grab") : "zoom-in";
+    };
+    const reset = () => { scale = 1; tx = 0; ty = 0; apply(); };
+    const clampPan = () => {
+      const w = stage.clientWidth, h = stage.clientHeight;
+      const maxX = Math.max(0, (scale - 1) * w), maxY = Math.max(0, (scale - 1) * h);
+      tx = Math.min(0, Math.max(-maxX, tx));
+      ty = Math.min(0, Math.max(-maxY, ty));
+    };
+
+    const show = (i) => {
+      index = (i + hires.length) % hires.length;
+      img.src = hires[index];
+      if (counter) counter.textContent = `${index + 1} / ${hires.length}`;
+      reset();
+    };
+    const open = (i) => {
+      box.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      show(i);
+    };
+    const close = () => {
+      box.hidden = true;
+      document.documentElement.style.overflow = "";
+      showSlide(index); // keep inline gallery in sync with where the viewer left off
+    };
+
+    root.querySelectorAll("[data-lightbox-open]").forEach((btn) =>
+      btn.addEventListener("click", () => open(Number(btn.dataset.lightboxOpen)))
+    );
+    box.querySelector("[data-lightbox-close]").addEventListener("click", close);
+    box.querySelectorAll("[data-lightbox-nav]").forEach((btn) =>
+      btn.addEventListener("click", () => show(index + Number(btn.dataset.lightboxNav)))
+    );
+
+    // Zoom toward a point (client coords), keeping that point stationary.
+    const zoomAt = (cx, cy, factor) => {
+      const next = Math.min(4, Math.max(1, scale * factor));
+      const r = stage.getBoundingClientRect();
+      const px = cx - r.left, py = cy - r.top;
+      tx = px - ((px - tx) / scale) * next;
+      ty = py - ((py - ty) / scale) * next;
+      scale = next;
+      if (scale === 1) { tx = 0; ty = 0; }
+      clampPan();
+      apply();
+    };
+
+    stage.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.2 : 1 / 1.2);
+    }, { passive: false });
+
+    stage.addEventListener("pointerdown", (e) => {
+      if (scale <= 1) return;
+      dragging = true; moved = false; sx = e.clientX - tx; sy = e.clientY - ty;
+      stage.setPointerCapture(e.pointerId);
+      apply();
+    });
+    stage.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      moved = true;
+      tx = e.clientX - sx; ty = e.clientY - sy;
+      clampPan(); apply();
+    });
+    stage.addEventListener("pointerup", () => { dragging = false; apply(); });
+    stage.addEventListener("click", (e) => {
+      // click toggles zoom on the image; a click on the dark backdrop closes.
+      // A drag that ends here is not a click.
+      if (moved) { moved = false; return; }
+      if (e.target !== img) { if (scale <= 1) close(); return; }
+      scale <= 1 ? zoomAt(e.clientX, e.clientY, 2.2) : reset();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (box.hidden) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") show(index - 1);
+      if (e.key === "ArrowRight") show(index + 1);
+    });
+  })();
+</script>
