@@ -52,11 +52,11 @@ Production deployment remains owner-approved.
 
 | Component | Responsibility | Owns (data) | Depends on |
 | --- | --- | --- | --- |
-| `src/pages/` + `src/pages/fa/` | thin locale routes | — | features |
+| `src/pages/` + locale route directories | thin locale routes | — | features |
 | `src/features/*.astro` | full page bodies shared by both locales | long-form heritage copy | components, lib, content |
 | `src/components/*.astro` | design-system pieces (Header, RugCard, Gallery, FilterBar, forms, CTAs) | — | i18n, lib |
 | `src/lib/rugs.ts`, `src/lib/whatsapp.ts` | collection queries, locale fallback, WhatsApp URL building | — | astro:content, i18n |
-| `src/i18n/ui.ts` | all UI strings (en+fa), locale metadata, contact constants | UI strings, contact details | — |
+| `src/i18n/ui.ts` | all UI strings, locale metadata, contact constants | UI strings, contact details | — |
 | `src/content/rugs/` | the catalog | rug entries | — |
 | `scripts/migrate.mjs` | one-off Drupal→collections migration | — | dump at `~/Documents/arsalani-rug`, sharp |
 

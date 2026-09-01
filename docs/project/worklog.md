@@ -19,6 +19,32 @@ last-reviewed: 2026-09-01
 - When this file gets long, move older entries to `worklog-archive/YYYY.md` and leave a
   pointer here. Do not truncate.
 
+## ARSA-020 — Add Russian, Arabic, and Chinese locales — 2026-09-01
+
+**Tier:** 2. **Request.** Add Russian, Arabic, and Chinese to the site's language options.
+
+**What was done.** Added UI dictionaries and locale metadata for `ru`, `ar`, and `zh`;
+added localized route trees; added Arabic RTL metadata; expanded locale stripping,
+alternate links, Open Graph locale mapping, and Astro's locale configuration. Long-form
+catalog and heritage content continues to use the existing English fallback.
+
+**Reviews.** Localisation: Pass with conditions — all core UI labels are present, but
+native-owner review is still appropriate for the new translations. Accessibility: Pass
+with conditions — Arabic uses the existing RTL layout path; native assistive-technology
+review was not performed. QA: Pass with conditions — static route generation and type
+checking are covered below.
+
+**Verification.** `npx astro check` — **Verified**, 0 errors (existing deprecation and
+unused-variable hints remain). `npm run build` — **Verified**, 406 pages built.
+`npm audit --audit-level=high` — **Verified**, 0 vulnerabilities. Route spot checks —
+**Verified**, `/ru`, `/ar`, and `/zh` build with `lang="ru"`, `lang="ar"`, and
+`lang="zh-CN"`; Arabic emits `dir="rtl"`. `git diff --check` — **Verified**, no
+whitespace errors. Format/lint/unit/integration/contract/accessibility/e2e stages —
+**Absent** from the charter command table.
+
+**Not done.** Native linguistic review of Russian, Arabic, and Chinese copy; translated
+long-form rug and heritage content.
+
 ## ARSA-018 — Replace main hero image — 2026-09-01
 
 **Tier:** 2. **Request.** Replace the current hero photo with the owner-provided

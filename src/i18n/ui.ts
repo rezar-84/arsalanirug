@@ -1,4 +1,4 @@
-export const locales = ["en", "fa", "tr", "es", "ja", "de"] as const;
+export const locales = ["en", "fa", "tr", "es", "ja", "de", "ru", "ar", "zh"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
@@ -9,6 +9,9 @@ export const localeMeta: Record<Locale, { dir: "ltr" | "rtl"; htmlLang: string; 
   es: { dir: "ltr", htmlLang: "es", label: "Español" },
   ja: { dir: "ltr", htmlLang: "ja", label: "日本語" },
   de: { dir: "ltr", htmlLang: "de", label: "Deutsch" },
+  ru: { dir: "ltr", htmlLang: "ru", label: "Русский" },
+  ar: { dir: "rtl", htmlLang: "ar", label: "العربية" },
+  zh: { dir: "ltr", htmlLang: "zh-CN", label: "中文" },
 };
 
 // Contact details carried over from the old site. The WhatsApp number is a
@@ -498,6 +501,84 @@ tr: {
     whatsappMessage: (title: string, sku: string, url: string) =>
       `Guten Tag, ich interessiere mich für "${title}" (Ref ${sku}) — ${url}`,
   },
+  ru: {
+    siteName: "Arsalani Rug",
+    siteTagline: "Роскошные персидские ковры ручной работы — семейное ремесло с 1866 года.",
+    nav: { home: "Главная", rugs: "Коллекция", history: "История", guide: "Гид по коврам", heritage: "Наше наследие", contact: "Контакты" },
+    categories: {
+      all: "Все ковры", "selected-available-rugs": "Избранные и доступные", "boutique-rugs": "Бутиковые ковры", "patch-work": "Пэчворк", oushak: "Ушак", "moshk-abad": "Мошк-Абаад", "new-moshk-abad": "Новый Мошк-Абад",
+    } satisfies Record<CategorySlug | "all", string>,
+    materials: { "full-silk": "Чистый шёлк", wool: "Шерсть", "silk-touch": "Шёлковый блеск" } satisfies Record<MaterialSlug, string>,
+    specs: { title: "Детали", sku: "Артикул", dimensions: "Размеры", origin: "Происхождение", material: "Материал", category: "Коллекция", colors: "Палитра", cm: "см" },
+    cta: { priceOnRequest: "Цена по запросу", inquire: "Узнать об этом ковре", whatsapp: "WhatsApp", call: "Позвонить нам", email: "Написать нам", viewCollection: "Смотреть коллекцию", viewRug: "Смотреть ковёр", readStory: "Наша история", allFilter: "Все", relatedRugs: "Вам также может понравиться" },
+    gallery: { zoomHint: "Нажмите, чтобы увеличить", close: "Закрыть", prev: "Предыдущее изображение", next: "Следующее изображение", zoomHelp: "Нажмите или прокрутите для увеличения · перетаскивайте для перемещения" },
+    home: {
+      featuredKicker: "Отобранная коллекция", categoriesKicker: "По коллекциям", heroKicker: "Кум · Кашан · Ушак", heroTitle: "Тканые реликвии",
+      heroText: "Шёлковые и шерстяные шедевры ручной работы из великих персидских мастерских — отобранные семьёй Арсалани, которая занимается этим ремеслом с 1866 года.",
+      featuredTitle: "Избранные изделия", categoriesTitle: "Коллекции", heritageTitle: "Семья ткачей с 1866 года",
+      heritageTeaser: "От Голамхоссейна Арсалани, родившегося в Кашане в 1866 году, до базаров Тегерана и Кума — пять поколений, посвящённых искусству персидского ковра.",
+      inquiryTitle: "Ищете особенный ковёр?", inquiryText: "Расскажите о желаемом размере, палитре и стиле — наша семья найдёт его или закажет для вас.",
+    },
+    catalog: { title: "Коллекция", intro: "Ковры ручной работы, каждый — уникальное произведение; размеры и происхождение указаны, цена по запросу.", empty: "Ковров, соответствующих выбору, нет.", filterMaterial: "Материал", piecesCount: (n: number) => n + " изделий" },
+    heritage: { title: "Наше наследие", intro: "Более века персидского коврового ремесла — от Кашана до всего мира." },
+    contactPage: { title: "Свяжитесь с нами", intro: "Посетите нас в исторических базарах Тегерана и Кума, а также в наших представительствах в Измире и Лос-Анджелесе — или напишите нам ниже.", locationsTitle: "Наши адреса", formTitle: "Отправить сообщение", name: "Имя", email: "Электронная почта", phone: "Телефон (необязательно)", message: "Сообщение", submit: "Отправить", thankYouTitle: "Спасибо", thankYouText: "Ваше сообщение отправлено. Мы скоро свяжемся с вами." },
+    locations: [{ city: "Тегеран, Иран", address: "Базар Буали-Сара, Большой базар Тегерана" }, { city: "Кум, Иран", address: "Базар Амджади-Сара, Кум" }, { city: "Измир, Турция", address: "мкр. Аташехир, Измир" }, { city: "Лос-Анджелес, США", address: "Лос-Анджелес, Калифорния" }],
+    footer: { tagline: "Персидские ковры ручной работы, созданные пережить нас всех.", rights: "Все права защищены.", navTitle: "Изучить", contactTitle: "Связаться" },
+    notFound: { title: "Страница не найдена", text: "Нить, по которой вы пришли, оборвалась. Позвольте проводить вас обратно.", backHome: "На главную" },
+    whatsappMessage: (title: string, sku: string, url: string) => "Здравствуйте, меня интересует «" + title + "» (арт. " + sku + ") — " + url,
+  },
+  ar: {
+    siteName: "سجاد أرسلاني",
+    siteTagline: "سجاد فارسي فاخر منسوج يدوياً — حرفة عائلية منذ عام 1866.",
+    nav: { home: "الرئيسية", rugs: "المجموعة", history: "التاريخ", guide: "دليل السجاد", heritage: "تراثنا", contact: "اتصل بنا" },
+    categories: {
+      all: "كل السجاد", "selected-available-rugs": "مختار ومتاح", "boutique-rugs": "سجاد فاخر", "patch-work": "رقع فنية", oushak: "أوشاك", "moshk-abad": "موشك آباد", "new-moshk-abad": "موشك آباد الجديد",
+    } satisfies Record<CategorySlug | "all", string>,
+    materials: { "full-silk": "حرير خالص", wool: "صوف", "silk-touch": "لمسة حريرية" } satisfies Record<MaterialSlug, string>,
+    specs: { title: "التفاصيل", sku: "المرجع", dimensions: "الأبعاد", origin: "المنشأ", material: "الخامة", category: "المجموعة", colors: "لوحة الألوان", cm: "سم" },
+    cta: { priceOnRequest: "السعر عند الطلب", inquire: "استفسر عن هذا السجاد", whatsapp: "واتساب", call: "اتصل بنا", email: "راسلنا", viewCollection: "شاهد المجموعة", viewRug: "شاهد السجادة", readStory: "اقرأ قصتنا", allFilter: "الكل", relatedRugs: "قد يعجبك أيضاً" },
+    gallery: { zoomHint: "انقر للتكبير", close: "إغلاق", prev: "الصورة السابقة", next: "الصورة التالية", zoomHelp: "انقر أو مرر للتكبير · اسحب للتحريك" },
+    home: {
+      featuredKicker: "اختيارنا", categoriesKicker: "تصفح حسب المجموعة", heroKicker: "قم · كاشان · أوشاك", heroTitle: "إرث منسوج",
+      heroText: "روائع من الحرير والصوف منسوجة يدوياً في أعظم دور النسيج الفارسية — اختارتها عائلة أرسلاني التي تعمل في هذه الحرفة منذ عام 1866.",
+      featuredTitle: "قطع مختارة", categoriesTitle: "المجموعات", heritageTitle: "عائلة من النساجين منذ عام 1866",
+      heritageTeaser: "من غلامحسين أرسلاني، المولود في كاشان عام 1866، إلى أسواق طهران وقم وما وراءهما — خمسة أجيال كرّست نفسها لفن السجاد الفارسي.",
+      inquiryTitle: "هل تبحث عن قطعة مميزة؟", inquiryText: "أخبرنا بالمقاس والألوان والأسلوب الذي تريده — وستبحث عائلتنا عنها أو تطلب نسجها لك.",
+    },
+    catalog: { title: "المجموعة", intro: "سجاد منسوج يدوياً، كل قطعة عمل فني فريدة — الأبعاد والمنشأ موضحان، والسعر عند الطلب.", empty: "لا توجد سجاد مطابق لهذا الاختيار.", filterMaterial: "الخامة", piecesCount: (n: number) => n + " قطع" },
+    heritage: { title: "تراثنا", intro: "أكثر من قرن من حرفة السجاد الفارسي، من كاشان إلى العالم." },
+    contactPage: { title: "اتصل بنا", intro: "تفضل بزيارتنا في أسواق طهران وقم التاريخية، أو في صالاتنا في إزمير ولوس أنجلوس — أو اكتب لنا أدناه.", locationsTitle: "مواقعنا", formTitle: "أرسل رسالة", name: "الاسم", email: "البريد الإلكتروني", phone: "الهاتف (اختياري)", message: "الرسالة", submit: "إرسال الرسالة", thankYouTitle: "شكراً لك", thankYouText: "تم إرسال رسالتك. سنتواصل معك قريباً." },
+    locations: [{ city: "طهران، إيران", address: "بازار بوعلي سرا، بازار طهران الكبير" }, { city: "قم، إيران", address: "بازار أمجدي سرا، قم" }, { city: "إزمير، تركيا", address: "حي أتا شهير، إزمير" }, { city: "لوس أنجلوس، الولايات المتحدة", address: "لوس أنجلوس، كاليفورنيا" }],
+    footer: { tagline: "سجاد فارسي منسوج يدوياً ليبقى أطول من أعمارنا جميعاً.", rights: "جميع الحقوق محفوظة.", navTitle: "استكشف", contactTitle: "تواصل معنا" },
+    notFound: { title: "الصفحة غير موجودة", text: "انقطع الخيط الذي اتبعته. دعنا نرشدك إلى طريق العودة.", backHome: "العودة إلى الرئيسية" },
+    whatsappMessage: (title: string, sku: string, url: string) => "مرحباً، أنا مهتم بـ «" + title + "» (المرجع " + sku + ") — " + url,
+  },
+  zh: {
+    siteName: "Arsalani 地毯",
+    siteTagline: "奢华手工波斯地毯——始于1866年的家族技艺。",
+    nav: { home: "首页", rugs: "地毯收藏", history: "历史", guide: "地毯指南", heritage: "家族传承", contact: "联系我们" },
+    categories: {
+      all: "全部地毯", "selected-available-rugs": "精选现货", "boutique-rugs": "精品地毯", "patch-work": "拼布地毯", oushak: "乌沙克", "moshk-abad": "莫什克·阿巴德", "new-moshk-abad": "新莫什克·阿巴德",
+    } satisfies Record<CategorySlug | "all", string>,
+    materials: { "full-silk": "纯丝", wool: "羊毛", "silk-touch": "丝质触感" } satisfies Record<MaterialSlug, string>,
+    specs: { title: "详细信息", sku: "编号", dimensions: "尺寸", origin: "产地", material: "材质", category: "系列", colors: "色彩", cm: "厘米" },
+    cta: { priceOnRequest: "价格请咨询", inquire: "咨询这款地毯", whatsapp: "WhatsApp", call: "致电我们", email: "发送邮件", viewCollection: "查看收藏", viewRug: "查看地毯", readStory: "阅读我们的故事", allFilter: "全部", relatedRugs: "您也可能喜欢" },
+    gallery: { zoomHint: "点击放大", close: "关闭", prev: "上一张", next: "下一张", zoomHelp: "点击或滚动缩放 · 拖动查看" },
+    home: {
+      featuredKicker: "精选作品", categoriesKicker: "按系列浏览", heroKicker: "库姆 · 卡尚 · 乌沙克", heroTitle: "织就的传家宝",
+      heroText: "来自伟大波斯织造工坊的手工丝绸与羊毛杰作——由自1866年传承这门技艺的Arsalani家族精心甄选。",
+      featuredTitle: "精选地毯", categoriesTitle: "地毯系列", heritageTitle: "始于1866年的织毯家族",
+      heritageTeaser: "从1866年出生于卡尚的Gholamhossein Arsalani，到德黑兰、库姆及更远的集市——五代人致力于波斯地毯艺术。",
+      inquiryTitle: "在寻找特别的地毯吗？", inquiryText: "告诉我们您心仪的尺寸、色彩和风格——我们家族会为您寻找或定制。",
+    },
+    catalog: { title: "地毯收藏", intro: "手工编织的地毯，每一件都是独一无二的作品——尺寸与产地已列明，价格请咨询。", empty: "没有符合此选择的地毯。", filterMaterial: "材质", piecesCount: (n: number) => n + " 件" },
+    heritage: { title: "家族传承", intro: "一个多世纪的波斯地毯技艺，从卡尚走向世界。" },
+    contactPage: { title: "联系我们", intro: "欢迎到访德黑兰和库姆的历史集市，以及我们在伊兹密尔和洛杉矶的展厅——也可以在下方留言。", locationsTitle: "我们的地址", formTitle: "发送消息", name: "姓名", email: "电子邮箱", phone: "电话（可选）", message: "留言", submit: "发送消息", thankYouTitle: "谢谢", thankYouText: "您的消息已发送，我们会尽快与您联系。" },
+    locations: [{ city: "伊朗·德黑兰", address: "布阿里商廊，德黑兰大巴扎" }, { city: "伊朗·库姆", address: "阿姆贾迪商廊，库姆" }, { city: "土耳其·伊兹密尔", address: "阿塔谢希尔区，伊兹密尔" }, { city: "美国·洛杉矶", address: "加利福尼亚州洛杉矶" }],
+    footer: { tagline: "手工编织的波斯地毯，愿它比我们每个人都长久。", rights: "版权所有。", navTitle: "探索", contactTitle: "联系方式" },
+    notFound: { title: "页面未找到", text: "您循着的线索已经松开，让我们带您回去。", backHome: "返回首页" },
+    whatsappMessage: (title: string, sku: string, url: string) => "您好，我对“" + title + "”（编号 " + sku + "）感兴趣——" + url,
+  },
 } as const;
 
 export function t(locale: Locale) {
@@ -511,7 +592,7 @@ export function localizedPath(locale: Locale, path: string): string {
 }
 
 export function stripLocale(currentPath: string): string {
-  const stripped = currentPath.replace(/^\/(fa|tr|es|ja|de)(\/|$)/, "/");
+  const stripped = currentPath.replace(/^\/(fa|tr|es|ja|de|ru|ar|zh)(\/|$)/, "/");
   return stripped === "" ? "/" : stripped;
 }
 
