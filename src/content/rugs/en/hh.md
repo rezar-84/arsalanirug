@@ -1,5 +1,5 @@
 ---
-title: "hh"
+title: "Chehelteke 2"
 sku: "s-8999"
 lengthCm: 225
 widthCm: 170

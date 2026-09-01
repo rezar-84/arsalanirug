@@ -1,5 +1,5 @@
 ---
-title: "bb"
+title: "Chehelteke"
 sku: "s-8559"
 lengthCm: 236
 widthCm: 182
