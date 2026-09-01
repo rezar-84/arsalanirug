@@ -172,6 +172,10 @@ records: `docs/project/reviews/ARSA-006-design.md` and
 
 ---
 
+## ARSA-022 (addendum, Tier 3) — 2026-09-01 — Owner feedback on the motif pass: removed the rosette from the hero image frame apex and the two arch motifs from the catalog title (both disliked); hero keeps the lachak spandrels + guard band. History timeline's bare S-curve reworked into a flowering eslimi vine — stem with alternating lanceolate leaves (with midribs), two curling tendrils, three buds, and a five-petal crimson blossom replacing the boteh node at each era ("update the line to better match the branch and leaf and flowers design in carpets"). Verified: astro check 0 errors, build exit 0 (406 pages), screenshot shows the vine with leaves/blossoms winding between eras.
+
+---
+
 ## ARSA-022 (Tier 3) — 2026-09-01 — More motifs + hero-frame ornament (owner: "add more motif also add some motifs to hero images frame"). `Motif.astro` gained `shamse` (16-ray sunburst), `star` (8-point khatam star), and `arch` (double mihrab outline). Hero image frame now carries a saffron rosette at the arch apex (seated on the border via a bitter plug), mirrored lachak spandrels at the foot, and a guard band beneath; the hero panel's second background medallion became a shamse. Star pair added to the home heritage band corners; faint arch pair flanks the catalog title (lg+). Owner-provided hero image and link untouched. Verified: astro check 0 errors, build exit 0 (406 pages), screenshot confirms frame ornaments and shamse.
 
 ---
