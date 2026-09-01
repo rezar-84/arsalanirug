@@ -172,6 +172,10 @@ records: `docs/project/reviews/ARSA-006-design.md` and
 
 ---
 
+## ARSA-024 (addendum, Tier 3) — 2026-09-01 — Owner: hero's lower-right corner motif and the under-frame motif "not good". Replaced the bottom-end shamse sunburst with the soft medallion (now mirroring the top-start corner) and removed the guard band beneath the hero image frame; the lachak spandrels stay. Verified: build exit 0, screenshot shows matched corner medallions and a clean area under the frame.
+
+---
+
 ## ARSA-024 (Tier 3) — 2026-09-01 — Owner: home "Selected Pieces" should mostly show the boutique classics. HomePage showcase logic reworked: five slots go to boutique-rugs (featured first, then by order), one slot to a featured piece from the rest for variety; the hero rug is excluded by slug so it never repeats in the grid. Verified: build exit 0; home now shows 5 boutique cards (Ghaliche Kork, Lachak Torang, Kashan Old Manchester Pashm, Malayer Boteh, Shiraz Gabbeh) + 1 Patchwork.
 
 ---
