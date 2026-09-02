@@ -29,7 +29,7 @@ table, so it cannot drift.
 | Framework(s) | Astro 7 (static output, built-in i18n) + Tailwind CSS 4 (`@tailwindcss/vite`) |
 | Data store(s) | none — content lives in Astro content collections (`src/content/rugs/{en,fa}/*.md`) |
 | Auth | none — public site, no accounts |
-| Hosting | Cloudflare Workers Static Assets (build `npm run build`, assets `./dist`, Node 22) |
+| Hosting | Dokploy / Docker (multi-stage build `npm run build`, `nginx:alpine` on port 80) |
 | CI | none yet |
 | Test tooling | none yet — verification is `astro check` + `astro build` (see Commands) |
 

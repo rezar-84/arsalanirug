@@ -48,6 +48,7 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status | Completed |
 | --- | --- | --- | --- | --- | --- | --- |
+| ARSA-026 | Dokploy deploy setup: multi-stage Dockerfile (Node 22 + Nginx alpine), nginx.conf caching/routing, .dockerignore | 2 | devops-sre | — | Done | 2026-09-02 |
 | ARSA-025 | Multi-brand + multi-region architecture, catalog filter upgrade, houses/region strips, size guide | 2 | architect | — | Done | 2026-09-01 |
 | ARSA-023 | Contact overhaul: remove Tehran/Qom, add Toronto (Richmond Hill) + tel +1 647-879-5149, all locales + schema + llms | 1 | product-manager | — | Done | 2026-09-01 |
 | ARSA-002 | WhatsApp/phone placeholder — resolved by ARSA-023 with the owner-provided Toronto line (confirm it is the WhatsApp line, see A6) | 1 | product-manager | — | Done | 2026-09-01 |

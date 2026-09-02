@@ -43,9 +43,9 @@ Visitor ─► page ─► WhatsApp deep link / tel: / mailto:
               └─► <form POST> ─► api.web3forms.com ─► info@arsalanirug.com
 ```
 
-Deploy target: Cloudflare Workers Static Assets (`npm run build`, then `npx wrangler
-deploy`, with `assets.directory` set to `./dist`), selected by the owner 2026-09-01.
-The `wrangler.jsonc` file is the repository source of truth for the Worker asset boundary.
+Deploy target: Dokploy containerized static hosting via multi-stage `Dockerfile`
+(`node:22-alpine` runs `npm run build`, output served by `nginx:alpine` on port 80 with
+clean URL routing, gzip compression, and caching headers), selected 2026-09-02.
 Production deployment remains owner-approved.
 
 ## Components

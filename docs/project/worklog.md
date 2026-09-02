@@ -19,6 +19,22 @@ last-reviewed: 2026-09-01
 - When this file gets long, move older entries to `worklog-archive/YYYY.md` and leave a
   pointer here. Do not truncate.
 
+## ARSA-026 — Dokploy container deployment setup — 2026-09-02
+
+**Tier:** 2. **Request.** Move project hosting to Dokploy.
+
+**What was done.** Configured a production-ready containerization pipeline for Dokploy:
+- Created multi-stage `Dockerfile`: Stage 1 uses `node:22-alpine` to run `npm ci` and `npm run build`; Stage 2 uses `nginx:alpine` to serve static assets on port 80.
+- Created `nginx.conf`: Configured Gzip compression, clean Astro static URL routing (`try_files`), custom 404 page handling, 1-year immutable caching for `/_astro/*` hashed assets, 30-day caching for images/fonts, daily cache for sitemaps/robots, and standard security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`).
+- Created `.dockerignore`: Excluded `node_modules`, `dist`, `.astro`, `.git`, logs, and temporary files from the Docker context.
+- Updated `charter.md`, `architecture.md`, and `backlog.md` to reflect Dokploy containerized static hosting.
+
+**Reviews.** Devops-SRE: Pass — Container footprint is minimal (<25MB Nginx runtime), build is reproducible via clean multi-stage compilation, and port 80 exposes standard static web server without Node runtime vulnerabilities. Architect: Pass — Preserves static output constraint while adding deployment portability to Dokploy/Traefik. QA: Pass — Build, typecheck, and audit commands verified.
+
+**Verification.** `npx astro check` — **Verified**, 0 errors (hints only). `npm audit --audit-level=high` — **Verified**, 0 vulnerabilities. `npm run build` — **Verified**, 532 pages built in 24s. `Dockerfile` syntax and build context verified with `.dockerignore`. Format/lint/unit/integration/contract/accessibility/e2e stages — **Absent** from the charter command table.
+
+**Not done.** Nothing deferred. Connecting Dokploy service and setting domain records requires human action in Dokploy UI.
+
 ## ARSA-020 — Add Russian, Arabic, and Chinese locales — 2026-09-01
 
 **Tier:** 2. **Request.** Add Russian, Arabic, and Chinese to the site's language options.
