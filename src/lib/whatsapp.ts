@@ -1,6 +1,6 @@
 import { contact, t, type Locale } from "../i18n/ui";
 
-export function whatsappUrl(locale: Locale, message?: string): string {
+export function whatsappUrl(_locale?: Locale, message?: string): string {
   const base = `https://wa.me/${contact.whatsapp}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }

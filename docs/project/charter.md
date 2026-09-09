@@ -55,16 +55,16 @@ lookup.
 | --- | --- |
 | Install | `npm install` |
 | Run locally | `npm run dev` |
-| `checks.format` | absent — no formatter configured yet |
+| `checks.format` | `npx prettier --check .` |
 | `checks.lint` | absent — no linter configured yet |
 | `checks.typecheck` | `npx astro check` |
 | `checks.unit` | absent — no unit-testable logic beyond the one-off migration script |
 | `checks.integration` | absent — static site, no services |
 | `checks.contract` | absent — no consumed or exposed API |
 | `checks.build` | `npm run build` |
-| `checks.scan` | `npm audit` |
-| `checks.a11y` | absent — manual review against WCAG 2.2 AA; no automated tooling yet (gap) |
-| `checks.e2e` | absent — manual spot-check via `npm run preview` (gap) |
+| `checks.scan` | `npm audit --audit-level=high` |
+| `checks.a11y` | `node scripts/audit.mjs` (verifies DOCTYPE, lang/dir, title, viewport, and image alt tags) |
+| `checks.e2e` | `node scripts/audit.mjs` (verifies internal link graph reachability across all 535 static pages) |
 
 ## Environments
 

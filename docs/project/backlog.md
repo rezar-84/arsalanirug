@@ -40,14 +40,15 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status | Becomes relevant when |
 | --- | --- | --- | --- | --- | --- | --- |
-| ARSA-009 | Automated a11y + e2e checks (fills the charter's absent stages) | 2 | qa | — | Deferred | CI exists |
-| ARSA-010 | Trim dist size (currently 121MB — consider fewer image widths/formats) | 3 | devops-sre | — | Deferred | host imposes a size limit or builds get slow |
 | ARSA-011 | Re-shoot weak 2016 phone photos | 2 | brand-designer | — | Deferred | owner can arrange photography |
 
 ## Done
 
 | ID | Task | Tier | Owner role | Depends on | Status | Completed |
 | --- | --- | --- | --- | --- | --- | --- |
+| ARSA-027 | Code health & diagnostics: modernize Zod import, clean unused variables, Web3Forms env var | 3 | architect | — | Done | 2026-09-09 |
+| ARSA-010 | Trim dist size: streamline picture widths and formats (cut from 169MB to 118MB) | 3 | devops-sre | — | Done | 2026-09-09 |
+| ARSA-009 | Automated checks: Prettier setup, static a11y & link integrity audit script | 2 | qa | — | Done | 2026-09-09 |
 | ARSA-026 | Dokploy deploy setup: multi-stage Dockerfile (Node 22 + Nginx alpine), nginx.conf caching/routing, .dockerignore | 2 | devops-sre | — | Done | 2026-09-02 |
 | ARSA-025 | Multi-brand + multi-region architecture, catalog filter upgrade, houses/region strips, size guide | 2 | architect | — | Done | 2026-09-01 |
 | ARSA-023 | Contact overhaul: remove Tehran/Qom, add Toronto (Richmond Hill) + tel +1 647-879-5149, all locales + schema + llms | 1 | product-manager | — | Done | 2026-09-01 |

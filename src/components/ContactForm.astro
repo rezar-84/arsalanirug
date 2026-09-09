@@ -7,9 +7,12 @@ interface Props {
 const { locale } = Astro.props;
 const ui = t(locale);
 
-// Web3Forms public access key — replace the placeholder after registering
+// Web3Forms public access key — read from env or replace after registering
 // info@arsalanirug.com at https://web3forms.com (free). See README "Open items".
-const WEB3FORMS_KEY = "REPLACE-WITH-WEB3FORMS-ACCESS-KEY";
+const WEB3FORMS_KEY =
+  import.meta.env.PUBLIC_WEB3FORMS_KEY ||
+  import.meta.env.WEB3FORMS_KEY ||
+  "REPLACE-WITH-WEB3FORMS-ACCESS-KEY";
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "";
 const redirect = `${site}${localizedPath(locale, "/thank-you")}`;
 

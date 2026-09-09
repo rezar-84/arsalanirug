@@ -29,9 +29,9 @@ const guestBrand = rug.data.brand !== "arsalani" ? brandBySlug(rug.data.brand) :
     <div class="arch border border-espresso/25 bg-card transition-colors duration-500 group-hover:border-crimson/50">
       <Picture
         src={rug.data.images[0]}
-        widths={[400, 800]}
+        widths={[380, 720]}
         sizes="(min-width: 1280px) 320px, (min-width: 640px) 45vw, 90vw"
-        formats={["avif", "webp"]}
+        formats={["webp"]}
         alt={rug.data.title}
         loading={loading}
         class="aspect-[3/4] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"

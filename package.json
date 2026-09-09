@@ -10,6 +10,11 @@
     "build": "node scripts/generate-llms-full.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check:types": "astro check",
+    "check:audit": "node scripts/audit.mjs",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "test": "npm run check:types && npm run check:audit",
     "migrate": "node scripts/migrate.mjs"
   },
   "dependencies": {
@@ -24,6 +29,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^1.0.0",
     "sharp": "^0.35.4",
     "typescript": "^6.0.3"
   }

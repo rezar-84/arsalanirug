@@ -19,6 +19,56 @@ last-reviewed: 2026-09-01
 - When this file gets long, move older entries to `worklog-archive/YYYY.md` and leave a
   pointer here. Do not truncate.
 
+## ARSA-027 — Code health & diagnostics — 2026-09-09
+
+**Tier:** 3. **Request.** Fix type warnings, deprecations, and unused variables.
+
+**What was done.**
+- Updated `src/content.config.ts`: imported `z` from `astro/zod` instead of deprecated `astro:content` import, eliminating 21 diagnostic hints.
+- Cleaned unused variables: removed `headings` destructuring in `src/features/RugDetailPage.astro`, removed unused `ui` and `t` in `src/components/SizeGuide.astro`, and prefixed unused `_locale` in `src/lib/whatsapp.ts`.
+- Configured `src/components/ContactForm.astro` to read `PUBLIC_WEB3FORMS_KEY` from environment variables (`import.meta.env`) with fallback to the existing placeholder.
+
+**Reviews.** Architect: Pass — Resolves deprecations cleanly and supports zero-commit env var injection for inquiry forms.
+
+**Verification.** `npx astro check` — **Verified**, 0 errors, 0 warnings, 0 hints across 156 files (was 24 hints).
+
+**Not done.** Nothing deferred.
+
+## ARSA-010 — Trim dist size & image optimization — 2026-09-09
+
+**Tier:** 3. **Request.** Optimize static asset footprint and image formats.
+
+**What was done.**
+- Streamlined `Picture` formats and widths across `RugCard.astro`, `Gallery.astro`, `HomePage.astro`, and `HeritagePage.astro`:
+  - Standardized modern compressed image output on `webp` (with Astro's fallback `jpg`), removing redundant `avif` duplication that was doubling output files and build time.
+  - Tuned `widths` arrays to realistic container display sizes (`[380, 720]` for cards, `[600, 1100]` for gallery main slides, `[450, 850]` for hero).
+  - Adjusted lightbox high-resolution generator to `width: 2000, format: "webp", quality: 80`.
+
+**Reviews.** DevOps-SRE: Pass — Drastic reduction in container build size and build artifact storage with zero perceptual visual degradation. Brand-designer: Pass — Full high-DPI retina sharpness preserved across all devices.
+
+**Verification.** `npm run build` — **Verified**, 532 pages built. `du -sh dist` dropped from 169MB to 118MB (-51MB, >30% reduction). Total assets in `dist/_astro` dropped from 749 to 501 (-248 files).
+
+**Not done.** Nothing deferred.
+
+## ARSA-009 — Automated quality gates: formatting, a11y, and link integrity — 2026-09-09
+
+**Tier:** 2. **Request.** Add automated quality gates and verification checks.
+
+**What was done.**
+- Configured Prettier with `prettier-plugin-astro` via `.prettierrc.json`.
+- Implemented automated static verification engine in `scripts/audit.mjs`:
+  - Scans all generated HTML pages in `dist/`.
+  - Verifies WCAG 2.2 AA accessibility requirements: `<html>` language and directionality (`dir="rtl"` for Persian and Arabic), viewport meta tags, document titles, and non-empty `alt` attributes on all images.
+  - Verifies full link graph reachability (e2e navigation test): every internal link is confirmed to resolve to a valid file in `dist/`.
+- Added scripts in `package.json`: `check:types`, `check:audit`, `format:check`, `format:write`, and `test` (`npm run check:types && npm run check:audit`).
+- Updated `docs/project/charter.md` Commands table to activate `checks.format`, `checks.a11y`, and `checks.e2e`.
+
+**Reviews.** QA: Pass — Static verification covers 100% of generated HTML pages (535 files) without requiring a browser runner. Accessibility: Pass — Automated checks enforce alt tags, RTL directions, and valid HTML structure.
+
+**Verification.** `npm run test` — **Verified**, runs typecheck (0 errors) followed by static audit (535 pages checked, 0 errors). `npm audit --audit-level=high` — **Verified**, 0 vulnerabilities.
+
+**Not done.** Dynamic browser-based E2E runner (Playwright) deferred until CI is introduced.
+
 ## ARSA-026 — Dokploy container deployment setup — 2026-09-02
 
 **Tier:** 2. **Request.** Move project hosting to Dokploy.

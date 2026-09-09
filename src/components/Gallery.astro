@@ -13,7 +13,7 @@ const ui = t(locale);
 // High-resolution variants for the zoom lightbox.
 const hiRes = await Promise.all(
   rug.data.images.map((img) =>
-    getImage({ src: img, width: 2200, format: "webp", quality: 82 })
+    getImage({ src: img, width: 2000, format: "webp", quality: 80 })
   )
 );
 ---
@@ -31,9 +31,9 @@ const hiRes = await Promise.all(
     >
       <Picture
         src={img}
-        widths={[600, 1000, 1600]}
+        widths={[600, 1100]}
         sizes="(min-width: 1024px) 640px, 92vw"
-        formats={["avif", "webp"]}
+        formats={["webp"]}
         alt={`${rug.data.title}${i > 0 ? ` — ${i + 1}` : ""}`}
         loading={i === 0 ? "eager" : "lazy"}
         class="w-full object-cover"

@@ -23,7 +23,7 @@ const path = `/content/${slug}`;
 const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://arsalanirug.com";
 const canonicalUrl = `${site}${localizedPath(locale, path)}`;
 
-const { Content, headings } = await render(rug);
+const { Content } = await render(rug);
 const hasBody = rug.body && !/^\s*(<!--.*-->)?\s*$/s.test(rug.body);
 
 const description = `${rug.data.title} — ${formatDimensions(rug, locale)} ${ui.specs.cm}. ${ui.cta.priceOnRequest}.`;
