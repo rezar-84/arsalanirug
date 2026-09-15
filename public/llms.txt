@@ -17,7 +17,7 @@ Arabic (/ar/, RTL), and Chinese (/zh/).
 
 - [The Collection](https://arsalanirug.com/products): all rugs, filterable by material
 - [Categories](https://arsalanirug.com/categories/boutique-rugs): boutique-rugs,
-  oushak, moshk-abad, new-moshk-abad, patch-work, selected-available-rugs
+  oushak, moshk-abad, new-moshk-abad, selected-available-rugs
 - Individual rugs live at /content/<slug>, e.g.
   [Qom Lachak Torang Gerd](https://arsalanirug.com/content/arsalani-qom-lachak-torang-gerd)
 - Specialties: Qom silk (zarcharak and zaronim sizes, silk warp), Kashan old
