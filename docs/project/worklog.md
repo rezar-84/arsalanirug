@@ -19,6 +19,206 @@ last-reviewed: 2026-09-01
 - When this file gets long, move older entries to `worklog-archive/YYYY.md` and leave a
   pointer here. Do not truncate.
 
+## ARSA-030 — Bring `checks.format` green
+
+**Date:** 2026-09-16 **Tier:** 3
+**Status:** Done
+**Branch/commits:** working tree on `main`, alongside the ARSA-028 review fixes
+
+### What changed
+
+Added `.prettierignore` and ran `npm run format:write`. 63 code files reformatted
+(`src/`, `scripts/`, `astro.config.mjs`, `wrangler.jsonc`). `npx prettier --check .` now
+passes, so the charter's first check stage is a real gate for the first time.
+
+### Why
+
+The backlog offered two routes — reformat everything, or narrow the check's scope. Both
+were used, deliberately: the check now covers code, and `.prettierignore` excludes
+`dist/`, `node_modules/`, `.claude/` (harness-owned) and all Markdown. Reformatting the
+Markdown meant rewriting 55 `docs/` files whose tables come from the shared SDLC kit in
+`DevOps/ai-sdlc-template` — that would create drift against upstream and churn every
+review and worklog entry on each pass, for no gain: prose is reviewed by the copywriter
+and localisation roles, not by Prettier. Narrowing here is the kit's "fix the check as
+its own tracked item with its own justification", not a check loosened to make something
+pass — nothing was failing on it.
+
+### Verified
+
+- [x] `checks.format` — Verified — `npx prettier --check .`: "All matched files use
+  Prettier code style!" (was 180 files failing)
+- [ ] `checks.lint` / `checks.unit` / `checks.integration` / `checks.contract` —
+  **Absent** — none configured (charter)
+- [x] `checks.typecheck` — Verified — `npx astro check`: 0 errors, 0 warnings, 0 hints
+- [x] `checks.build` — Verified — `npm run build`: exit 0, 478 pages
+- [x] `checks.scan` — Verified — `npm audit --audit-level=high`: 0 vulnerabilities
+- [x] `checks.a11y` / `checks.e2e` — Verified — `node scripts/audit.mjs`: 503 pages,
+  0 errors
+- [x] manual — re-served `dist/` through `nginx:1.27-alpine` + `nginx.conf`: `/`,
+  `/products/`, `/categories/boutique-rugs/`, `/content/oushak/` all 200 with their own
+  titles; the ARSA-028 redirects still 301 to the locale's `/products`;
+  `/this-does-not-exist` still 404
+
+**On the output diff.** Every built page's hash changed, so it was checked rather than
+assumed. Reformatting `src/styles/global.css` gives the CSS bundle a new content hash,
+which appears in every page's `<link>`: diffing four representative pages (home, /about,
+a rug page, `/fa/products`) with the CSS filename normalised showed them **identical**.
+The remaining delta is HTML whitespace from reformatting `.astro` templates; the codebase
+has no whitespace-sensitive rendering (no `<pre>`, no `white-space` rule anywhere in
+`src/`), and the structural metrics all match the pre-format measurements — one `<h1>` per
+real page, canonical on 503/503, `noindex` on exactly the 25 stubs + 9 thank-you + 404,
+no duplicate titles within a locale except the noindex stubs, 7 showcase links and 4
+category pills on the home page, 7 images with full `alt` on a rug page, same 46 KB page
+weight and still 0 KB of external JavaScript. `sitemap-0.xml` and `robots.txt` are
+byte-identical.
+
+### Not done
+
+Nothing deferred. `docs/` and `.claude/` are ignored by design, recorded above and in the
+comments in `.prettierignore`.
+
+### Discovered
+
+Nothing new.
+
+### Decisions
+
+`checks.format` covers code only. Recorded here rather than in an ADR: it is a tooling
+scope decision, reversible by deleting two lines from `.prettierignore`.
+
+### Reviews
+
+Tier 3 — no role review. The change is mechanical and its effect on the built output was
+verified above.
+
+## ARSA-028 — Remove the patchwork rugs and category
+
+**Date:** 2026-09-16 **Tier:** 1
+**Status:** Done
+**Branch/commits:** `chore/ARSA-028-remove-patchwork` / `1b94af6..9e3d235`, plus the
+review-fix commit on `main`
+
+### What changed
+
+The owner asked for the patchwork pieces to come off the catalog. Four rugs went:
+`aa` (s-6911), `bb` "Chehelteke" (s-8559), `hh` "Chehelteke 2" (s-8999) and
+`colorful-patch-work` (ZD032-131) — EN and FA entries plus their photographs. The
+`patch-work` category went with them: out of `categorySlugs` and out of the category
+labels in all nine locales, so its index page stops being generated everywhere. Catalog:
+32 rugs → 28.
+
+The ship review (`reviews/ARSA-028-ship.md`) returned **Block** on that, and the fixes
+that cleared it are part of this item:
+
+- The 45 withdrawn URLs now redirect instead of disappearing — `astro.config.mjs` emits
+  stubs for any host, and `nginx.conf` answers with real `301`s to the locale's
+  `/products`.
+- `nginx.conf` no longer falls back to `/index.html`, so an unknown path is a real 404
+  with the real 404 page. It used to answer **200 with the homepage**.
+- Categories with no entries stop publishing: routes come from
+  `getPopulatedCategories()` (`src/lib/rugs.ts`) rather than the full `categorySlugs`.
+  That retired nine empty, orphaned `selected-available-rugs` index pages that predate
+  this work, and it reverses itself the moment an entry lands in that category.
+- `scripts/migrate.mjs` emits slugs that are actually members of `categorySlugs`, and
+  drops "patch work" products rather than refiling them.
+
+### Why
+
+Removing the entries alone would have left the old Drupal aliases — which this site
+deliberately mirrors (`astro.config.mjs`) — resolving to nothing. Withdrawing a product
+is a decision about the catalog; discarding the URL's history is not, and was not asked
+for.
+
+`getPopulatedCategories()` was chosen over deleting `selected-available-rugs` from
+`categorySlugs` because whether that category gets filled is the owner's call (U2, the
+open stock check). Empty means unpublished, not deleted.
+
+### Verified
+
+- [x] `checks.format` — Verified — red at the time of this entry (180 files, all
+  pre-existing); brought green immediately afterwards by ARSA-030, and
+  `npx prettier --check .` now reports "All matched files use Prettier code style!"
+- [ ] `checks.lint` — **Absent** — no linter configured (charter)
+- [x] `checks.typecheck` — Verified — `npx astro check`: 156 files, 0 errors, 0 warnings,
+  0 hints
+- [ ] `checks.unit` — **Absent** — no unit suite (charter)
+- [ ] `checks.integration` — **Absent** — static site, no services (charter)
+- [ ] `checks.contract` — **Absent** — no consumed or exposed API (charter)
+- [x] `checks.build` — Verified — `npm run build`: exit 0, 478 pages + 25 redirect stubs
+- [x] `checks.scan` — Verified — `npm audit --audit-level=high`: 0 vulnerabilities
+- [x] `checks.a11y` — Verified — `node scripts/audit.mjs`: 503 pages, 0 errors
+- [x] `checks.e2e` — Verified — same run; every internal link resolves, none points at a
+  withdrawn URL
+- [x] manual — served `dist/` through the project's own `nginx:1.27-alpine` +
+  `nginx.conf` in Docker and probed the real HTTP responses, before and after:
+
+```
+before                                    after
+/content/aa                 200 homepage  → 301 /products
+/categories/patch-work      200 homepage  → 301 /products
+/fa/categories/patch-work   200 homepage  → 301 /fa/products
+/zh/.../selected-available  200 page      → 301 /zh/products
+/this-does-not-exist        200 homepage  → 404 "Page not found — Arsalani Rug"
+```
+
+  Also checked the built output directly: no withdrawn URL in `sitemap-0.xml`, every stub
+  `noindex` with a canonical to its locale's `/products`, one `<h1>` per real page, zero
+  duplicate titles within any locale, hreflang complete and reciprocal.
+
+### Not done
+
+- `checks.format` left red. A repo-wide reformat would have buried this diff in 180
+  unrelated files → ARSA-030
+- The `main` branch is **not pushed** — `git push` fails with
+  `Permission denied (publickey)`; `ssh-add -l` reports no identities. Needs the owner's
+  key → ARSA-028 stays here until it lands on `origin`
+- The rollback (`git revert -m 1 9e3d235`) is verified as *possible* — the deleted image
+  blobs are intact at `9e3d235^1` — but was not executed
+
+### Discovered
+
+- **`nginx.conf` answered every unknown URL with 200 and the homepage.**
+  `try_files $uri $uri/ $uri.html /index.html =404` reaches `/index.html` before `=404`,
+  so the `error_page 404` below it was unreachable and the custom 404 page had never been
+  served to anyone. Pre-existing since ARSA-026; found by running the container, not by
+  reading the config. Fixed here.
+- **Nine orphaned `selected-available-rugs` pages.** 0 rugs, 0 inbound internal links,
+  in the sitemap, rendering "0 pieces". Pre-existing. Fixed here.
+- **"in the trade since 1866" does not trace to `docs/source-copy.md`**, which gives 1866
+  as Gholamhossein Arsalani's *birth* year and **1910** as the founding of the weaving
+  business. The site's own `llms.txt:44` states it correctly. It appears on 486 pages, in
+  all nine locales. **Not fixed** — the owner may have grounds the source does not record,
+  and inventing a replacement date would repeat the error. Logged as claim C2 →
+  ARSA-029
+- `scripts/migrate.mjs` emitted three category slugs that are not members of
+  `categorySlugs`, so the charter's claim that the Drupal migration is "re-runnable from
+  the preserved dump" was false. Fixed here.
+- Risk R4 (`sharp` high-severity audit finding) is stale — `npm audit --audit-level=high`
+  now reports 0. Row closed.
+
+### Decisions
+
+Withdrawn catalog URLs redirect to the locale's `/products` rather than 410. No ADR: it
+applies the redirect policy already set at `astro.config.mjs` for `/gallery`, `/news` and
+`/boutique-rugs`, rather than deciding anything new.
+
+An empty category is unpublished, not deleted — the slug stays in `categorySlugs` so the
+owner's intent survives, and the route returns on its own when an entry appears.
+
+### Assumptions used
+
+A4 (the heritage dates are accurate and approved) is now partly contradicted by the
+source for the 1866 trade claim — see C2. U2 (which rugs are actually in stock) is why
+`selected-available-rugs` was unpublished rather than removed; if the owner fills it, the
+category and its nine pages come back with no code change.
+
+### Reviews
+
+Ship review — `reviews/ARSA-028-ship.md`. Blocked on seo #5 (S2, 45 URLs with no
+redirect map); the owner chose to fix rather than waive. Re-review recorded in that file.
+No design review was held — the work was executed before it was classified as Tier 1,
+which is itself recorded as finding #1 there.
+
 ## ARSA-027 — Code health & diagnostics — 2026-09-09
 
 **Tier:** 3. **Request.** Fix type warnings, deprecations, and unused variables.

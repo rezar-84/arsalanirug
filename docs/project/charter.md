@@ -64,7 +64,7 @@ lookup.
 | `checks.build` | `npm run build` |
 | `checks.scan` | `npm audit --audit-level=high` |
 | `checks.a11y` | `node scripts/audit.mjs` (verifies DOCTYPE, lang/dir, title, viewport, and image alt tags) |
-| `checks.e2e` | `node scripts/audit.mjs` (verifies internal link graph reachability across all 535 static pages) |
+| `checks.e2e` | `node scripts/audit.mjs` (verifies internal link graph reachability across every built page) |
 
 ## Environments
 

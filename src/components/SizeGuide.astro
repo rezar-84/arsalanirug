@@ -60,7 +60,10 @@ const W = 400 + PAD * 2 + 150; // room for edge labels
             fill-opacity="0.5"
             dominant-baseline="hanging"
           >
-            {s2.w} × {s2.h} cm · <tspan style="font-family: var(--font-fa-display); font-size: 12px;">{s2.fa}</tspan>
+            {s2.w} × {s2.h} cm ·{" "}
+            <tspan style="font-family: var(--font-fa-display); font-size: 12px;">
+              {s2.fa}
+            </tspan>
           </text>
         </g>
       );

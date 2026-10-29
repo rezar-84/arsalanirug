@@ -27,7 +27,8 @@
 
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Cormorant Variable", Georgia, serif;
-  --font-fa: "Vazirmatn", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-fa:
+    "Vazirmatn", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-fa-display: "Amiri", "Vazirmatn", Georgia, serif;
 }
 
@@ -47,10 +48,13 @@
 
   /* Japanese: extend the stacks with the platform's JP faces (no webfont). */
   html[lang="ja"] {
-    font-family: "Inter Variable", "Hiragino Sans", "Yu Gothic", "Meiryo", ui-sans-serif, sans-serif;
+    font-family:
+      "Inter Variable", "Hiragino Sans", "Yu Gothic", "Meiryo", ui-sans-serif,
+      sans-serif;
   }
   html[lang="ja"] .font-display-lang {
-    font-family: "Cormorant Variable", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+    font-family:
+      "Cormorant Variable", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
   }
 
   ::selection {
@@ -88,7 +92,9 @@
 .js-reveal [data-reveal] {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 .js-reveal [data-reveal].is-visible {
   opacity: 1;

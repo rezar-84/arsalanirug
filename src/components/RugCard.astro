@@ -13,7 +13,8 @@ interface Props {
 const { rug, locale, loading = "lazy" } = Astro.props;
 const ui = t(locale);
 const href = localizedPath(locale, `/content/${rugSlug(rug)}`);
-const guestBrand = rug.data.brand !== "arsalani" ? brandBySlug(rug.data.brand) : undefined;
+const guestBrand =
+  rug.data.brand !== "arsalani" ? brandBySlug(rug.data.brand) : undefined;
 ---
 
 <article
@@ -44,11 +45,16 @@ const guestBrand = rug.data.brand !== "arsalani" ? brandBySlug(rug.data.brand) :
       </p>
       <div class="mt-2 flex items-center justify-center gap-2">
         <Badge>{ui.categories[rug.data.category]}</Badge>
-        {rug.data.material && <Badge tone="saffron">{ui.materials[rug.data.material]}</Badge>}
+        {rug.data.material && (
+          <Badge tone="saffron">{ui.materials[rug.data.material]}</Badge>
+        )}
         {guestBrand && <Badge tone="crimson">{guestBrand.name}</Badge>}
       </div>
       {rug.data.palette && (
-        <div class="mt-2.5 flex items-center justify-center gap-1.5" aria-hidden="true">
+        <div
+          class="mt-2.5 flex items-center justify-center gap-1.5"
+          aria-hidden="true"
+        >
           {rug.data.palette.slice(0, 4).map((hex) => (
             <span
               class="inline-block h-2.5 w-2.5 rounded-full border border-espresso/20"
@@ -57,7 +63,9 @@ const guestBrand = rug.data.brand !== "arsalani" ? brandBySlug(rug.data.brand) :
           ))}
         </div>
       )}
-      <p class="mt-2 text-xs tracking-widest text-crimson">{ui.cta.priceOnRequest}</p>
+      <p class="mt-2 text-xs tracking-widest text-crimson">
+        {ui.cta.priceOnRequest}
+      </p>
     </div>
   </a>
 </article>

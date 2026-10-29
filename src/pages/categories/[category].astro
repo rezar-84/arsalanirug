@@ -1,9 +1,10 @@
 ---
 import CatalogPage from "../../features/CatalogPage.astro";
-import { categorySlugs } from "../../i18n/ui";
+import { getPopulatedCategories } from "../../lib/rugs";
 
-export function getStaticPaths() {
-  return categorySlugs.map((category) => ({ params: { category } }));
+export async function getStaticPaths() {
+  const categories = await getPopulatedCategories();
+  return categories.map((category) => ({ params: { category } }));
 }
 
 const { category } = Astro.params;

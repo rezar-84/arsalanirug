@@ -25,9 +25,11 @@ const tiles = regions.map((region) => {
 ---
 
 <div
-  class={compact
-    ? "flex gap-5 overflow-x-auto pb-4 [scrollbar-width:thin]"
-    : "grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4"}
+  class={
+    compact
+      ? "flex gap-5 overflow-x-auto pb-4 [scrollbar-width:thin]"
+      : "grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4"
+  }
 >
   {tiles.map((tile) => (
     <a

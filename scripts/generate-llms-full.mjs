@@ -10,7 +10,8 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dir = join(ROOT, "src/content/rugs/en");
 
-const fm = (text, key) => text.match(new RegExp(`^${key}: "?([^"\\n]*)"?$`, "m"))?.[1];
+const fm = (text, key) =>
+  text.match(new RegExp(`^${key}: "?([^"\\n]*)"?$`, "m"))?.[1];
 
 const rugs = readdirSync(dir)
   .filter((f) => f.endsWith(".md"))
@@ -57,7 +58,17 @@ ${rugs.map(line).join("\n")}
 
 ## Regions
 
-${["qom","kashan","malayer","shiraz","oushak","moshk-abad","tabriz","isfahan","nain"]
+${[
+  "qom",
+  "kashan",
+  "malayer",
+  "shiraz",
+  "oushak",
+  "moshk-abad",
+  "tabriz",
+  "isfahan",
+  "nain",
+]
   .map((r) => `- https://arsalanirug.com/regions/${r}`)
   .join("\n")}
 

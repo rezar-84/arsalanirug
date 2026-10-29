@@ -13,18 +13,20 @@ const ui = t(locale);
 // A cultural history of the Persian rug — deliberately separate from the
 // Arsalani family story on /about. Dates cross-checked against standard
 // references (Hermitage/Pazyryk, V&A/Ardabil, UNESCO ICH 2010).
-const content: Partial<Record<
-  Locale,
-  {
-    kicker: string;
-    title: string;
-    intro: string;
-    eras: { era: string; title: string; text: string }[];
-    closingTitle: string;
-    closing: string;
-    toGuide: string;
-  }
->> = {
+const content: Partial<
+  Record<
+    Locale,
+    {
+      kicker: string;
+      title: string;
+      intro: string;
+      eras: { era: string; title: string; text: string }[];
+      closingTitle: string;
+      closing: string;
+      toGuide: string;
+    }
+  >
+> = {
   en: {
     kicker: "The Persian Rug",
     title: "A Woven History",
@@ -131,10 +133,19 @@ const c = content[locale] ?? content.en!;
   description={c.intro.slice(0, 155)}
 >
   <section class="mx-auto max-w-[800px] px-6 pt-16 text-center">
-    <p class="text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{c.kicker}</p>
-    <h1 class="font-display-lang mt-4 text-5xl md:text-6xl" data-reveal>{c.title}</h1>
+    <p class="text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>
+      {c.kicker}
+    </p>
+    <h1 class="font-display-lang mt-4 text-5xl md:text-6xl" data-reveal>
+      {c.title}
+    </h1>
     <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
-    <p class="mt-8 text-start text-base leading-loose text-espresso/90" data-reveal>{c.intro}</p>
+    <p
+      class="mt-8 text-start text-base leading-loose text-espresso/90"
+      data-reveal
+    >
+      {c.intro}
+    </p>
   </section>
 
   <!-- The winding timeline: a continuous curve like a rug's branching stem -->
@@ -156,49 +167,98 @@ const c = content[locale] ?? content.en!;
               >
                 <!-- flat-design khataei scroll: thin winding stem, filled
                      almond leaves seated on it, curled fronds, crimson buds -->
-                <g stroke="currentColor" stroke-opacity="0.45" stroke-width="1.4">
+                <g
+                  stroke="currentColor"
+                  stroke-opacity="0.45"
+                  stroke-width="1.4"
+                >
                   <path d="M40 0 C 62 46 18 86 16 140 C 14 194 62 234 40 280" />
                   <path d="M43.5 47 C 51 41 57 33 60 23" />
                   <path d="M29.9 199 C 23 206 18 214 17 223" />
                   <path d="M16 140 C 11 140 6 140 1 140" />
                 </g>
                 <g fill="currentColor" fill-opacity="0.4" stroke="none">
-                  <path transform="translate(50 38) rotate(35)" d="M0 0 C 6 -7 7 -17 0 -26 C -7 -17 -6 -7 0 0 Z" />
-                  <path transform="translate(56 29) rotate(28)" d="M0 0 C 5 -6 6 -14 0 -21 C -6 -14 -5 -6 0 0 Z" />
-                  <path transform="translate(31.7 80.6) rotate(-125)" d="M0 0 C 6 -7 7 -17 0 -26 C -7 -17 -6 -7 0 0 Z" />
-                  <path transform="translate(23.4 182.5) rotate(-135)" d="M0 0 C 5 -6 6 -15 0 -22 C -6 -15 -5 -6 0 0 Z" />
-                  <path transform="translate(26 205) rotate(-140)" d="M0 0 C 5 -6 6 -14 0 -21 C -6 -14 -5 -6 0 0 Z" />
-                  <path transform="translate(21 213) rotate(-145)" d="M0 0 C 4 -5 5 -12 0 -18 C -5 -12 -4 -5 0 0 Z" />
-                  <path transform="translate(44 240) rotate(130)" d="M0 0 C 6 -7 7 -17 0 -26 C -7 -17 -6 -7 0 0 Z" />
-                  <path transform="translate(47 58) rotate(55)" d="M0 0 C 5 -6 6 -14 0 -21 C -6 -14 -5 -6 0 0 Z" />
+                  <path
+                    transform="translate(50 38) rotate(35)"
+                    d="M0 0 C 6 -7 7 -17 0 -26 C -7 -17 -6 -7 0 0 Z"
+                  />
+                  <path
+                    transform="translate(56 29) rotate(28)"
+                    d="M0 0 C 5 -6 6 -14 0 -21 C -6 -14 -5 -6 0 0 Z"
+                  />
+                  <path
+                    transform="translate(31.7 80.6) rotate(-125)"
+                    d="M0 0 C 6 -7 7 -17 0 -26 C -7 -17 -6 -7 0 0 Z"
+                  />
+                  <path
+                    transform="translate(23.4 182.5) rotate(-135)"
+                    d="M0 0 C 5 -6 6 -15 0 -22 C -6 -15 -5 -6 0 0 Z"
+                  />
+                  <path
+                    transform="translate(26 205) rotate(-140)"
+                    d="M0 0 C 5 -6 6 -14 0 -21 C -6 -14 -5 -6 0 0 Z"
+                  />
+                  <path
+                    transform="translate(21 213) rotate(-145)"
+                    d="M0 0 C 4 -5 5 -12 0 -18 C -5 -12 -4 -5 0 0 Z"
+                  />
+                  <path
+                    transform="translate(44 240) rotate(130)"
+                    d="M0 0 C 6 -7 7 -17 0 -26 C -7 -17 -6 -7 0 0 Z"
+                  />
+                  <path
+                    transform="translate(47 58) rotate(55)"
+                    d="M0 0 C 5 -6 6 -14 0 -21 C -6 -14 -5 -6 0 0 Z"
+                  />
                 </g>
                 <g fill="currentColor" fill-opacity="0.28" stroke="none">
                   <path d="M62 82 C 50 82 44 92 47 104 C 48 96 53 90 62 88 Z" />
                   <path d="M14 232 C 26 232 32 242 29 254 C 28 246 23 240 14 238 Z" />
                 </g>
                 <g fill="var(--color-crimson)" fill-opacity="0.8" stroke="none">
-                  <path transform="translate(60 23) rotate(25)" d="M0 0 C 4 -5 4 -12 0 -16 C -4 -12 -4 -5 0 0 Z" />
-                  <path transform="translate(17 223) rotate(-150)" d="M0 0 C 4 -5 4 -12 0 -16 C -4 -12 -4 -5 0 0 Z" />
+                  <path
+                    transform="translate(60 23) rotate(25)"
+                    d="M0 0 C 4 -5 4 -12 0 -16 C -4 -12 -4 -5 0 0 Z"
+                  />
+                  <path
+                    transform="translate(17 223) rotate(-150)"
+                    d="M0 0 C 4 -5 4 -12 0 -16 C -4 -12 -4 -5 0 0 Z"
+                  />
                 </g>
               </svg>
               <span class="w-px grow bg-espresso/25"></span>
             </div>
             <!-- era flower -->
-            <svg viewBox="0 0 100 100" fill="none"
+            <svg
+              viewBox="0 0 100 100"
+              fill="none"
               class={`absolute top-1/2 h-12 w-12 -translate-y-1/2 ${i % 2 ? "right-[8px] rotate-90" : "left-[8px] -rotate-90"}`}
-              aria-hidden="true">
+              aria-hidden="true"
+            >
               <!-- flat layered rosette, as in classic carpet medallion flowers -->
               <g fill="var(--color-crimson)" fill-opacity="0.92">
                 {[0, 72, 144, 216, 288].map((a) => (
-                  <path transform={`translate(50 50) rotate(${a})`} d="M0 -8 C 9 -16 9 -30 0 -38 C -9 -30 -9 -16 0 -8 Z" />
+                  <path
+                    transform={`translate(50 50) rotate(${a})`}
+                    d="M0 -8 C 9 -16 9 -30 0 -38 C -9 -30 -9 -16 0 -8 Z"
+                  />
                 ))}
               </g>
               <g fill="var(--color-saffron)" fill-opacity="0.95">
                 {[36, 108, 180, 252, 324].map((a) => (
-                  <path transform={`translate(50 50) rotate(${a})`} d="M0 -7 C 5 -12 5 -20 0 -24 C -5 -20 -5 -12 0 -7 Z" />
+                  <path
+                    transform={`translate(50 50) rotate(${a})`}
+                    d="M0 -7 C 5 -12 5 -20 0 -24 C -5 -20 -5 -12 0 -7 Z"
+                  />
                 ))}
               </g>
-              <circle cx="50" cy="50" r="5" fill="var(--color-espresso)" fill-opacity="0.85" />
+              <circle
+                cx="50"
+                cy="50"
+                r="5"
+                fill="var(--color-espresso)"
+                fill-opacity="0.85"
+              />
             </svg>
           </div>
 
@@ -206,9 +266,15 @@ const c = content[locale] ?? content.en!;
             class={`border-s-2 border-espresso/20 ps-6 md:border-0 md:ps-0 ${i % 2 ? "md:col-start-3 md:text-start" : "md:col-start-1 md:text-end"} py-10 md:py-14 md:row-start-1`}
             data-reveal
           >
-            <p class="text-xs uppercase tracking-[0.25em] text-saffron">{item.era}</p>
-            <h2 class="font-display-lang mt-2 text-3xl md:text-4xl">{item.title}</h2>
-            <p class="mt-4 text-sm leading-loose text-espresso/90">{item.text}</p>
+            <p class="text-xs uppercase tracking-[0.25em] text-saffron">
+              {item.era}
+            </p>
+            <h2 class="font-display-lang mt-2 text-3xl md:text-4xl">
+              {item.title}
+            </h2>
+            <p class="mt-4 text-sm leading-loose text-espresso/90">
+              {item.text}
+            </p>
           </div>
         </div>
       ))}
@@ -220,12 +286,21 @@ const c = content[locale] ?? content.en!;
       class="relative mx-auto max-w-[900px] overflow-hidden rounded-[2.5rem] bg-bitter px-8 py-14 text-center text-canvas"
       data-reveal
     >
-      <Motif variant="medallion" class="pointer-events-none absolute -end-24 -top-24 h-80 w-80 text-canvas/[0.06]" />
+      <Motif
+        variant="medallion"
+        class="pointer-events-none absolute -end-24 -top-24 h-80 w-80 text-canvas/[0.06]"
+      />
       <h2 class="font-display-lang text-3xl md:text-4xl">{c.closingTitle}</h2>
-      <p class="mx-auto mt-6 max-w-xl text-sm leading-loose text-canvas/80">{c.closing}</p>
+      <p class="mx-auto mt-6 max-w-xl text-sm leading-loose text-canvas/80">
+        {c.closing}
+      </p>
       <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <Button href={localizedPath(locale, "/guide")} variant="outline-light">{c.toGuide}</Button>
-        <Button href={localizedPath(locale, "/products")} variant="primary">{ui.cta.viewCollection}</Button>
+        <Button href={localizedPath(locale, "/guide")} variant="outline-light">
+          {c.toGuide}
+        </Button>
+        <Button href={localizedPath(locale, "/products")} variant="primary">
+          {ui.cta.viewCollection}
+        </Button>
       </div>
     </div>
   </section>

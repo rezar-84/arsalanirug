@@ -1,5 +1,12 @@
 ---
-import { t, localizedPath, categorySlugs, type Locale, type CategorySlug, type MaterialSlug } from "../i18n/ui";
+import {
+  t,
+  localizedPath,
+  categorySlugs,
+  type Locale,
+  type CategorySlug,
+  type MaterialSlug,
+} from "../i18n/ui";
 import { getRugsWithFallback, regionOf } from "../lib/rugs";
 import { brandBySlug } from "../data/brands";
 import { regionBySlug, regionName } from "../data/regions";
@@ -12,19 +19,31 @@ const { locale, activeCategory = "all" } = Astro.props;
 const ui = t(locale);
 
 const all = await getRugsWithFallback(locale);
-const scoped = activeCategory === "all" ? all : all.filter((r) => r.data.category === activeCategory);
+const scoped =
+  activeCategory === "all"
+    ? all
+    : all.filter((r) => r.data.category === activeCategory);
 
 const nonEmptyCategories = categorySlugs.filter(
   (c) => c === activeCategory || all.some((r) => r.data.category === c)
 );
 
-const distinct = <T,>(vals: (T | undefined)[]) => [...new Set(vals.filter(Boolean))] as T[];
-const materials = distinct(scoped.map((r) => r.data.material)) as MaterialSlug[];
-const brandsHere = distinct(scoped.map((r) => r.data.brand)).filter((b) => brandBySlug(b));
+const distinct = <T,>(vals: (T | undefined)[]) =>
+  [...new Set(vals.filter(Boolean))] as T[];
+const materials = distinct(
+  scoped.map((r) => r.data.material)
+) as MaterialSlug[];
+const brandsHere = distinct(scoped.map((r) => r.data.brand)).filter((b) =>
+  brandBySlug(b)
+);
 const regionsHere = distinct(scoped.map((r) => regionOf(r)));
 
 // A filter group only appears when it can actually narrow something.
-const groups: { key: string; label: string; values: { value: string; label: string }[] }[] = [];
+const groups: {
+  key: string;
+  label: string;
+  values: { value: string; label: string }[];
+}[] = [];
 if (materials.length >= 2)
   groups.push({
     key: "material",
@@ -49,7 +68,10 @@ if (regionsHere.length >= 2)
 
 // Every possible localized count string, so the client stays translation-free.
 const countMap = Object.fromEntries(
-  Array.from({ length: scoped.length + 1 }, (_, n) => [n, ui.catalog.piecesCount(n)])
+  Array.from({ length: scoped.length + 1 }, (_, n) => [
+    n,
+    ui.catalog.piecesCount(n),
+  ])
 );
 
 const catLink = (slug: string) =>
@@ -80,27 +102,50 @@ const pill = (active: boolean) =>
       <div class="flex flex-col gap-3">
         {groups.map((g) => (
           <div class="flex flex-wrap items-center gap-2">
-            <span class="w-16 shrink-0 text-xs uppercase tracking-[0.15em] text-espresso/50">{g.label}</span>
-            <button type="button" data-filter={g.key} data-value="" class={pill(true)}>
+            <span class="w-16 shrink-0 text-xs uppercase tracking-[0.15em] text-espresso/50">
+              {g.label}
+            </span>
+            <button
+              type="button"
+              data-filter={g.key}
+              data-value=""
+              class={pill(true)}
+            >
               {ui.cta.allFilter}
             </button>
             {g.values.map((v) => (
-              <button type="button" data-filter={g.key} data-value={v.value} class={pill(false)}>
+              <button
+                type="button"
+                data-filter={g.key}
+                data-value={v.value}
+                class={pill(false)}
+              >
                 {v.label}
               </button>
             ))}
           </div>
         ))}
         <div class="flex flex-wrap items-center gap-2">
-          <span class="w-16 shrink-0 text-xs uppercase tracking-[0.15em] text-espresso/50">{ui.catalog.sortLabel}</span>
-          <button type="button" data-sort="" class={pill(true)}>{ui.cta.allFilter}</button>
-          <button type="button" data-sort="largest" class={pill(false)}>{ui.catalog.sortLargest}</button>
-          <button type="button" data-sort="smallest" class={pill(false)}>{ui.catalog.sortSmallest}</button>
+          <span class="w-16 shrink-0 text-xs uppercase tracking-[0.15em] text-espresso/50">
+            {ui.catalog.sortLabel}
+          </span>
+          <button type="button" data-sort="" class={pill(true)}>
+            {ui.cta.allFilter}
+          </button>
+          <button type="button" data-sort="largest" class={pill(false)}>
+            {ui.catalog.sortLargest}
+          </button>
+          <button type="button" data-sort="smallest" class={pill(false)}>
+            {ui.catalog.sortSmallest}
+          </button>
         </div>
       </div>
 
       <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-espresso/15 pt-4">
-        <span class="text-xs uppercase tracking-[0.2em] text-espresso/60" data-result-count>
+        <span
+          class="text-xs uppercase tracking-[0.2em] text-espresso/60"
+          data-result-count
+        >
           {ui.catalog.piecesCount(scoped.length)}
         </span>
         <button
@@ -124,7 +169,12 @@ const pill = (active: boolean) =>
     const clearBtn = bar.querySelector("[data-clear-filters]");
     const countMap = JSON.parse(bar.dataset.countMap || "{}");
     const active = ["border-crimson", "bg-crimson", "text-canvas"];
-    const idle = ["border-espresso/30", "text-ink", "hover:border-crimson", "hover:text-crimson"];
+    const idle = [
+      "border-espresso/30",
+      "text-ink",
+      "hover:border-crimson",
+      "hover:text-crimson",
+    ];
     const state = { material: "", brand: "", region: "", sort: "" };
 
     const paint = () => {
@@ -149,20 +199,28 @@ const pill = (active: boolean) =>
         if (!hide) visible++;
         const area = Number(card.dataset.area) || 0;
         card.style.order =
-          state.sort === "largest" ? -area : state.sort === "smallest" ? area : 0;
+          state.sort === "largest"
+            ? -area
+            : state.sort === "smallest"
+              ? area
+              : 0;
       }
       if (countEl) countEl.textContent = countMap[visible] ?? String(visible);
-      const anyFilter = state.material || state.brand || state.region || state.sort;
+      const anyFilter =
+        state.material || state.brand || state.region || state.sort;
       if (clearBtn) clearBtn.hidden = !anyFilter;
       if (emptyEl) emptyEl.hidden = visible !== 0;
       const params = new URLSearchParams();
-      for (const k of ["material", "brand", "region", "sort"]) if (state[k]) params.set(k, state[k]);
+      for (const k of ["material", "brand", "region", "sort"])
+        if (state[k]) params.set(k, state[k]);
       const q = params.toString();
       history.replaceState(null, "", q ? `?${q}` : location.pathname);
     };
 
     bar.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-filter],[data-sort],[data-clear-filters]");
+      const btn = e.target.closest(
+        "[data-filter],[data-sort],[data-clear-filters]"
+      );
       if (!btn) return;
       if ("clearFilters" in btn.dataset) {
         state.material = state.brand = state.region = state.sort = "";
@@ -176,7 +234,8 @@ const pill = (active: boolean) =>
 
     // Restore shareable filter links once the whole page (grid included) exists.
     const params = new URLSearchParams(location.search);
-    for (const k of ["material", "brand", "region", "sort"]) state[k] = params.get(k) || "";
+    for (const k of ["material", "brand", "region", "sort"])
+      state[k] = params.get(k) || "";
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", paint);
     } else {

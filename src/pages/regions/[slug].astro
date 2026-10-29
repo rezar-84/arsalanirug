@@ -3,7 +3,10 @@ import RegionDetailPage from "../../features/RegionDetailPage.astro";
 import { regions } from "../../data/regions";
 
 export function getStaticPaths() {
-  return regions.map((region) => ({ params: { slug: region.slug }, props: { region } }));
+  return regions.map((region) => ({
+    params: { slug: region.slug },
+    props: { region },
+  }));
 }
 
 const { region } = Astro.props;

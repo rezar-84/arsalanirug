@@ -13,7 +13,16 @@ const { locale } = Astro.props;
 const ui = t(locale);
 
 // Long-form story, rewritten from the old site's About page (docs/source-copy.md).
-const story: Partial<Record<Locale, { mission: string; timeline: { era: string; title: string; text: string }[]; closing: string }>> = {
+const story: Partial<
+  Record<
+    Locale,
+    {
+      mission: string;
+      timeline: { era: string; title: string; text: string }[];
+      closing: string;
+    }
+  >
+> = {
   en: {
     mission:
       "Our mission is simple: to bring the finest Persian hand-woven carpets to connoisseurs anywhere in the world — from our own signature pieces to rugs sourced, on commission, from the most reputable weaving houses of Iran. Behind that promise stand more than a hundred years of family craft.",
@@ -94,10 +103,22 @@ const galleryRugs = rugs.filter((r) => r.data.images.length > 1).slice(0, 3);
   description={ui.heritage.intro}
 >
   <section class="relative mx-auto max-w-[800px] px-6 pt-16 text-center">
-    <Motif variant="rosette" class="pointer-events-none absolute -top-2 start-1/2 h-16 w-16 -translate-x-1/2 rtl:translate-x-1/2 text-espresso/20" />
-    <h1 class="font-display-lang mt-8 text-5xl md:text-6xl" data-reveal>{ui.heritage.title}</h1>
-    <p class="mt-4 text-sm text-espresso/70" data-reveal>{ui.heritage.intro}</p>
-    <p class="mt-10 text-start text-base leading-loose text-espresso/90" data-reveal>{s.mission}</p>
+    <Motif
+      variant="rosette"
+      class="pointer-events-none absolute -top-2 start-1/2 h-16 w-16 -translate-x-1/2 rtl:translate-x-1/2 text-espresso/20"
+    />
+    <h1 class="font-display-lang mt-8 text-5xl md:text-6xl" data-reveal>
+      {ui.heritage.title}
+    </h1>
+    <p class="mt-4 text-sm text-espresso/70" data-reveal>
+      {ui.heritage.intro}
+    </p>
+    <p
+      class="mt-10 text-start text-base leading-loose text-espresso/90"
+      data-reveal
+    >
+      {s.mission}
+    </p>
   </section>
 
   <section class="mx-auto max-w-[800px] px-6 py-16">
@@ -107,7 +128,9 @@ const galleryRugs = rugs.filter((r) => r.data.images.length > 1).slice(0, 3);
           <span class="absolute -start-[41px] top-1 h-4 w-4 rounded-full border border-espresso/40 bg-canvas md:-start-[57px]">
             <span class="absolute inset-1 rounded-full bg-crimson"></span>
           </span>
-          <p class="text-xs uppercase tracking-[0.25em] text-saffron">{item.era}</p>
+          <p class="text-xs uppercase tracking-[0.25em] text-saffron">
+            {item.era}
+          </p>
           <h2 class="font-display-lang mt-2 text-3xl">{item.title}</h2>
           <p class="mt-3 text-sm leading-loose text-espresso/90">{item.text}</p>
         </li>
@@ -141,9 +164,13 @@ const galleryRugs = rugs.filter((r) => r.data.images.length > 1).slice(0, 3);
       <Motif variant="rosette" class="h-10 w-10 mb-3" />
       <Motif variant="cypress" class="h-16 w-8 -scale-x-100" />
     </div>
-    <p class="font-display-lang text-2xl leading-relaxed text-espresso">{s.closing}</p>
+    <p class="font-display-lang text-2xl leading-relaxed text-espresso">
+      {s.closing}
+    </p>
     <div class="mt-8">
-      <Button href={localizedPath(locale, "/products")} variant="primary">{ui.cta.viewCollection}</Button>
+      <Button href={localizedPath(locale, "/products")} variant="primary">
+        {ui.cta.viewCollection}
+      </Button>
     </div>
   </section>
 </BaseLayout>

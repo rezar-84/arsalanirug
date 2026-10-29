@@ -21,7 +21,8 @@ export const brands: Brand[] = [
     name: "Arsalani",
     story: {
       en: {
-        tagline: "The house itself — five generations of Qom masters, since 1866.",
+        tagline:
+          "The house itself — five generations of Qom masters, since 1866.",
         body: [
           "Arsalani is the family house behind this collection: founded from Kashan, rooted in Qom, and led today by the fifth generation. Its signature is the fine Qom silk piece — zarcharak and zaronim sizes at knot counts that turn wool and silk into light.",
           "Every rug carrying the Arsalani name was woven for the house or selected by it, and is documented with its reference, woven dimensions, and materials.",
@@ -68,7 +69,9 @@ export const brands: Brand[] = [
       },
       fa: {
         tagline: "میهمانی در مجموعه.",
-        body: ["قطعاتی که اکنون از این خانه داریم در زیر با مشخصات کامل آمده‌اند."],
+        body: [
+          "قطعاتی که اکنون از این خانه داریم در زیر با مشخصات کامل آمده‌اند.",
+        ],
       },
     },
   },

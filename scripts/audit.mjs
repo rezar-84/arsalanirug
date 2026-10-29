@@ -82,12 +82,16 @@ async function audit() {
       const imgAttrs = match[1];
       const hasAlt = /\balt\b/i.test(imgAttrs);
       if (!hasAlt) {
-        errors.push(`${relPath}: <img> missing alt attribute: ${match[0].slice(0, 80)}...`);
+        errors.push(
+          `${relPath}: <img> missing alt attribute: ${match[0].slice(0, 80)}...`
+        );
       }
     }
 
     // 6. Accessibility: buttons must not be empty or must have aria-label
-    const btnMatches = content.matchAll(/<button([^>]*)>([\s\S]*?)<\/button>/gi);
+    const btnMatches = content.matchAll(
+      /<button([^>]*)>([\s\S]*?)<\/button>/gi
+    );
     for (const match of btnMatches) {
       const btnAttrs = match[1];
       const btnInner = match[2].replace(/<[^>]+>/g, "").trim();
@@ -98,7 +102,9 @@ async function audit() {
     }
 
     // 7. Internal link integrity check (e2e navigation)
-    const linkMatches = content.matchAll(/<a\s+[^>]*href=["']([^"'#]+)["'][^>]*>/gi);
+    const linkMatches = content.matchAll(
+      /<a\s+[^>]*href=["']([^"'#]+)["'][^>]*>/gi
+    );
     for (const match of linkMatches) {
       const href = match[1];
       // Check only internal root-relative links
@@ -125,17 +131,21 @@ async function audit() {
   if (warnings.length > 0) {
     console.log(`Warnings (${warnings.length}):`);
     warnings.slice(0, 10).forEach((w) => console.log(` - ${w}`));
-    if (warnings.length > 10) console.log(` ... and ${warnings.length - 10} more warnings.`);
+    if (warnings.length > 10)
+      console.log(` ... and ${warnings.length - 10} more warnings.`);
   }
 
   if (errors.length > 0) {
     console.error(`FAILED with ${errors.length} error(s):`);
     errors.slice(0, 20).forEach((e) => console.error(` ✕ ${e}`));
-    if (errors.length > 20) console.error(` ... and ${errors.length - 20} more errors.`);
+    if (errors.length > 20)
+      console.error(` ... and ${errors.length - 20} more errors.`);
     process.exit(1);
   }
 
-  console.log("All accessibility and link integrity checks passed cleanly (0 errors)!");
+  console.log(
+    "All accessibility and link integrity checks passed cleanly (0 errors)!"
+  );
 }
 
 audit().catch((err) => {
