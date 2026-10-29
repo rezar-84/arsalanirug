@@ -28,4 +28,5 @@ these, not after.
 | --- | --- | --- | --- |
 | ARSA-006 | design | 2026-09-01 | Pass with conditions |
 | ARSA-006 | ship | 2026-09-01 | Block |
+| ARSA-028 | ship | 2026-09-16 | Block → Pass with conditions (re-review, same file) |
 | | | | |

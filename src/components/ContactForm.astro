@@ -20,11 +20,21 @@ const input =
   "w-full rounded-2xl border border-espresso/30 bg-canvas px-4 py-3 text-sm outline-none transition-colors focus:border-crimson";
 ---
 
-<form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4">
+<form
+  action="https://api.web3forms.com/submit"
+  method="POST"
+  class="flex flex-col gap-4"
+>
   <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
   <input type="hidden" name="subject" value="Inquiry from arsalanirug.com" />
   <input type="hidden" name="redirect" value={redirect} />
-  <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+  <input
+    type="checkbox"
+    name="botcheck"
+    class="hidden"
+    tabindex="-1"
+    autocomplete="off"
+  />
 
   <label class="flex flex-col gap-1.5 text-sm">
     {ui.contactPage.name}

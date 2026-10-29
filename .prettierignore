@@ -1,0 +1,16 @@
+# Build output and dependencies
+dist/
+node_modules/
+package-lock.json
+
+# Harness-owned files — not ours to reformat
+.claude/
+
+# Prose, not code (ARSA-030). `checks.format` exists to keep code mechanically
+# consistent and diffs quiet. The SDLC docs are installed from the shared kit in
+# DevOps/ai-sdlc-template; reformatting their tables here would create drift
+# against upstream and churn every review and worklog entry on each pass.
+# Markdown content is reviewed by the copywriter/localisation roles, not by
+# Prettier.
+docs/
+*.md

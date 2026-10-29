@@ -11,7 +11,10 @@ export async function getStaticPaths() {
     props: {
       rug,
       related: rugs
-        .filter((r) => rugSlug(r) !== rugSlug(rug) && r.data.category === rug.data.category)
+        .filter(
+          (r) =>
+            rugSlug(r) !== rugSlug(rug) && r.data.category === rug.data.category
+        )
         .slice(0, 3),
     },
   }));

@@ -22,7 +22,7 @@ last-reviewed: 2026-09-01
 | ID | Task | Tier | Owner role | Depends on | Status |
 | --- | --- | --- | --- | --- | --- |
 | ARSA-004 | Translation review: FA rug titles/descriptions + FA/tr/es/ja/de long-form pages (History/Guide/Heritage) currently falling back to English | 1 | copywriter | — | Ready |
-| ARSA-005 | Write real EN descriptions for the 29 rugs (bodies are TODO placeholders) | 2 | copywriter | — | Ready |
+| ARSA-005 | Write real EN descriptions for the 28 rugs (bodies are TODO placeholders) | 2 | copywriter | — | Ready |
 
 ## Blocked
 
@@ -46,6 +46,9 @@ last-reviewed: 2026-09-01
 
 | ID | Task | Tier | Owner role | Depends on | Status | Completed |
 | --- | --- | --- | --- | --- | --- | --- |
+| ARSA-030 | `checks.format` green: `.prettierignore` scopes Prettier to code, 63 code files formatted | 3 | qa | — | Done | 2026-09-16 |
+| ARSA-029 | Confirm the "since 1866" trade date — owner confirmed it as stated; copy unchanged, claim C2 closed | 1 | copywriter | — | Done | 2026-09-16 |
+| ARSA-028 | Remove the patchwork rugs and category; 301s for the withdrawn URLs, real 404s in nginx, unpopulated categories stop publishing | 1 | product-manager | — | Done | 2026-09-16 |
 | ARSA-027 | Code health & diagnostics: modernize Zod import, clean unused variables, Web3Forms env var | 3 | architect | — | Done | 2026-09-09 |
 | ARSA-010 | Trim dist size: streamline picture widths and formats (cut from 169MB to 118MB) | 3 | devops-sre | — | Done | 2026-09-09 |
 | ARSA-009 | Automated checks: Prettier setup, static a11y & link integrity audit script | 2 | qa | — | Done | 2026-09-09 |

@@ -20,7 +20,8 @@ const { locale, rug, related, hasAltLocale = true } = Astro.props;
 const ui = t(locale);
 const slug = rugSlug(rug);
 const path = `/content/${slug}`;
-const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://arsalanirug.com";
+const site =
+  Astro.site?.toString().replace(/\/$/, "") ?? "https://arsalanirug.com";
 const canonicalUrl = `${site}${localizedPath(locale, path)}`;
 
 const { Content } = await render(rug);
@@ -48,10 +49,30 @@ const breadcrumbLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: ui.nav.home, item: `${site}${localizedPath(locale, "/")}` },
-    { "@type": "ListItem", position: 2, name: ui.nav.rugs, item: `${site}${localizedPath(locale, "/products")}` },
-    { "@type": "ListItem", position: 3, name: ui.categories[rug.data.category], item: `${site}${localizedPath(locale, `/categories/${rug.data.category}`)}` },
-    { "@type": "ListItem", position: 4, name: rug.data.title, item: canonicalUrl },
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: ui.nav.home,
+      item: `${site}${localizedPath(locale, "/")}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: ui.nav.rugs,
+      item: `${site}${localizedPath(locale, "/products")}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: ui.categories[rug.data.category],
+      item: `${site}${localizedPath(locale, `/categories/${rug.data.category}`)}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      name: rug.data.title,
+      item: canonicalUrl,
+    },
   ],
 };
 ---
@@ -68,11 +89,18 @@ const breadcrumbLd = {
 >
   <section class="mx-auto max-w-[1200px] px-6 pt-16">
     <nav class="mb-8 text-xs text-espresso/60" aria-label="Breadcrumb">
-      <a href={localizedPath(locale, "/")} class="hover:text-crimson">{ui.nav.home}</a>
+      <a href={localizedPath(locale, "/")} class="hover:text-crimson">
+        {ui.nav.home}
+      </a>
       <span class="mx-2">/</span>
-      <a href={localizedPath(locale, "/products")} class="hover:text-crimson">{ui.nav.rugs}</a>
+      <a href={localizedPath(locale, "/products")} class="hover:text-crimson">
+        {ui.nav.rugs}
+      </a>
       <span class="mx-2">/</span>
-      <a href={localizedPath(locale, `/categories/${rug.data.category}`)} class="hover:text-crimson">
+      <a
+        href={localizedPath(locale, `/categories/${rug.data.category}`)}
+        class="hover:text-crimson"
+      >
         {ui.categories[rug.data.category]}
       </a>
       <span class="mx-2">/</span>
@@ -86,11 +114,17 @@ const breadcrumbLd = {
         <div data-reveal>
           <div class="flex flex-wrap gap-2">
             <Badge>{ui.categories[rug.data.category]}</Badge>
-            {rug.data.material && <Badge tone="saffron">{ui.materials[rug.data.material]}</Badge>}
+            {rug.data.material && (
+              <Badge tone="saffron">{ui.materials[rug.data.material]}</Badge>
+            )}
           </div>
-          <h1 class="font-display-lang mt-4 text-5xl leading-tight">{rug.data.title}</h1>
+          <h1 class="font-display-lang mt-4 text-5xl leading-tight">
+            {rug.data.title}
+          </h1>
           {rug.data.origin && (
-            <p class="mt-2 text-sm text-espresso/70">{ui.specs.origin}: {rug.data.origin}</p>
+            <p class="mt-2 text-sm text-espresso/70">
+              {ui.specs.origin}: {rug.data.origin}
+            </p>
           )}
         </div>
 
@@ -103,7 +137,10 @@ const breadcrumbLd = {
         />
 
         {hasBody && (
-          <div class="prose-sm max-w-none text-sm leading-relaxed text-espresso/90" data-reveal>
+          <div
+            class="prose-sm max-w-none text-sm leading-relaxed text-espresso/90"
+            data-reveal
+          >
             <Content />
           </div>
         )}
@@ -113,7 +150,9 @@ const breadcrumbLd = {
 
   {related.length > 0 && (
     <section class="mx-auto max-w-[1400px] px-6 py-24">
-      <h2 class="font-display-lang text-center text-3xl" data-reveal>{ui.cta.relatedRugs}</h2>
+      <h2 class="font-display-lang text-center text-3xl" data-reveal>
+        {ui.cta.relatedRugs}
+      </h2>
       <Motif variant="divider" class="mt-5 text-espresso/25" data-reveal />
       <div class="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
         {related.slice(0, 3).map((r) => (

@@ -32,10 +32,17 @@ const boutiqueRanked = [
 const otherFeatured = pool.filter(
   (r) => r.data.category !== "boutique-rugs" && r.data.featured
 );
-const showcase = [...boutiqueRanked.slice(0, 5), ...otherFeatured, ...boutiqueRanked.slice(5)].slice(0, 6);
+const showcase = [
+  ...boutiqueRanked.slice(0, 5),
+  ...otherFeatured,
+  ...boutiqueRanked.slice(5),
+].slice(0, 6);
 
 const counts = Object.fromEntries(
-  categorySlugs.map((c) => [c, rugs.filter((r) => r.data.category === c).length])
+  categorySlugs.map((c) => [
+    c,
+    rugs.filter((r) => r.data.category === c).length,
+  ])
 );
 ---
 
@@ -47,11 +54,15 @@ const counts = Object.fromEntries(
 >
   <!-- Dark specimen hero — the one dark moment on the page -->
   <section class="px-4 pt-6">
-    <div
-      class="relative mx-auto max-w-[1400px] overflow-hidden rounded-t-[3rem] rounded-b-[2.5rem] bg-bitter px-6 py-16 text-canvas md:py-24"
-    >
-      <Motif variant="medallion" class="pointer-events-none absolute -start-40 -top-40 h-[34rem] w-[34rem] text-canvas/[0.06]" />
-      <Motif variant="medallion" class="pointer-events-none absolute -bottom-48 -end-24 h-[28rem] w-[28rem] text-canvas/[0.05]" />
+    <div class="relative mx-auto max-w-[1400px] overflow-hidden rounded-t-[3rem] rounded-b-[2.5rem] bg-bitter px-6 py-16 text-canvas md:py-24">
+      <Motif
+        variant="medallion"
+        class="pointer-events-none absolute -start-40 -top-40 h-[34rem] w-[34rem] text-canvas/[0.06]"
+      />
+      <Motif
+        variant="medallion"
+        class="pointer-events-none absolute -bottom-48 -end-24 h-[28rem] w-[28rem] text-canvas/[0.05]"
+      />
       <div class="relative mx-auto grid max-w-[1100px] items-center gap-12 md:grid-cols-2">
         <div class="text-center md:text-start">
           <img
@@ -59,7 +70,9 @@ const counts = Object.fromEntries(
             alt="Arsalani"
             class="mx-auto mb-6 h-16 w-auto md:mx-0"
           />
-          <p class="text-xs uppercase tracking-[0.3em] text-saffron">{ui.home.heroKicker}</p>
+          <p class="text-xs uppercase tracking-[0.3em] text-saffron">
+            {ui.home.heroKicker}
+          </p>
           <h1 class="font-display-lang mt-6 text-6xl leading-none md:text-7xl lg:text-8xl">
             {ui.home.heroTitle}
           </h1>
@@ -70,7 +83,10 @@ const counts = Object.fromEntries(
             <Button href={localizedPath(locale, "/products")} variant="primary">
               {ui.cta.viewCollection}
             </Button>
-            <Button href={localizedPath(locale, "/about")} variant="outline-light">
+            <Button
+              href={localizedPath(locale, "/about")}
+              variant="outline-light"
+            >
               {ui.cta.readStory}
             </Button>
           </div>
@@ -88,8 +104,14 @@ const counts = Object.fromEntries(
             />
           </a>
           <!-- lachak spandrels at the frame's foot -->
-          <Motif variant="lachak" class="pointer-events-none absolute -bottom-2 -start-2 h-16 w-16 -scale-y-100 text-canvas/25" />
-          <Motif variant="lachak" class="pointer-events-none absolute -bottom-2 -end-2 h-16 w-16 -scale-x-100 -scale-y-100 text-canvas/25" />
+          <Motif
+            variant="lachak"
+            class="pointer-events-none absolute -bottom-2 -start-2 h-16 w-16 -scale-y-100 text-canvas/25"
+          />
+          <Motif
+            variant="lachak"
+            class="pointer-events-none absolute -bottom-2 -end-2 h-16 w-16 -scale-x-100 -scale-y-100 text-canvas/25"
+          />
         </div>
       </div>
     </div>
@@ -97,8 +119,15 @@ const counts = Object.fromEntries(
 
   <!-- Featured pieces -->
   <section class="mx-auto max-w-[1400px] px-6 py-20 md:py-24">
-    <p class="text-center text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.home.featuredKicker}</p>
-    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>{ui.home.featuredTitle}</h2>
+    <p
+      class="text-center text-xs uppercase tracking-[0.3em] text-saffron"
+      data-reveal
+    >
+      {ui.home.featuredKicker}
+    </p>
+    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>
+      {ui.home.featuredTitle}
+    </h2>
     <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
     <div class="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
       {showcase.map((rug) => (
@@ -114,8 +143,15 @@ const counts = Object.fromEntries(
 
   <!-- Collections -->
   <section class="mx-auto max-w-[1400px] px-6 py-8">
-    <p class="text-center text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.home.categoriesKicker}</p>
-    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>{ui.home.categoriesTitle}</h2>
+    <p
+      class="text-center text-xs uppercase tracking-[0.3em] text-saffron"
+      data-reveal
+    >
+      {ui.home.categoriesKicker}
+    </p>
+    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>
+      {ui.home.categoriesTitle}
+    </h2>
     <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
     <div class="mt-10 flex flex-wrap justify-center gap-3" data-reveal>
       {categorySlugs
@@ -134,10 +170,19 @@ const counts = Object.fromEntries(
 
   <!-- The houses we carry -->
   <section class="mx-auto max-w-[1100px] px-6 py-20">
-    <p class="text-center text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.explore.housesKicker}</p>
-    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>{ui.explore.housesTitle}</h2>
+    <p
+      class="text-center text-xs uppercase tracking-[0.3em] text-saffron"
+      data-reveal
+    >
+      {ui.explore.housesKicker}
+    </p>
+    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>
+      {ui.explore.housesTitle}
+    </h2>
     <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
-    <div class={`mt-10 grid gap-6 ${activeBrands.length > 2 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
+    <div
+      class={`mt-10 grid gap-6 ${activeBrands.length > 2 ? "md:grid-cols-3" : "md:grid-cols-2"}`}
+    >
       {activeBrands.map((brand) => {
         const count = rugsByBrand(rugs, brand.slug).length;
         const story = brandStory(brand, locale);
@@ -147,9 +192,20 @@ const counts = Object.fromEntries(
             class="group rounded-3xl border border-espresso/25 bg-card p-6 text-center transition-colors hover:border-crimson/50"
             data-reveal
           >
-            <h3 class="font-display text-2xl transition-colors group-hover:text-crimson" lang="en">{brand.name}</h3>
-            <p class="mt-1 text-[11px] uppercase tracking-[0.2em] text-espresso/50">{ui.catalog.piecesCount(count)}</p>
-            {story?.tagline && <p class="mt-3 text-xs leading-relaxed text-espresso/75">{story.tagline}</p>}
+            <h3
+              class="font-display text-2xl transition-colors group-hover:text-crimson"
+              lang="en"
+            >
+              {brand.name}
+            </h3>
+            <p class="mt-1 text-[11px] uppercase tracking-[0.2em] text-espresso/50">
+              {ui.catalog.piecesCount(count)}
+            </p>
+            {story?.tagline && (
+              <p class="mt-3 text-xs leading-relaxed text-espresso/75">
+                {story.tagline}
+              </p>
+            )}
           </a>
         );
       })}
@@ -158,8 +214,15 @@ const counts = Object.fromEntries(
 
   <!-- The weaving regions -->
   <section class="mx-auto max-w-[1400px] px-6 py-8">
-    <p class="text-center text-xs uppercase tracking-[0.3em] text-saffron" data-reveal>{ui.explore.regionsKicker}</p>
-    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>{ui.explore.regionsTitle}</h2>
+    <p
+      class="text-center text-xs uppercase tracking-[0.3em] text-saffron"
+      data-reveal
+    >
+      {ui.explore.regionsKicker}
+    </p>
+    <h2 class="font-display-lang mt-3 text-center text-4xl" data-reveal>
+      {ui.explore.regionsTitle}
+    </h2>
     <Motif variant="divider" class="mt-6 text-espresso/25" data-reveal />
     <div class="mx-auto mt-10 max-w-[1100px]">
       <RegionTiles locale={locale} compact />
@@ -173,8 +236,14 @@ const counts = Object.fromEntries(
       style="background: linear-gradient(115deg, rgba(201,154,60,0.14), rgba(138,31,45,0.10));"
       data-reveal
     >
-      <Motif variant="star" class="pointer-events-none absolute -start-6 top-6 h-24 w-24 text-espresso/10" />
-      <Motif variant="star" class="pointer-events-none absolute -end-6 bottom-6 h-24 w-24 text-espresso/10" />
+      <Motif
+        variant="star"
+        class="pointer-events-none absolute -start-6 top-6 h-24 w-24 text-espresso/10"
+      />
+      <Motif
+        variant="star"
+        class="pointer-events-none absolute -end-6 bottom-6 h-24 w-24 text-espresso/10"
+      />
       <h2 class="font-display-lang mx-auto max-w-2xl text-4xl leading-tight md:text-5xl">
         {ui.home.heritageTitle}
       </h2>
@@ -192,9 +261,15 @@ const counts = Object.fromEntries(
   <!-- Inquiry strip -->
   <section class="mx-auto max-w-[900px] px-6 pb-8 text-center" data-reveal>
     <div class="flex items-end justify-center gap-8">
-      <Motif variant="cypress" class="hidden h-20 w-9 text-espresso/20 sm:block" />
+      <Motif
+        variant="cypress"
+        class="hidden h-20 w-9 text-espresso/20 sm:block"
+      />
       <h2 class="font-display-lang text-3xl">{ui.home.inquiryTitle}</h2>
-      <Motif variant="cypress" class="hidden h-20 w-9 -scale-x-100 text-espresso/20 sm:block" />
+      <Motif
+        variant="cypress"
+        class="hidden h-20 w-9 -scale-x-100 text-espresso/20 sm:block"
+      />
     </div>
     <p class="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-espresso/80">
       {ui.home.inquiryText}

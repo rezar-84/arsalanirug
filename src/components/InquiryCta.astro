@@ -17,11 +17,20 @@ const ui = t(locale);
   <p class="font-display-lang text-2xl text-crimson">{ui.cta.priceOnRequest}</p>
   <p class="mt-2 text-sm text-espresso/70">{ui.cta.inquire}</p>
   <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
-    <Button href={rugWhatsappUrl(locale, title, sku, url)} variant="whatsapp" external>
+    <Button
+      href={rugWhatsappUrl(locale, title, sku, url)}
+      variant="whatsapp"
+      external
+    >
       {ui.cta.whatsapp}
     </Button>
-    <Button href={`tel:${contact.phone}`} variant="outline">{ui.cta.call}</Button>
-    <Button href={`mailto:${contact.email}?subject=${encodeURIComponent(`${title} (${sku})`)}`} variant="outline">
+    <Button href={`tel:${contact.phone}`} variant="outline">
+      {ui.cta.call}
+    </Button>
+    <Button
+      href={`mailto:${contact.email}?subject=${encodeURIComponent(`${title} (${sku})`)}`}
+      variant="outline"
+    >
       {ui.cta.email}
     </Button>
   </div>

@@ -19,8 +19,21 @@ export const regions: Region[] = [
   {
     slug: "qom",
     featured: true,
-    name: { en: "Qom", fa: "قم", tr: "Kum", es: "Qom", ja: "クム", de: "Ghom", ru: "Кум", ar: "قم", zh: "库姆" },
-    kicker: { en: "Silk · c. 1930 – today", fa: "ابریشم · از حدود ۱۳۱۰ تا امروز" },
+    name: {
+      en: "Qom",
+      fa: "قم",
+      tr: "Kum",
+      es: "Qom",
+      ja: "クム",
+      de: "Ghom",
+      ru: "Кум",
+      ar: "قم",
+      zh: "库姆",
+    },
+    kicker: {
+      en: "Silk · c. 1930 – today",
+      fa: "ابریشم · از حدود ۱۳۱۰ تا امروز",
+    },
     body: {
       en: [
         "The youngest of the great weaving cities — and, in fineness, the summit. Qom had no carpet tradition until weavers from Kashan seeded workshops here in the early 20th century; unburdened by habit, the city specialised in what is hardest: silk warp, silk weft, silk pile, at knot counts that turn a floor covering into optics.",
@@ -35,8 +48,21 @@ export const regions: Region[] = [
   {
     slug: "kashan",
     featured: true,
-    name: { en: "Kashan", fa: "کاشان", tr: "Kaşan", es: "Kashan", ja: "カーシャーン", de: "Kaschan", ru: "Кашан", ar: "كاشان", zh: "卡尚" },
-    kicker: { en: "Wool & silk · Safavid roots, UNESCO 2010", fa: "پشم و ابریشم · ریشه صفوی، ثبت یونسکو ۱۳۸۹" },
+    name: {
+      en: "Kashan",
+      fa: "کاشان",
+      tr: "Kaşan",
+      es: "Kashan",
+      ja: "カーシャーン",
+      de: "Kaschan",
+      ru: "Кашан",
+      ar: "كاشان",
+      zh: "卡尚",
+    },
+    kicker: {
+      en: "Wool & silk · Safavid roots, UNESCO 2010",
+      fa: "پشم و ابریشم · ریشه صفوی، ثبت یونسکو ۱۳۸۹",
+    },
     body: {
       en: [
         "Kashan is memory. A royal workshop city under the Safavids — the Ardabil Carpet itself is signed by a Kashani — it led the 19th-century revival under masters like Mohtasham, whose luminous rugs of imported merino wool, spun via Manchester's mills, gave the trade the name 'Manchester Kashan'.",
@@ -51,7 +77,14 @@ export const regions: Region[] = [
   {
     slug: "malayer",
     featured: false,
-    name: { en: "Malayer", fa: "ملایر", ru: "Мелайер", ar: "ملاير", zh: "马拉耶尔", ja: "マラーイェル" },
+    name: {
+      en: "Malayer",
+      fa: "ملایر",
+      ru: "Мелайер",
+      ar: "ملاير",
+      zh: "马拉耶尔",
+      ja: "マラーイェル",
+    },
     kicker: { en: "Village wool of the west", fa: "پشمِ روستایی غرب" },
     body: {
       en: [
@@ -65,7 +98,14 @@ export const regions: Region[] = [
   {
     slug: "shiraz",
     featured: false,
-    name: { en: "Shiraz & Fars", fa: "شیراز و فارس", ru: "Шираз и Фарс", ar: "شيراز وفارس", zh: "设拉子与法尔斯", ja: "シーラーズとファールス" },
+    name: {
+      en: "Shiraz & Fars",
+      fa: "شیراز و فارس",
+      ru: "Шираз и Фарс",
+      ar: "شيراز وفارس",
+      zh: "设拉子与法尔斯",
+      ja: "シーラーズとファールス",
+    },
     kicker: { en: "Homeland of the Gabbeh", fa: "زادگاه گبه" },
     body: {
       en: [
@@ -79,7 +119,15 @@ export const regions: Region[] = [
   {
     slug: "oushak",
     featured: false,
-    name: { en: "Oushak", fa: "اوشاک", tr: "Uşak", ru: "Ушак", ar: "أوشاك", zh: "乌沙克", ja: "ウシャク" },
+    name: {
+      en: "Oushak",
+      fa: "اوشاک",
+      tr: "Uşak",
+      ru: "Ушак",
+      ar: "أوشاك",
+      zh: "乌沙克",
+      ja: "ウシャク",
+    },
     kicker: { en: "The Anatolian neighbour", fa: "همسایه آناتولیایی" },
     body: {
       en: [
@@ -93,8 +141,18 @@ export const regions: Region[] = [
   {
     slug: "moshk-abad",
     featured: false,
-    name: { en: "Moshk Abad", fa: "مشک‌آباد", ru: "Мошк-Абад", ar: "مشك‌آباد", zh: "莫什克阿巴德", ja: "モシュク・アバード" },
-    kicker: { en: "Old village carpets near Arak", fa: "فرش‌های کهنه روستایی حوالی اراک" },
+    name: {
+      en: "Moshk Abad",
+      fa: "مشک‌آباد",
+      ru: "Мошк-Абад",
+      ar: "مشك‌آباد",
+      zh: "莫什克阿巴德",
+      ja: "モシュク・アバード",
+    },
+    kicker: {
+      en: "Old village carpets near Arak",
+      fa: "فرش‌های کهنه روستایی حوالی اراک",
+    },
     body: {
       en: [
         "A village weaving name from the Arak region of central Iran, prized for durable, warmly-colored room-size carpets. Old Moshk Abad pieces are sought for the mellow patina their wool takes on with age; our collection carries both old and newer examples.",
@@ -107,8 +165,18 @@ export const regions: Region[] = [
   {
     slug: "tabriz",
     featured: false,
-    name: { en: "Tabriz", fa: "تبریز", ru: "Тебриз", ar: "تبريز", zh: "大不里士", ja: "タブリーズ" },
-    kicker: { en: "The great school of the northwest", fa: "مکتب بزرگ شمال غرب" },
+    name: {
+      en: "Tabriz",
+      fa: "تبریز",
+      ru: "Тебриз",
+      ar: "تبريز",
+      zh: "大不里士",
+      ja: "タブリーズ",
+    },
+    kicker: {
+      en: "The great school of the northwest",
+      fa: "مکتب بزرگ شمال غرب",
+    },
     body: {
       en: [
         "The great mercantile school of the northwest — masterly in every genre, from hunting scenes to pictorial rugs. We source Tabriz work on commission.",
@@ -121,7 +189,14 @@ export const regions: Region[] = [
   {
     slug: "isfahan",
     featured: false,
-    name: { en: "Isfahan", fa: "اصفهان", ru: "Исфахан", ar: "أصفهان", zh: "伊斯法罕", ja: "イスファハーン" },
+    name: {
+      en: "Isfahan",
+      fa: "اصفهان",
+      ru: "Исфахан",
+      ar: "أصفهان",
+      zh: "伊斯法罕",
+      ja: "イスファハーン",
+    },
     kicker: { en: "Safavid court refinement", fa: "ظرافت درباری صفوی" },
     body: {
       en: [
@@ -135,7 +210,14 @@ export const regions: Region[] = [
   {
     slug: "nain",
     featured: false,
-    name: { en: "Nain", fa: "نایین", ru: "Наин", ar: "نايين", zh: "纳因", ja: "ナーイーン" },
+    name: {
+      en: "Nain",
+      fa: "نایین",
+      ru: "Наин",
+      ar: "نايين",
+      zh: "纳因",
+      ja: "ナーイーン",
+    },
     kicker: { en: "Ivory and blue formality", fa: "رسمیتِ کرم و آبی" },
     body: {
       en: [
@@ -173,12 +255,16 @@ const ORIGIN_MAP: Record<string, string> = {
   nain: "nain",
 };
 
-export function originToRegion(origin?: string, category?: string): string | undefined {
+export function originToRegion(
+  origin?: string,
+  category?: string
+): string | undefined {
   if (origin) {
     const hit = ORIGIN_MAP[origin.toLowerCase().trim()];
     if (hit) return hit;
   }
   if (category === "oushak") return "oushak";
-  if (category === "moshk-abad" || category === "new-moshk-abad") return "moshk-abad";
+  if (category === "moshk-abad" || category === "new-moshk-abad")
+    return "moshk-abad";
   return undefined;
 }

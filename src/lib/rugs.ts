@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
-import type { Locale } from "../i18n/ui";
+import { categorySlugs, type CategorySlug, type Locale } from "../i18n/ui";
 import { originToRegion } from "../data/regions";
 
 export type Rug = CollectionEntry<"rugs">;
@@ -14,7 +14,8 @@ export async function getRugs(locale: Locale): Promise<Rug[]> {
     (r) => rugLocale(r) === locale && !r.data.draft
   );
   return all.sort(
-    (a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title)
+    (a, b) =>
+      a.data.order - b.data.order || a.data.title.localeCompare(b.data.title)
   );
 }
 
@@ -26,12 +27,14 @@ export async function getRugsWithFallback(locale: Locale): Promise<Rug[]> {
   const have = new Set(localized.map(rugSlug));
   const en = await getRugs("en");
   return [...localized, ...en.filter((r) => !have.has(rugSlug(r)))].sort(
-    (a, b) => a.data.order - b.data.order || rugSlug(a).localeCompare(rugSlug(b))
+    (a, b) =>
+      a.data.order - b.data.order || rugSlug(a).localeCompare(rugSlug(b))
   );
 }
 
 export const formatDimensions = (rug: Rug, locale: Locale) => {
-  const fmt = (n: number) => n.toLocaleString(locale === "fa" ? "fa-IR" : locale);
+  const fmt = (n: number) =>
+    n.toLocaleString(locale === "fa" ? "fa-IR" : locale);
   return `${fmt(rug.data.lengthCm)} × ${fmt(rug.data.widthCm)}`;
 };
 
@@ -43,3 +46,13 @@ export const rugsByBrand = (rugs: Rug[], brand: string) =>
 
 export const rugsByRegion = (rugs: Rug[], region: string) =>
   rugs.filter((r) => regionOf(r) === region);
+
+// Categories with at least one entry. A category the owner keeps in
+// `categorySlugs` but has not filled (e.g. "selected-available-rugs" while the
+// stock check in U2 is open) should not publish an empty, orphaned index page,
+// so the routes and the sitemap are built from this rather than from the full
+// list. It comes back automatically once an entry lands in that category.
+export async function getPopulatedCategories(): Promise<CategorySlug[]> {
+  const rugs = await getRugs("en");
+  return categorySlugs.filter((c) => rugs.some((r) => r.data.category === c));
+}

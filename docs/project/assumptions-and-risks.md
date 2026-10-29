@@ -32,6 +32,7 @@ last-reviewed: 2026-09-01
 
 | # | Claim | Where it appears | Evidence needed | From whom | Status |
 | --- | --- | --- | --- | --- | --- |
+| C2 | "in the trade since 1866" / "a family craft since 1866" / "A Family of Weavers Since 1866" — `docs/source-copy.md` gives 1866 as Gholamhossein Arsalani's **birth** year in Kashan and **1910** as the founding of the family weaving business in Qom, so the trade/founding date does not trace to the source _(unverified — needs confirmation: the date the family entered the carpet trade, from Rezar86)_ | `src/i18n/ui.ts` siteTagline + heroText + heritageTitle/Teaser in all 9 locales; `public/llms.txt:4`, `public/llms-full.txt:4`; 486 built pages | owner's basis for 1866, or a corrected date (1910) | Rezar86 | **confirmed by the owner (Rezar86), 2026-09-16** — the charter allows provenance dates to trace to `source-copy.md` *or the owner*; this is the owner's route. `source-copy.md` is the old-site archive and stays as it is. Copy unchanged. |
 | C1 | "some topline carpets in domestic and foreign museums" (old About page; toned to "the finest among them hang in museums" on /heritage) | `src/features/HeritagePage.astro` | which museums, or owner's confirmation to keep the claim | Rezar86 | open |
 
 ## Risks
@@ -41,7 +42,7 @@ last-reviewed: 2026-09-01
 | R1 | Contact form silently undelivered (placeholder Web3Forms key) if deployed before ARSA-003 | lost inquiries | high if deployed early | ARSA-006 depends on ARSA-003 in the backlog | devops-sre |
 | R2 | 2016 photo quality undercuts the luxury positioning | weaker brand perception | medium | ARSA-011 re-shoot; hand-picked featured set uses the best shots | brand-designer |
 | R3 | FA pages showing EN titles (fallback) read as unfinished to Persian visitors | brand perception in the home market | medium | ARSA-004 translation pass before launch promotion | copywriter |
-| R4 | `sharp` dependency has one high-severity audit finding and the available fix is a breaking upgrade | vulnerable build dependency remains in the deployment toolchain | unknown | owner decision and reviewed dependency upgrade before release | security |
+| R4 | ~~`sharp` dependency has one high-severity audit finding~~ — closed 2026-09-16: `npm audit --audit-level=high` reports 0 vulnerabilities (sec/ARSA-016 upgrade is merged). Re-open if a future audit regresses. | vulnerable build dependency in the deployment toolchain | resolved | `checks.scan` in the release sequence | security |
 
 ## Accepted risks
 
